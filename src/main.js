@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './stores/index.js'
 
 import {
   Vuetify,
@@ -16,6 +17,8 @@ import {
   VDialog,
   VCard,
   VTabs,
+  VForm,
+  VTextField,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -34,6 +37,8 @@ Vue.use(Vuetify, {
     VDialog,
     VCard,
     VTabs,
+    VForm,
+    VTextField,
     transitions
   },
   theme: {
@@ -53,5 +58,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })

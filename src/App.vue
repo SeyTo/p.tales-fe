@@ -29,6 +29,7 @@ export default {
     toolbarSideIconBind () {
       const isSmall = (this.$vuetify.breakpoint.smAndDown)
       if (!isSmall) this.drawer = false
+      if (isSmall) console.log('is Small')
       return isSmall
     },
     next () {
@@ -44,29 +45,10 @@ export default {
 </script>
 <template lang="pug">
   v-app(light)
-    v-navigation-drawer( 
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      disable-resize-watcher
-      persistent
-      fixed
-      app
-    )
-      v-list
-        v-list-tile( 
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        )
-          v-list-tile-action
-            v-icon(v-html="item.icon") 
-          v-list-tile-content
-            v-list-tile-title(v-text="item.title") 
 
     // -- navbar
     tales-navbar
-      landing-button-bar/
+      landing-button-bar(v-if="!toolbarSideIconBind")/
 
     // -- content start
     v-content
@@ -78,9 +60,24 @@ export default {
           ul 
             li: a(@click.stop="enable = true") Landing page - login/signup dialog 
       
-    // footer start
+    // -- footer start
     v-footer(app) 
       span &copy; 2017
+
+    v-navigation-drawer( 
+        :mini-variant="false"
+        :clipped="false"
+        @input="closed($event)"
+        v-model="drawer"
+        disable-resize-watcher
+        persistent
+        fixed
+        app
+      )
+      v-list(class="pa-0") 
+        v-list-tile
+          v-list-tile-content
+            v-list-tile-title John Leider
 </template>
 
 <style lang="stylus">

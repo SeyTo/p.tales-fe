@@ -20,16 +20,21 @@ export default {
       const active = parseInt(this.enable)
       this.enable = (active < 2 ? active + 1 : 0).toString()
     }
+  },
+  methods: {
+    openDrawer () { }
   }
 }
 </script>
 
 <template lang="pug"> 
-v-toolbar(app :clipped-left="clipped")
-  v-toolbar-side-icon(@click.stop="drawer = !drawer" v-if="toolbarSideIconBind") 
-  v-toolbar-title(v-text="title") 
-  v-spacer
-  slot
+div
+  v-toolbar(app :clipped-left="clipped")
+    v-toolbar-side-icon(@click.stop="openDrawer" v-if="toolbarSideIconBind") 
+    v-toolbar-title(v-text="title") 
+    v-spacer
+    slot
+
 </template> 
 
 <style lang="stylus">
