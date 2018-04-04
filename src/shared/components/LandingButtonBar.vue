@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'LoginDialog',
+  name: 'landing-button-bar',
   props: {
     enable: {
       type: Boolean,
