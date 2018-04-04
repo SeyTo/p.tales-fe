@@ -7,11 +7,6 @@ export default {
       activeTab: null,
       isFormValid: false,
       isSignupFormValid: false,
-      // formName: '',
-      // formNameRules: [
-      //   v => !!v || 'Name is required',
-      //   v => v.length <= 20 || 'Name must be less than 20 characters'
-      // ],
       formEmail: {
         text: '',
         rules: [
@@ -76,7 +71,6 @@ div
 
         // log in tab items
         v-tab-item 
-          // TODO change form
           v-container
             div.centered
               v-btn() Log In With facebook
@@ -138,9 +132,6 @@ div
                   :append-icon-cb="() => (formPassword.visibility = !formPassword.visibility)"
                   min="8"
                 )/
-          // v-container(fluid)
-          //   v-spacer
-          //   v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Sign Up
           
           v-card-actions
             v-spacer
