@@ -10,7 +10,8 @@ export default {
       right: true,
       rightDrawer: false,
       // login dialog options
-      enable: true
+      enable: true,
+      toggle: false
     }
   },
   computed: {
@@ -29,6 +30,12 @@ export default {
       }
     }
   },
+  methods: {
+    getToggle (event) {
+      console.log('got event')
+      this.toggle = event
+    }
+  },
   components: {
     'tales-navbar': NavBar,
     'landing-button-bar': LandingButtonBar
@@ -44,8 +51,8 @@ export default {
 
     // -- content start
     v-content
-      // temp content
       router-view/
+      // temp content
       v-container(fluid)
         v-layout(column align-center)
           h2 PAGES
@@ -73,7 +80,4 @@ export default {
           v-list-tile-content
             v-list-tile-title John Leider
 </template>
-
-<style lang="stylus">
-</style>
 
