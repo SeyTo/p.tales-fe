@@ -57,7 +57,8 @@ export default {
       span &copy; 2017
 
     // -- Master Navigation Drawer
-    // this drawer and its contents are controlled using vuex 'tales-navbar'
+    // this is the drawer for all navbars and its contents are controlled 
+    // using vuex 'tales-navbar'
     v-navigation-drawer( 
         :mini-variant="false"
         :clipped="false"

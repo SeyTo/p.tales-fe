@@ -37,12 +37,15 @@ export default {
 div
   v-toolbar(app :clipped-left="clipped")
     v-toolbar-side-icon(@click.stop="openDrawer" v-if="toolbarSideIconBind") 
-    v-toolbar-title(v-text="title") 
+    img(src="@/assets/favicon.64.png" alt="Tales logo" class="logo") 
+    v-toolbar-title {{ title }}
     v-spacer
     slot
 
 </template> 
 
 <style lang="stylus">
+.logo
+  width 50px
 </style>
 
