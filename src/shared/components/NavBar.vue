@@ -4,7 +4,9 @@ export default {
   data () {
     return {
       title: 'Tales',
+      // clip the drawer above the navbar
       clipped: false,
+      // toggle a mini variant of the navbar
       miniVariant: false,
       drawer: false,
       enable: true
@@ -15,14 +17,18 @@ export default {
       const isSmall = (this.$vuetify.breakpoint.smAndDown)
       if (!isSmall) this.drawer = false
       return isSmall
-    },
-    next () {
-      const active = parseInt(this.enable)
-      this.enable = (active < 2 ? active + 1 : 0).toString()
     }
+    // test
+    // next () {
+    //   const active = parseInt(this.enable)
+    //   this.enable = (active < 2 ? active + 1 : 0).toString()
+    // }
   },
   methods: {
-    openDrawer () { }
+    openDrawer () {
+      this.$store.commit('setDrawerOpen', { open: true })
+      console.log(this.$store.getters.getDrawer)
+    }
   }
 }
 </script>

@@ -6,19 +6,7 @@ export default {
   name: 'App',
   data () {
     return {
-      title: 'Tales',
-      toolbarSideIcon: false,
-      // drawer options
-      // clip the drawer above the navbar
-      clipped: false,
-      // toggle a mini variant of the navbar
-      miniVariant: false,
-      // toggle the drawer
       drawer: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
       right: true,
       rightDrawer: false,
       // login dialog options
@@ -26,15 +14,19 @@ export default {
     }
   },
   computed: {
-    toolbarSideIconBind () {
-      const isSmall = (this.$vuetify.breakpoint.smAndDown)
-      if (!isSmall) this.drawer = false
-      if (isSmall) console.log('is Small')
-      return isSmall
+    ifSmallSized () {
+      return this.$vuetify.breakpoint.smAndDown
     },
-    next () {
-      const active = parseInt(this.enable)
-      this.enable = (active < 2 ? active + 1 : 0).toString()
+    // test TODO: simplify
+    talesDrawer: {
+      set (isToOpen) {
+        // console.log('set isTOOpen: ' + this.$store.getters.getDrawer)
+        this.$store.commit('setDrawerOpen', { open: isToOpen })
+      },
+      get () {
+        // console.log('get isTOOpen: ' + this.$store.getters.getDrawer)
+        return this.$store.getters.getDrawer
+      }
     }
   },
   components: {
@@ -48,7 +40,7 @@ export default {
 
     // -- navbar
     tales-navbar
-      landing-button-bar(v-if="!toolbarSideIconBind")/
+      landing-button-bar(v-if="!ifSmallSized")/
 
     // -- content start
     v-content
@@ -64,11 +56,12 @@ export default {
     v-footer(app) 
       span &copy; 2017
 
+    // -- Master Navigation Drawer
+    // this drawer and its contents are controlled using vuex 'tales-navbar'
     v-navigation-drawer( 
         :mini-variant="false"
         :clipped="false"
-        @input="closed($event)"
-        v-model="drawer"
+        v-model="talesDrawer"
         disable-resize-watcher
         persistent
         fixed
@@ -82,5 +75,4 @@ export default {
 
 <style lang="stylus">
 </style>
-
 
