@@ -24,7 +24,7 @@ export default {
 
   mounted () {
     // change button bar to vertical style with full width when width <= 500
-    this.isCompactView = (this.$refs.bbar.clientWidth <= 500)? true : false
+    this.isCompactView = (this.$refs.bbar.clientWidth <= 500)
   }
 
 }
