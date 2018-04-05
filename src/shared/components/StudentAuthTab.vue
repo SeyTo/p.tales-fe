@@ -1,7 +1,7 @@
 <script>
 export default {
   'name': 'student-auth-tab',
-  props: { 
+  props: {
     'value': Boolean
   },
   data () {
@@ -38,7 +38,7 @@ export default {
           v => v.length < 20 || 'Name should be less than 20 characters'
         ]
       }
-    }  
+    }
   }
 }
 </script>
@@ -76,9 +76,9 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
                 min="8"
               )/
 
-          v-card-actions
-            v-spacer
-            v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Log In
+        v-card-actions
+          v-spacer
+          v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Log In
 
       // sign up tab items
       v-tab-item 

@@ -14,6 +14,7 @@ export default {
       toggle: false
     }
   },
+
   computed: {
     ifSmallSized () {
       return this.$vuetify.breakpoint.smAndDown
@@ -30,18 +31,23 @@ export default {
       }
     }
   },
+
   methods: {
     getToggle (event) {
       console.log('got event')
       this.toggle = event
     }
   },
+
   components: {
     'tales-navbar': NavBar,
     'landing-button-bar': LandingButtonBar
   }
+
 }
 </script>
+
+
 <template lang="pug">
   v-app(light)
 
@@ -75,9 +81,6 @@ export default {
         fixed
         app
       )
-      v-list(class="pa-0") 
-        v-list-tile
-          v-list-tile-content
-            v-list-tile-title John Leider
+      router-view(name="talesNavDrawer")
 </template>
 

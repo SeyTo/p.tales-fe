@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/views/Landing'
+import LandingButtonBar from '@/shared/components/LandingButtonBar'
 
 Vue.use(Router)
 
@@ -9,7 +10,12 @@ export default new Router({
     {
       path: '/',
       name: 'Landing',
-      component: Landing
+
+      components: {
+        default: Landing,
+        talesNavDrawer: LandingButtonBar
+      }
+
     }
   ]
 })

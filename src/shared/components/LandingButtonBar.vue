@@ -6,7 +6,10 @@ export default {
   name: 'landing-button-bar',
 
   data () {
-    return { dialogToggle: false }
+    return {
+      dialogToggle: false,
+      isCompactView: false
+    }
   },
 
   methods: {
@@ -17,6 +20,11 @@ export default {
 
   components: {
     'student-auth-tab': StudentAuthTab
+  },
+
+  mounted () {
+    // change button bar to vertical style with full width when width <= 500
+    this.isCompactView = (this.$refs.bbar.clientWidth <= 500)? true : false
   }
 
 }
@@ -24,19 +32,26 @@ export default {
 
 
 <template lang="pug">
-div
 
-  v-btn(flat large) 
-    | FOR EMPLOYERS
-  v-btn(flat large) 
-    | Blogs
-  v-btn(flat large @click.stop="fixed = !fixed") 
-    | Log In
-  v-btn(depressed large color="primary" @click.native.stop="dialogToggle = !dialogToggle") 
-    | Sign Up
+div
+  div(ref="bbar" :class="{ compact: isCompactView }")
+    v-btn(flat large) 
+      | FOR EMPLOYERS
+    v-btn(flat large) 
+      | Blogs
+    v-btn(flat large @click.stop="fixed = !fixed") 
+      | Log In
+    v-btn(depressed large color="primary" @click.native.stop="dialogToggle = !dialogToggle") 
+      | Sign Up
 
   // Dialog for log in and Sign up
   student-auth-tab(v-model="dialogToggle")
 
 </template>
 
+
+<style lang="stylus">
+.compact
+  display flex
+  flex-direction column
+</style>
