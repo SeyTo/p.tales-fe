@@ -3,6 +3,8 @@ import App from './App'
 import router from './router'
 import store from './stores/index.js'
 
+import './assets/styles/main.styl'
+
 import {
   Vuetify,
   VApp,
