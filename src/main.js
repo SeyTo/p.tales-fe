@@ -6,6 +6,7 @@ import store from './stores/index.js'
 import {
   Vuetify,
   VApp,
+  VAvatar,
   VNavigationDrawer,
   VFooter,
   VList,
@@ -26,6 +27,7 @@ import '../node_modules/vuetify/src/stylus/app.styl'
 Vue.use(Vuetify, {
   components: {
     VApp,
+    VAvatar,
     VNavigationDrawer,
     VFooter,
     VList,

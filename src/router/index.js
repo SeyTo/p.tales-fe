@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/views/Landing'
 import LandingButtonBar from '@/shared/components/LandingButtonBar'
+import StudentProfile from '@/views/StudentProfile'
 
 Vue.use(Router)
 
@@ -10,12 +11,15 @@ export default new Router({
     {
       path: '/',
       name: 'Landing',
-
       components: {
         default: Landing,
         talesNavDrawer: LandingButtonBar
       }
-
+    },
+    {
+      path: '/student/profile',
+      name: 'StudentProfile',
+      component: StudentProfile
     }
   ]
 })
