@@ -1,9 +1,9 @@
 <script>
-import StudentAuthTab from './StudentAuthTab'
+import StudentAuthTab from '@/shared/components/StudentAuthTab'
 
 export default {
 
-  name: 'landing-button-bar',
+  name: 'student-navbar-buttonbar-landing',
 
   data () {
     return {

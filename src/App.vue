@@ -1,6 +1,6 @@
 <script>
 import NavBar from './shared/components/NavBar'
-import LandingButtonBar from './shared/components/LandingButtonBar'
+import StudentNavBarButtonbarLanding from './shared/components/navbar-slots/student-navbar-buttonbar-landing.vue'
 
 export default {
   name: 'App',
@@ -41,7 +41,7 @@ export default {
 
   components: {
     'tales-navbar': NavBar,
-    'landing-button-bar': LandingButtonBar
+    'student-navbar-buttonbar-landing': StudentNavBarButtonbarLanding
   }
 
 }
@@ -53,7 +53,7 @@ export default {
 
     // -- navbar
     tales-navbar
-      landing-button-bar(v-if="!ifSmallSized")/
+      student-navbar-buttonbar-landing(v-if="!ifSmallSized")/
 
     // -- content start
     v-content

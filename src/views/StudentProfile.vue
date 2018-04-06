@@ -1,9 +1,9 @@
 <script>
 export default {
   name: 'student-profile',
-  data() {
-    return { 
-    } 
+  data () {
+    return {
+    }
   },
   computed: {
     ifSmallSized () { return this.$vuetify.breakpoint.smAndDown },
