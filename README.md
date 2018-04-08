@@ -1,6 +1,22 @@
-# tales
+# Project Tales
+## Tales-FE
 
-> A Webportal project
+Tales-FE as in Tales-Front End.
+
+### Frameworks, Languages & Preprocessors used
+
+* [VueJS](http://vuejs.org/)
+  * [Vuetify](http://vuetifyjs.com/)
+* [Pug](http://pugjs.org/) (Preprocessor for HTML)
+* [Stylus](http://stylus-lang.com/) (Preprocessor for CSS)
+* [Webpack] (For build controls)
+* [BabelJS] (https://babeljs.io/learn-es2015/) (For ECMA2015)
+* Linting 
+  * Eslint
+* Testing
+  * Chai
+  * Karma-mocha
+
 
 ## Build Setup
 
@@ -9,7 +25,7 @@
 npm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+npm run dev (npm start)
 
 # build for production with minification
 npm run build
@@ -25,6 +41,8 @@ npm run e2e
 
 # run all tests
 npm test
+
+# generate documentation (TODO)
+npm run docs
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
