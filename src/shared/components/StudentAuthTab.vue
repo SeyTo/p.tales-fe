@@ -1,13 +1,20 @@
 <script>
+/**
+ * Component: For student login Tabbar dialog. 
+ * Login auths are not handled here. Log in states are handled in stores.
+ */
 export default {
   'name': 'student-auth-tab',
+
   props: {
+    // primary dialog state (visible/invisible)
     'value': Boolean
   },
+
   data () {
     return {
       activeTab: null,
-      isFormValid: false,
+      isLoginFormValid: false,
       isSignupFormValid: false,
       formEmail: {
         text: '',
@@ -43,21 +50,25 @@ export default {
 }
 </script>
 
+
 <template lang="pug">
+
 v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
   v-card
-    // -- Tabs container for Log In and Sign Up
+    // -- tabs container for LogIn and Sign Up
     v-tabs(v-model="activeTab" grow)
       v-tabs-slider(color="yellow")
       v-tab Log In
       v-tab Sign Up
 
-      // log in tab items
+      // login tab items
       v-tab-item 
         v-container
           div.centered
+            // TODO create natural facebook button
             v-btn() Log In With facebook
-          v-form(v-model="isFormValid") 
+            // TODO create google button
+          v-form(v-model="isLoginFormValid") 
             v-text-field(
                 label="E-mail" 
                 v-model="formEmail.text" 
@@ -76,11 +87,12 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
                 min="8"
               )/
 
+        // -- login buttons
         v-card-actions
           v-spacer
           v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Log In
 
-      // sign up tab items
+      // -- sign up tab items
       v-tab-item 
         v-container
           v-form(v-model="isSignupFormValid") 
@@ -116,6 +128,7 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
                 min="8"
               )/
         
+        // -- signup buttons
         v-card-actions
           v-spacer
           v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Sign up 
@@ -123,6 +136,7 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
 </template>
 
 <style lang="stylus" scoped>
+// TODO: remove
 .centered 
   display flex
   justify-content center

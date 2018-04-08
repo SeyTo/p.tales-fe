@@ -1,20 +1,18 @@
 <script>
 import StudentAuthTab from '@/shared/components/StudentAuthTab'
 
+/**
+ * Student navbar when in '/student/'
+ */
 export default {
 
   name: 'student-navbar-buttonbar-landing',
 
   data () {
     return {
+      // login/signup dialog toggler
       dialogToggle: false,
       isCompactView: false
-    }
-  },
-
-  methods: {
-    toggleVisibility () {
-      this.formPassword.visibility = !this.formPassword.visibility
     }
   },
 
@@ -23,7 +21,8 @@ export default {
   },
 
   mounted () {
-    // change button bar to vertical style with full width when width <= 500
+    // change button bar to vertical style in full width when width <= 500
+    // TODO: remove width dependency, rather use props
     this.isCompactView = (this.$refs.bbar.clientWidth <= 500)
   }
 
@@ -34,6 +33,7 @@ export default {
 <template lang="pug">
 
 div
+  // -- nav buttons
   div(ref="bbar" :class="{ compact: isCompactView }")
     v-btn(flat large) 
       | FOR EMPLOYERS
@@ -44,13 +44,14 @@ div
     v-btn(depressed large color="primary" @click.native.stop="dialogToggle = !dialogToggle") 
       | Sign Up
 
-  // Dialog for log in and Sign up
+  // -- dialog for log in and Sign up
   student-auth-tab(v-model="dialogToggle")
 
 </template>
 
 
 <style lang="stylus">
+// TODO: remove dependency
 .compact
   display flex
   flex-direction column

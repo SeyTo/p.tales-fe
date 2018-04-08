@@ -8,7 +8,6 @@ export default {
   computed: {
     ifSmallSized () { return this.$vuetify.breakpoint.smAndDown },
     masterLayout () {
-      const binding = {}
       if (this.$vuetify.breakpoint.smAndDown) {
         console.log('smAndDown')
       } else if (this.$vuetify.breakpoint.mdAndUp) {

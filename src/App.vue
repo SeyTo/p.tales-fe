@@ -2,15 +2,13 @@
 import NavBar from './shared/components/NavBar'
 import StudentNavBarButtonbarLanding from './shared/components/navbar-slots/student-navbar-buttonbar-landing.vue'
 
+/**
+ * Start Here.
+ */
 export default {
   name: 'App',
   data () {
     return {
-      drawer: false,
-      right: true,
-      rightDrawer: false,
-      // login dialog options
-      enable: true,
       toggle: false
     }
   },
@@ -19,23 +17,14 @@ export default {
     ifSmallSized () {
       return this.$vuetify.breakpoint.smAndDown
     },
-    // test TODO: simplify
+    // see @/stores/modules/TalesNavbarStore.js@setDrawerOpen
     talesDrawer: {
-      set (isToOpen) {
-        // console.log('set isTOOpen: ' + this.$store.getters.getDrawer)
-        this.$store.commit('setDrawerOpen', { open: isToOpen })
+      set (shouldOpen) {
+        this.$store.commit('setDrawerOpen', { open: shouldOpen })
       },
       get () {
-        // console.log('get isTOOpen: ' + this.$store.getters.getDrawer)
         return this.$store.getters.getDrawer
       }
-    }
-  },
-
-  methods: {
-    getToggle (event) {
-      console.log('got event')
-      this.toggle = event
     }
   },
 
@@ -53,6 +42,7 @@ export default {
 
     // -- navbar
     tales-navbar
+      // TODO: control navbar toggler directly using store 
       student-navbar-buttonbar-landing(v-if="!ifSmallSized")/
 
     // -- content start
@@ -61,16 +51,17 @@ export default {
       // temp content
       v-container(fluid)
         v-layout(column align-center)
-          h2 PAGES
+          h2 PAGES (navigate to inner links through here)
           ul 
-            li: a(@click.stop="enable = true") Landing page - login/signup dialog 
+            li: router-link(:to="{ name: 'StudentProfile' }") Student Profile Page
+            li: router-link(:to="{ name: 'StudentPostLoginQuery' }") Student Post Log In Query Page 
       
     // -- footer start
     v-footer(app) 
       span &copy; 2017
 
-    // -- Master Navigation Drawer
-    // this is the drawer for all navbars and its contents are controlled 
+    // -- master Navigation Drawer
+    // main drawer for all navbars and its contents are controlled 
     // using vuex 'tales-navbar'
     v-navigation-drawer( 
         :mini-variant="false"
@@ -81,7 +72,8 @@ export default {
         fixed
         app
       )
+      // all views are directed using a router, so when changing link, change router component for this router-view as well or disable it.
       router-view(name="talesNavDrawer")
-</template>
 
+</template>
 

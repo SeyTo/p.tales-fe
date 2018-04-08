@@ -1,4 +1,7 @@
 <script>
+/**
+ * Employer page when in '/employer/home'
+ */
 export default {
   name: 'employer-navbar-buttonbar-logged'
 }
