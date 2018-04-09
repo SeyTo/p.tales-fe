@@ -11,7 +11,7 @@ export default {
   props: {
     type: {
       validator (val) {
-        return ['fixed', 'float', 'absolute', 'scroll-off' ].index(val) != -1
+        return [ 'fixed', 'float', 'absolute', 'scroll-off' ].index(val) !== -1
       }
     }
   },

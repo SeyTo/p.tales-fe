@@ -17,7 +17,6 @@ Tales-FE as in Tales-Front End.
   * Chai
   * Karma-mocha
 
-
 ## Build Setup
 
 ``` bash
@@ -45,4 +44,8 @@ npm test
 # generate documentation (TODO)
 npm run docs
 ```
+
+## Commits
+
+All new commits should be pushed to 'dev' branch.
 

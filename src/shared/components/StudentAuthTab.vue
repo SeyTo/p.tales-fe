@@ -1,6 +1,6 @@
 <script>
 /**
- * Component: For student login Tabbar dialog. 
+ * Component: For student login Tabbar dialog.
  * Login auths are not handled here. Log in states are handled in stores.
  */
 export default {

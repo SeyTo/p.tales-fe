@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import TalesNavbarStore from './modules/TalesNavbarStore'
 
-
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
