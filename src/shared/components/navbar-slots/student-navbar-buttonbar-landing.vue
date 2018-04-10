@@ -8,11 +8,15 @@ export default {
 
   name: 'student-navbar-buttonbar-landing',
 
+  props: [
+    // defines a compact view for this component
+    'compactView'
+  ],
+
   data () {
     return {
       // login/signup dialog toggler
-      dialogToggle: false,
-      isCompactView: false
+      dialogToggle: false
     }
   },
 
@@ -21,9 +25,7 @@ export default {
   },
 
   mounted () {
-    // change button bar to vertical style in full width when width <= 500
-    // TODO: remove width dependency, rather use props
-    this.isCompactView = (this.$refs.bbar.clientWidth <= 500)
+    // this.data.isCompactView = (this.$refs.bbar.clientWidth <= 500)
   }
 
 }
@@ -34,12 +36,12 @@ export default {
 
 div
   // -- nav buttons
-  div(ref="bbar" :class="{ compact: isCompactView }")
+  div(:class="{ compact: compactView }")
     v-btn(flat large) 
       | FOR EMPLOYERS
     v-btn(flat large) 
       | Blogs
-    v-btn(flat large @click.stop="fixed = !fixed") 
+    v-btn(flat large) 
       | Log In
     v-btn(depressed large color="primary" @click.native.stop="dialogToggle = !dialogToggle") 
       | Sign Up
@@ -51,7 +53,7 @@ div
 
 
 <style lang="stylus">
-// TODO: remove dependency
+// TODO: move to master style page 
 .compact
   display flex
   flex-direction column

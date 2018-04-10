@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import TalesNavbarStore from './modules/TalesNavbarStore'
+import TalesNavDrawer from './modules/tales-navdrawer.store.js'
 
 Vue.use(Vuex)
 
@@ -9,7 +9,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    TalesNavbarStore
+    TalesNavDrawer
   },
 
   // debugging with vue debugger
