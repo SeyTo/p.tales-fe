@@ -30,7 +30,7 @@ export default {
   },
 
   components: {
-    'stu-navbar-btnbar-landing': StuNavbarLanding
+    'stu-navbar-landing': StuNavbarLanding
   }
 }
 </script>

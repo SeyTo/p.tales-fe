@@ -1,4 +1,5 @@
 <script>
+import StuNavbarLanding from './navbar-slots/stu-navbar-landing'
 /**
  * Component: The master Navbar for entire website. This component
  * should be controlled from a store.
@@ -21,11 +22,8 @@ export default {
       title: 'Tales',
       // clip the drawer above the navbar
       clipped: false,
-      // toggle a mini variant of the navbar
-      miniVariant: false,
-      drawer: {
-        disabled: false
-      }
+      // TODO: link with store
+      navbarComponent: StuNavbarLanding
     }
   },
 
@@ -41,6 +39,10 @@ export default {
     isSmall () {
       return this.$vuetify.breakpoint.smAndDown
     }
+  },
+
+  component: {
+    'stu-navbar-landing': StuNavbarLanding
   }
 
 }
@@ -62,8 +64,7 @@ div
     v-spacer
     v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall") 
     // everything from ./navbar-slots/*
-    // TODO move to components
-    router-view(name="talesNavDrawer" v-if="!isSmall")
+    component(:is="navbarComponent" v-if="!isSmall")
 
 </template> 
 

@@ -12,7 +12,7 @@ export default new Router({
       path: '/',
       name: 'Landing',
       components: {
-        default: Landing,
+        default: Landing
       }
     },
     {
