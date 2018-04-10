@@ -10,6 +10,9 @@ export default {
       },
       page1: { }
     }
+  },
+  mounted () {
+    this.$store.commit('setNavBarProps', { slotHidden: true, container: true })
   }
 }
 </script>

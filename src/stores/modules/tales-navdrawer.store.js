@@ -4,7 +4,7 @@
  */
 const state = {
   // set drawer if open
-  isOpen: true,
+  isOpen: false,
   // enable/disable drawer
   enable: true,
   // collection of data for navdrawer's dynamic components to exploit

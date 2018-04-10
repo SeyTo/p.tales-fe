@@ -39,6 +39,9 @@ export default {
     slotHidden () {
       return this.$store.getters.isNavBarSlotHidden
     },
+    isContainerSize () {
+      return this.$store.getters.isContainerSize
+    },
     isSmall () {
       return this.$vuetify.breakpoint.smAndDown
     }
@@ -61,14 +64,14 @@ div
     flat
     :clipped-left="clipped"
     )
-    // TODO: use svg
-    img(src="@/assets/favicon.64.png" alt="Tales logo").logo 
-    v-toolbar-title {{ title }}
-    | This is result {{ slotHidden }}
-    v-spacer
-    v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall") 
-    // everything from ./navbar-slots/*
-    component(:is="navbarComponent" v-if="!isSmall && !slotHidden")
+      // TODO: use container to get container size for toolbar content
+      // TODO: use svg
+      img(src="@/assets/favicon.64.png" alt="Tales logo").logo 
+      v-toolbar-title {{ title }}
+      v-spacer
+      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall") 
+      // everything from ./navbar-slots/*
+      component(:is="navbarComponent" v-if="!isSmall && !slotHidden")
 
 </template> 
 

@@ -5,7 +5,7 @@ export default {
   mounted () {
     this.$store.commit('setNavBarSlotHidden', { slotHidden: false })
   }
-}  
+}
 </script>
 
 
