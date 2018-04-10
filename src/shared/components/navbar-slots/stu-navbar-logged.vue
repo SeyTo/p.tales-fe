@@ -3,7 +3,7 @@
  * Student navbar when user is logged in. Used in '/student/home'
  */
 export default {
-  name: 'student-navbar-buttonbar-logged'
+  name: 'stu-navbar-logged'
 }
 </script>
 

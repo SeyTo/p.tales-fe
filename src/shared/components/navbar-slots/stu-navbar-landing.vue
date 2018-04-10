@@ -1,12 +1,12 @@
 <script>
-import StudentAuthTab from '@/shared/components/StudentAuthTab'
+import StuAuthTab from '@/shared/components/stu-authtab'
 
 /**
  * Student navbar when in '/student/'
  */
 export default {
 
-  name: 'student-navbar-buttonbar-landing',
+  name: 'stu-navbar-landing',
 
   props: [
     // defines a compact view for this component
@@ -21,7 +21,7 @@ export default {
   },
 
   components: {
-    'student-auth-tab': StudentAuthTab
+    'stu-auth-tab': StuAuthTab
   },
 
   mounted () {
@@ -47,7 +47,7 @@ div
       | Sign Up
 
   // -- dialog for log in and Sign up
-  student-auth-tab(v-model="dialogToggle")
+  stu-auth-tab(v-model="dialogToggle")
 
 </template>
 

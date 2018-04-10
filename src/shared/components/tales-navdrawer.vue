@@ -1,5 +1,5 @@
 <script>
-import StudentNavBarButtonbarLanding from './navbar-slots/student-navbar-buttonbar-landing.vue'
+import StuNavbarLanding from './navbar-slots/stu-navbar-landing'
 
 /**
  * The Global Navdrawer.
@@ -10,7 +10,7 @@ export default {
   data () {
     return {
       // current dynamic component for this drawer
-      drawerComponent: StudentNavBarButtonbarLanding,
+      drawerComponent: StuNavbarLanding,
       miniVariant: false
     }
   },
@@ -30,7 +30,7 @@ export default {
   },
 
   components: {
-    'stu-navbar-btnbar-landing': StudentNavBarButtonbarLanding
+    'stu-navbar-btnbar-landing': StuNavbarLanding
   }
 }
 </script>

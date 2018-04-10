@@ -3,7 +3,7 @@
  * Employer page when in '/employer/home'
  */
 export default {
-  name: 'employer-navbar-buttonbar-logged'
+  name: 'emp-navbar-logged'
 }
 </script>
 

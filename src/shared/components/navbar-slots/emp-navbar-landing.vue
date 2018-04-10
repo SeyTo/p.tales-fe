@@ -3,7 +3,7 @@
  * Employer page's navbar when in /employer/
  */
 export default {
-  name: 'employer-navbar-buttonbar-landing'
+  name: 'emp-navbar-landing'
 }
 </script>
 

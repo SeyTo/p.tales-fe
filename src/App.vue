@@ -1,14 +1,12 @@
 <script>
-import NavBar from './shared/components/NavBar'
-import StudentNavBarButtonbarLanding from './shared/components/navbar-slots/student-navbar-buttonbar-landing.vue'
-import TalesNavDrawer from './shared/components/TalesNavDrawer.vue'
+import TalesNavBar from './shared/components/tales-navbar'
+import TalesNavDrawer from './shared/components/tales-navdrawer'
 
 export default {
   name: 'App',
 
   components: {
-    'tales-navbar': NavBar,
-    'student-navbar-buttonbar-landing': StudentNavBarButtonbarLanding,
+    'tales-navbar': TalesNavBar,
     'tales-navdrawer': TalesNavDrawer
   }
 

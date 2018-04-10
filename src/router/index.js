@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/views/Landing'
-import StudentNavbarButtonbarLanding from '../shared/components/navbar-slots/student-navbar-buttonbar-landing.vue'
 import StudentProfile from '@/views/StudentProfile'
 import StudentPostLoginQuery from '@/views/StudentPostLoginQuery'
 
@@ -14,7 +13,6 @@ export default new Router({
       name: 'Landing',
       components: {
         default: Landing,
-        talesNavDrawer: StudentNavbarButtonbarLanding
       }
     },
     {

@@ -62,6 +62,7 @@ div
     v-spacer
     v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall") 
     // everything from ./navbar-slots/*
+    // TODO move to components
     router-view(name="talesNavDrawer" v-if="!isSmall")
 
 </template> 
