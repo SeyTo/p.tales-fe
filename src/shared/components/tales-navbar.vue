@@ -36,6 +36,9 @@ export default {
         this.$store.commit('setDrawerOpen', { open: val })
       }
     },
+    slotHidden () {
+      return this.$store.getters.isNavBarSlotHidden
+    },
     isSmall () {
       return this.$vuetify.breakpoint.smAndDown
     }
@@ -61,10 +64,11 @@ div
     // TODO: use svg
     img(src="@/assets/favicon.64.png" alt="Tales logo").logo 
     v-toolbar-title {{ title }}
+    | This is result {{ slotHidden }}
     v-spacer
     v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall") 
     // everything from ./navbar-slots/*
-    component(:is="navbarComponent" v-if="!isSmall")
+    component(:is="navbarComponent" v-if="!isSmall && !slotHidden")
 
 </template> 
 

@@ -3,8 +3,12 @@ export default {
   name: 'student-post-loginquery',
   data () {
     return {
-      sex: null,
-      genders: [ 'male', 'female' ]
+      currentPage: 0,
+      page0: {
+        selectedGender: null,
+        genders: [ 'male', 'female' ]
+      },
+      page1: { }
     }
   }
 }
@@ -13,7 +17,9 @@ export default {
 
 <template lang="pug">
 v-content
-  v-layout(column align-content-start)
+
+  // page0 content
+  v-layout(column align-content-start v-show="currentPage == 0")
     v-flex(d-flex row).line
       .inline My name is 
       v-flex(d-flex row)
@@ -22,7 +28,7 @@ v-content
         .inline .
     v-flex(d-flex row).line
       .inline-select I am 
-      v-select(:items="genders" v-model="sex" label="Gender").med
+      v-select(:items="page0.genders" v-model="page0.selectedGender" label="Gender").med
       .inline .
     v-flex(d-flex row).line
       .inline I currently live in
@@ -52,6 +58,15 @@ v-content
       v-text-field(name="Month" label="Month" id="month").short
       v-text-field(name="Year" label="Year" id="year").short
       .inline .
+    v-flex
+      v-btn(color="primary" @click.stop = "currentPage = 1") Next
+
+  // page 1
+  v-layout(column align-content-start v-show="currentPage == 1")
+    v-flex(d-flex row).line
+      | This is Page 1
+    v-flex
+      v-btn(color="primary" @click.stop = "currentPage = 0") Next
 </template>
 
 
@@ -66,7 +81,7 @@ inline-padding-left=6px
   line-height 65px
   padding-left inline-padding-left
 .inline-select
-  line-height 74px
+  line-height 73px
   padding-left inline-padding-left
 .line
   flex-wrap wrap !important
