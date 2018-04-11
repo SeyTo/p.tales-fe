@@ -17,10 +17,6 @@ export default {
 <template lang="pug">
   v-app(light)
 
-    // -- global navbar & navdrawer
-    // tales-navbar
-    // tales-navdrawer
-
     // -- content start
     v-content
       router-view/

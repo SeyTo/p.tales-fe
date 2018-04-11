@@ -8,7 +8,7 @@ import StuPostsignupQuery from '@/views/stu-postsignup-query'
 Vue.use(Router)
 
 export default new Router({
-  // using history stack will cause slots to reuse components, which may cause 
+  // using history stack will cause slots to reuse components, which may cause
   // errors with slotted components, specially the navbars and navdrawers
   // mode: 'history',
   routes: [
@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/student/profile',
       name: 'StudentProfile',
-      component: StudentProfile 
+      component: StudentProfile
     },
     {
       path: '/student/postlogin',

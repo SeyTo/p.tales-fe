@@ -8,7 +8,7 @@ export default {
 
   mounted () { },
 
-  beforeDestroy () {  },
+  beforeDestroy () { },
 
   components: {
     'tales-navbar': TalesNavBar,

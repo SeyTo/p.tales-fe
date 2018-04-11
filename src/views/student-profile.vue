@@ -1,6 +1,7 @@
 <script>
 import StuNavbarLogged from '../shared/components/navbar-slots/stu-navbar-logged'
 import TalesNavBar from '../shared/components/tales-navbar'
+import TalesNavDrawer from '../shared/components/tales-navdrawer'
 
 export default {
   name: 'student-profile',
@@ -15,6 +16,7 @@ export default {
 
   components: {
     'tales-navbar': TalesNavBar,
+    'tales-navdrawer': TalesNavDrawer,
     'stu-navbar-logged': StuNavbarLogged
   }
 
@@ -25,6 +27,9 @@ export default {
 div
   tales-navbar
     stu-navbar-logged
+
+  tales-navdrawer
+    stu-navbar-logged(compactView="true")
 
   v-container(container grid-list-md)
     v-layout(justify-center).sm-col
