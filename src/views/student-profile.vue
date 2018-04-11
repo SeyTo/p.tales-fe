@@ -7,7 +7,15 @@ export default {
   name: 'student-profile',
 
   data () {
-    return { }
+    return {
+      avatar: 'need absolute path/proper url, else wont load, cause webpack',
+      name: 'Jane Shepard',
+      aboutme: 'I am Commander Shepard and I approve of this message.',
+      email: 'jane.shepard@gmail.com',
+      address: 'Normandy, SSR4',
+      dob: '2017, 14th May',
+      phonenumber: '+200 9158248424'
+    }
   },
 
   mounted () { },
@@ -27,42 +35,46 @@ export default {
 div
   tales-navbar
     stu-navbar-logged
-
+  
   tales-navdrawer
     stu-navbar-logged(compactView="true")
 
-  v-container(container grid-list-md)
+  v-container(container)
     v-layout(justify-center).sm-col
       
       // profile bill board
-      v-flex(d-flex).profile-board.sm-full
+      v-flex(d-flex).profile-board.sm-full.general-margin
         v-card.profile-board-pad
           v-layout(column)
+
+            // top half contains avatar, name & about
             v-layout(justify-center column).sm-row
               // avatar container
-              v-flex(d-flex xs5 sm5 md12)
+              v-flex(d-flex)
                 v-flex(d-flex justify-center pb-2)
-                  v-avatar(:tile="false" :size=156)
+                  v-avatar(:tile="false" :size=168)
                     img(src="../assets/svg/avatar.svg")
               // name container
-              v-flex(d-flex xs7 sm7 md12)
+              v-flex(d-flex)
                 v-layout(column)
-                  h2.text-sm-center Suru Dururu
-                  p.text-sm-justify This is a shorthand flex-direction and flex-wrap properties, which together define the flex container's main and cross axes.
+                  h2.text-sm-center {{ name }}
+                  p.text-sm-justify {{ aboutme }}
+
+            // bottom half contains other details
             v-layout(justify-center column).sm-row
               v-flex
                 div Email
-                div suru@dururu.com
-              v-flex
-                div Contact
-                div 981491535
-            v-layout(justify-center column).sm-row
+                div {{ email }}
               v-flex
                 div Address
-                div some address
+                div {{ address }}
+            v-layout(justify-center column).sm-row
               v-flex
-                div Some
-                div Edit
+                div Phone Number
+                div {{ phonenumber }}
+              v-flex
+                div Date of Birth
+                div {{ dob }} 
             v-layout(justify-center column)
               v-flex
                 img(src="../assets/svg/facebook.svg" height="36") 
@@ -71,32 +83,32 @@ div
       // info cards
       v-flex(d-flex).info-card-container.sm-full
         v-layout(wrap align-content-start).info-card-layout
-          v-flex(d-flex).info-card
+          v-flex(d-flex).info-card.general-margin
             v-layout(column)
-              v-flex
+              v-flex.general-margin-bottom
                 v-card
                   v-card-title Profile Bill Board
                   v-card-text This is a sample  
-              v-flex
+              v-flex.general-margin-bottom
                 v-card
                   v-card-title Profile Bill Board
                   v-card-text This is a sample  
-              v-flex
+              v-flex.general-margin-bottom
                 v-card
                   v-card-title Profile Bill Board
                   v-card-text This is a sample  
 
-          v-flex(d-flex).info-card
+          v-flex(d-flex).info-card.general-margin
             v-layout(column)
-              v-flex
+              v-flex.general-margin-bottom
                 v-card
                   v-card-title Profile Bill Board
                   v-card-text This is a sample  
-              v-flex
+              v-flex.general-margin-bottom
                 v-card
                   v-card-title Profile Bill Board
                   v-card-text This is a sample  
-              v-flex
+              v-flex.general-margin-bottom
                 v-card
                   v-card-title Profile Bill Board
                   v-card-text This is a sample  
@@ -104,24 +116,42 @@ div
   </template>
 
 <style lang="stylus">
-_max-width = 156px + (48 * 2)px
-_card-max-width = 200px + (48 * 2)px
-_full-width = _max-width + 2 * (_card-max-width)
-_card-container-full-width = 2 * (_card-max-width)
+_general-margin             = (16 * 1.5)px
+_profile-pic                = (168)px
+_board-padding              = 36px
+_info-card-padding          = (16 * 1.5)px
+_profile-board-padding      = (16 * 2)px
+_card-max-width             = 322px
+_profile-board-max-width    = _profile-pic + (_board-padding * 2)px
+_full-width                 = _profile-board-max-width + (2 * _card-max-width) + 20px + (_general-margin * 4)
+_card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
+
 .at-width
-  max-width _max-width
+  max-width _profile-board-max-width
+  max-width _profile-board-max-width
 .profile-board
-  max-width _max-width 
+  max-width _profile-board-max-width 
+  min-width _profile-board-max-width
 .info-card-container
   max-width _card-container-full-width
+  min-width _card-container-full-width
 .info-card
   max-width _card-max-width
   min-width _card-max-width
-// xs breakpoint
 .profile-board-pad
-  padding (16 * 3)px
+  padding _profile-board-padding
+// common margin for all cards
+.general-margin
+  margin-left _general-margin
+.general-margin-bottom
+  margin-bottom _general-margin
+// margin for the right most elements
+.general-margin-edge
+  margin-right _general-margin
+  @extend .general-margin-bottom
 
 @media screen and (max-width: 600px)
+  // when screen small, do
   .sm-row
     flex-direction row !important
   .sm-col
@@ -130,22 +160,27 @@ _card-container-full-width = 2 * (_card-max-width)
     min-width 100% !important
     max-width 100% !important
   .info-card
-    @extend .sm-full 
+    // occupy its parent
+    @extend .sm-full
   .profile-board-pad
-    padding (16 * 1.5)px
+    // profile padding
+    padding _profile-board-padding
   .container
     padding-left 0 !important
     padding-right 0 !important
+  .general-margin
+    margin-left 0
 
 @media screen and (min-width: 450px)
   .md-row
     flex-direction row
 
-@media screen and (max-width: _full-width)
+@media screen and (max-width: (_full-width))
   .info-card-layout
     flex-direction column
   .info-card-container
     max-width _card-max-width
+    // max-width _card-max-width + (_general-margin * 2)
     min-width _card-max-width
-
+    // min-width _card-max-width + (_general-margin * 2)
 </style>
