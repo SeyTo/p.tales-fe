@@ -1,5 +1,4 @@
 <script>
-import StuNavbarLanding from './navbar-slots/stu-navbar-landing'
 /**
  * Component: The master Navbar for entire website. This component
  * should be controlled from a store.
@@ -14,6 +13,12 @@ export default {
       validator (val) {
         return [ 'fixed', 'float', 'absolute', 'scroll-off' ].index(val) !== -1
       }
+    },
+    noSlot: {
+      default: false
+    },
+    containerSize: {
+      default: false
     }
   },
 
@@ -21,9 +26,7 @@ export default {
     return {
       title: 'Tales',
       // clip the drawer above the navbar
-      clipped: false,
-      // TODO: link with store
-      navbarComponent: StuNavbarLanding
+      clipped: false
     }
   },
 
@@ -36,19 +39,9 @@ export default {
         this.$store.commit('setDrawerOpen', { open: val })
       }
     },
-    slotHidden () {
-      return this.$store.getters.isNavBarSlotHidden
-    },
-    isContainerSize () {
-      return this.$store.getters.isContainerSize
-    },
     isSmall () {
       return this.$vuetify.breakpoint.smAndDown
     }
-  },
-
-  component: {
-    'stu-navbar-landing': StuNavbarLanding
   }
 
 }
@@ -62,6 +55,7 @@ div
   v-toolbar(
     app 
     flat
+    color="white"
     :clipped-left="clipped"
     )
       // TODO: use container to get container size for toolbar content
@@ -69,9 +63,9 @@ div
       img(src="@/assets/favicon.64.png" alt="Tales logo").logo 
       v-toolbar-title {{ title }}
       v-spacer
-      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall") 
+      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
       // everything from ./navbar-slots/*
-      component(:is="navbarComponent" v-if="!isSmall && !slotHidden")
+      slot(v-if="!isSmall && !noSlot")
 
 </template> 
 

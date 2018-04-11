@@ -18,8 +18,8 @@ export default {
   v-app(light)
 
     // -- global navbar & navdrawer
-    tales-navbar
-    tales-navdrawer
+    // tales-navbar
+    // tales-navdrawer
 
     // -- content start
     v-content

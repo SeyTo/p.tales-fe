@@ -1,5 +1,4 @@
 <script>
-import StuNavbarLanding from './navbar-slots/stu-navbar-landing'
 
 /**
  * The Global Navdrawer.
@@ -10,7 +9,6 @@ export default {
   data () {
     return {
       // current dynamic component for this drawer
-      drawerComponent: StuNavbarLanding,
       miniVariant: false
     }
   },
@@ -27,11 +25,8 @@ export default {
     enable () {
       return this.$store.getters.isDrawerEnabled
     }
-  },
-
-  components: {
-    'stu-navbar-landing': StuNavbarLanding
   }
+
 }
 </script>
 
@@ -48,7 +43,9 @@ v-navigation-drawer(
   app
   v-show="enable"
 )
-  components(:is="drawerComponent" compactView="true")
+  slot
+  // router-view(name="navDrawer" compactView="true")
+  // components(:is="drawerComponent" compactView="true")
 </template>
 
 

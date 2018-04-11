@@ -8,10 +8,12 @@ export default {
 
   name: 'stu-navbar-landing',
 
-  props: [
+  props: {
     // defines a compact view for this component
-    'compactView'
-  ],
+    compactView: {
+      default: false
+    }
+  },
 
   data () {
     return {
@@ -43,7 +45,7 @@ div
       | Blogs
     v-btn(flat large) 
       | Log In
-    v-btn(depressed large color="primary" @click.native.stop="dialogToggle = !dialogToggle") 
+    v-btn(depressed large color="primary" @click.native.stop="dialogToggle = !dialogToggle")  
       | Sign Up
 
   // -- dialog for log in and Sign up
