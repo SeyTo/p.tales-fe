@@ -7,9 +7,9 @@ export default {
   name: 'emp-landing',
 
   data () {
-    return {  }
+    return { }
   },
-  
+
   components: {
     'tales-navbar': TalesNavBar,
     'tales-navdrawer': TalesNavDrawer,

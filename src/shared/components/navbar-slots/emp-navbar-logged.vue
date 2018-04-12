@@ -1,6 +1,4 @@
 <script>
-import StuAuthTab from '@/shared/components/stu-authtab'
-
 /**
  * Employer page when in '/employer/home'
  */

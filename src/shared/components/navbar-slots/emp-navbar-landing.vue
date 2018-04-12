@@ -23,7 +23,7 @@ export default {
 
   components: {
     'stu-auth-tab': StuAuthTab
-  },
+  }
 
 }
 </script>

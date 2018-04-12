@@ -6,6 +6,7 @@ import EmpLanding from '@/views/emp-landing'
 import StuProfile from '@/views/stu-profile'
 import EmpProfile from '@/views/emp-profile'
 import StuPostsignupQuery from '@/views/stu-postsignup-query'
+import EmpSearch from '@/views/emp-search'
 
 Vue.use(Router)
 
@@ -34,15 +35,19 @@ export default new Router({
       }
     },
     {
+      path: '/employer/',
+      name: 'EmployerLanding',
+      component: EmpLanding
+    },
+    {
       path: '/employer/profile',
       name: 'EmployerProfile',
       component: EmpProfile
     },
     {
-      path: '/employer/',
-      name: 'EmployerLanding',
-      component: EmpLanding
-
+      path: '/employer/search',
+      name: 'EmployerSearch',
+      component: EmpSearch
     }
   ]
 })

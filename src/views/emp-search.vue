@@ -4,11 +4,12 @@ import TalesNavDrawer from '../shared/components/tales-navdrawer'
 
 import EmpNavbarLogged from '../shared/components/navbar-slots/emp-navbar-logged.vue'
 
-/**
- *
- */
 export default {
-  name: 'employer-profile',
+  name: 'emp-search',
+
+  data () {
+    return { }
+  },
 
   components: {
     'tales-navbar': TalesNavBar,
@@ -17,6 +18,7 @@ export default {
   }
 }
 </script>
+
 
 <template lang="pug">
 div
@@ -27,11 +29,11 @@ div
     emp-navbar-logged(compactView="true")
 
   v-container
-    v-layout
+    v-layout 
       v-flex
         | Under-construction
-
 </template>
+
 
 <style lang="stylus">
 </style>
