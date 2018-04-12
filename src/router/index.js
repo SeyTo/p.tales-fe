@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Landing from '@/views/landing'
+import EmpLanding from '@/views/emp-landing'
 import StuProfile from '@/views/stu-profile'
 import EmpProfile from '@/views/emp-profile'
 import StuPostsignupQuery from '@/views/stu-postsignup-query'
@@ -36,6 +37,12 @@ export default new Router({
       path: '/employer/profile',
       name: 'EmployerProfile',
       component: EmpProfile
+    },
+    {
+      path: '/employer/',
+      name: 'EmployerLanding',
+      component: EmpLanding
+
     }
   ]
 })

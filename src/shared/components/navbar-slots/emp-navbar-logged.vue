@@ -43,11 +43,6 @@ div
           v-list-tile-title {{ item.text }}
 
   div(v-show="compactView").compact
-    v-expansion-panel(inset)
-      v-expansion-panel-content
-        div(slot="header") Jobs & Interns
-        div(v-for="(item, i) in jobsOptions" :key="i")
-          v-btn(flat) {{ item.text }}
     v-btn(flat) Blogs
     v-btn(flat) Notifs
     v-expansion-panel(inset)
