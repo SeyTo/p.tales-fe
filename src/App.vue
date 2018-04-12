@@ -27,6 +27,7 @@ export default {
           ul 
             li: router-link(:to="{ name: 'StudentProfile' }") Student Profile Page
             li: router-link(:to="{ name: 'StuPostSignupQuery' }") Student Post Log In Query Page 
+            li: router-link(:to="{ name: 'EmployerProfile' }") Employer Profile Page
       
     // -- footer start
     v-footer(app) 

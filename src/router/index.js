@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Landing from '@/views/landing'
-import StudentProfile from '@/views/student-profile'
+import StuProfile from '@/views/stu-profile'
+import EmpProfile from '@/views/emp-profile'
 import StuPostsignupQuery from '@/views/stu-postsignup-query'
 
 Vue.use(Router)
@@ -22,7 +23,7 @@ export default new Router({
     {
       path: '/student/profile',
       name: 'StudentProfile',
-      component: StudentProfile
+      component: StuProfile
     },
     {
       path: '/student/postlogin',
@@ -30,6 +31,11 @@ export default new Router({
       components: {
         default: StuPostsignupQuery
       }
+    },
+    {
+      path: '/employer/profile',
+      name: 'EmployerProfile',
+      component: EmpProfile
     }
   ]
 })

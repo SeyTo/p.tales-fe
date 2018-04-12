@@ -4,6 +4,7 @@
  */
 export default {
   name: 'stu-navbar-logged',
+
   props: {
     compactView: {
       default: false
@@ -24,7 +25,6 @@ export default {
         { text: 'Terms & Conditions' },
         { text: 'Log Out' }
       ]
-
     }
   }
 }
