@@ -17,14 +17,38 @@ export default {
       dob: '2017, 14th May',
       phonenumber: '+200 9158248424',
       infoCards: {
-        'Education': { },
-        'Work History': { },
-        'Gigs and Freelances': { },
-        'Skills': { },
-        'Volunteers': { },
-        'Leadership': { },
-        'Videos': { },
-        'Add New Module': { }
+        'education': {
+          'name': 'Education',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'workhistory': {
+          'name': 'Work History',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'gigsfreelances': {
+          'name': 'Gigs and Freelances',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'skills': {
+          'name': 'Skills',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'volunteers': { 
+          'name': 'Volunteers',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'leadership': {
+          'name': 'Leadership',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'videos': {
+          'name': 'Videos',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        },
+        'newmodule': { 
+          'name': 'Add New Module',
+          'nullText': 'List out some of your education, courses you took and certifications'
+        }
       }
     }
   },
@@ -33,18 +57,7 @@ export default {
 
   beforeDestroy () { },
 
-  methods: {
-    getInfoCards (isOdd = false) {
-      let cards = []
-      let index = 0
-      let remainder = (isOdd ? 1 : 0)
-      for (let i in this.infoCards) {
-        if (index % 2 === remainder) cards.push(i)
-        ++index
-      }
-      return cards
-    }
-  },
+  methods: { },
 
   components: {
     'tales-navbar': TalesNavBar,
@@ -56,6 +69,7 @@ export default {
 }
 </script>
 
+
 <template lang="pug">
 div
   tales-navbar
@@ -64,11 +78,12 @@ div
   tales-navdrawer
     stu-navbar-logged(compactView="true")
 
-  v-container(container)
-    v-layout(justify-center).sm-col
+  // main content
+  v-container
+    v-layout(justify-center align-start).sm-col
       
       // profile bill board
-      v-flex(d-flex).profile-board.sm-full.general-margin
+      v-flex(d-flex).profile-board.sm-full.ml
         v-card.profile-board-pad
           v-layout(column)
 
@@ -79,10 +94,11 @@ div
                 v-flex(d-flex justify-center pb-2)
                   v-avatar(:tile="false" :size=168)
                     img(src="../assets/svg/avatar.svg")
-              // name container
+              // name & about me container
               v-flex(d-flex)
                 v-layout(column)
                   h2.text-sm-center {{ name }}
+                  hr
                   p.text-sm-justify {{ aboutme }}
 
             // bottom half contains other details
@@ -100,23 +116,19 @@ div
               v-flex
                 div Date of Birth
                 div {{ dob }} 
-            v-layout(justify-center column)
-              v-flex
-                img(src="../assets/svg/facebook.svg" height="36") 
-                img(src="../assets/svg/twitter.svg" height="36") 
+            v-layout(column)
+              v-flex.self-center
+                v-btn(icon fab small flat)
+                  img(src="../assets/svg/facebook.svg" height="36") 
+                v-btn(icon fab small flat)
+                  img(src="../assets/svg/twitter.svg" height="36") 
 
       // info cards
-      v-flex(d-flex).info-card-container.sm-full
-        v-layout(wrap align-content-start).info-card-layout
-          v-flex(d-flex).info-card.general-margin
-            v-layout(column)
-              v-flex(v-for="i in getInfoCards()" :key="i").general-margin-bottom
-                stu-infocard-base(:title="i")
+      v-flex(d-flex).info-card-container.sm-full.mt.ml
+        v-layout(wrap align-content-start row).info-card-layout
+          v-flex(v-for="i of infoCards" :key="i.name").info-card.mb.mr
+            stu-infocard-base(:title="i.name" :nullText="i.nullText")
 
-          v-flex(d-flex).info-card.general-margin
-            v-layout(column)
-              v-flex(v-for="i in getInfoCards(true)" :key="i").general-margin-bottom
-                stu-infocard-base(:title="i")
 
   </template>
 
@@ -126,7 +138,7 @@ _profile-pic                = (168)px
 _board-padding              = 36px
 _info-card-padding          = (16 * 1.5)px
 _profile-board-padding      = (16 * 2)px
-_card-max-width             = 322px
+_card-max-width             = 384px
 _profile-board-max-width    = _profile-pic + (_board-padding * 2)px
 _full-width                 = _profile-board-max-width + (2 * _card-max-width) + 20px + (_general-margin * 4)
 _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
@@ -141,19 +153,22 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   max-width _card-container-full-width
   min-width _card-container-full-width
 .info-card
+  // having a fixed width help in illusion that there are 2 columns
   max-width _card-max-width
   min-width _card-max-width
 .profile-board-pad
   padding _profile-board-padding
 // common margin for all cards
-.general-margin
-  margin-left _general-margin
-.general-margin-bottom
+.mb
   margin-bottom _general-margin
-// margin for the right most elements
-.general-margin-edge
+.mt
+  margin-top _general-margin
+.mr
   margin-right _general-margin
-  @extend .general-margin-bottom
+.ml
+  margin-left _general-margin
+.self-center
+  align-self center
 
 @media screen and (max-width: 600px)
   // when screen small, do
@@ -173,7 +188,7 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   .container
     padding-left 0 !important
     padding-right 0 !important
-  .general-margin
+  .ml
     margin-left 0
 
 @media screen and (min-width: 450px)
