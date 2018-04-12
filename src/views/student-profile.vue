@@ -3,6 +3,7 @@ import StuNavbarLogged from '../shared/components/navbar-slots/stu-navbar-logged
 import TalesNavBar from '../shared/components/tales-navbar'
 import TalesNavDrawer from '../shared/components/tales-navdrawer'
 import StuInfocardBase from '../shared/components/stu-infocards/stu-infocard-base'
+import StuInfocardContentIcontext from '../shared/components/stu-infocards/stu-infocard-content-icontext'
 
 export default {
   name: 'student-profile',
@@ -19,7 +20,13 @@ export default {
       infoCards: {
         'education': {
           'name': 'Education',
-          'nullText': 'List out some of your education, courses you took and certifications'
+          'nullText': 'List out some of your education, courses you took and certifications',
+          contents: [
+            {
+              component: StuInfocardContentIcontext,
+              args: { title: 'Kathmandu University', date: '2017-8-19' }
+            }
+          ]
         },
         'workhistory': {
           'name': 'Work History',
@@ -33,7 +40,7 @@ export default {
           'name': 'Skills',
           'nullText': 'List out some of your education, courses you took and certifications'
         },
-        'volunteers': { 
+        'volunteers': {
           'name': 'Volunteers',
           'nullText': 'List out some of your education, courses you took and certifications'
         },
@@ -45,7 +52,7 @@ export default {
           'name': 'Videos',
           'nullText': 'List out some of your education, courses you took and certifications'
         },
-        'newmodule': { 
+        'newmodule': {
           'name': 'Add New Module',
           'nullText': 'List out some of your education, courses you took and certifications'
         }
@@ -63,7 +70,8 @@ export default {
     'tales-navbar': TalesNavBar,
     'tales-navdrawer': TalesNavDrawer,
     'stu-navbar-logged': StuNavbarLogged,
-    'stu-infocard-base': StuInfocardBase
+    'stu-infocard-base': StuInfocardBase,
+    'stu-infocard-content-icontext': StuInfocardContentIcontext
   }
 
 }
@@ -127,8 +135,10 @@ div
       v-flex(d-flex).info-card-container.sm-full.mt.ml
         v-layout(wrap align-content-start row).info-card-layout
           v-flex(v-for="i of infoCards" :key="i.name").info-card.mb.mr
-            stu-infocard-base(:title="i.name" :nullText="i.nullText")
-
+            stu-infocard-base(:title="i.name" :nullText="i.nullText" :slotActive="i.contents").info-card
+              template(v-if="i.contents")
+                component(:is="i.contents[0].component" :args="i.contents[0].args") 
+                // component(:is="i.contents[0].component") 
 
   </template>
 
@@ -195,7 +205,7 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   .md-row
     flex-direction row
 
-@media screen and (max-width: (_full-width))
+@media screen and (max-width: (_full-width - 150px))
   .info-card-layout
     flex-direction column
   .info-card-container

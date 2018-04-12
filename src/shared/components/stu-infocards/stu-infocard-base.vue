@@ -1,18 +1,25 @@
 <script>
 export default {
   name: 'stu-infocard-base',
+
   props: {
     'title': {
       default: ''
     },
     'nullText': {
-      default: ''
+      default: null
+    },
+    'slotActive': {
+      default: false
     }
   },
+
   data () {
-    return {
-    }
-  }
+    return { }
+  },
+
+  computed: { }
+
 }
 </script>
 
@@ -24,26 +31,26 @@ v-card
     v-btn(flat fab small).abs-right
       v-icon add
   hr
-  div.info-card-content
+  .null-text(v-if="nullText !== null && slotActive === false")
     | {{ nullText }}
-  
+  slot(v-if="slotActive")
+     
 </template>
 
 
 <style lang="stylus">
-header-height = 48px
+header-height = 56px
+padding = 16px 8px
 .header
   position relative
   text-align center
-  height header-height 
-  line-height header-height
-.abs-right
-  position absolute
-  right 0
-  top 0
-.info-card-content
+  padding padding
+  .abs-right
+    position absolute
+    right 0
+    top 0
+.info-card-null-content
   text-align center
-  min-height 2 * header-height
-
+  padding padding * 2
 
 </style>
