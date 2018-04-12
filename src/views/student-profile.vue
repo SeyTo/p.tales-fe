@@ -2,6 +2,7 @@
 import StuNavbarLogged from '../shared/components/navbar-slots/stu-navbar-logged'
 import TalesNavBar from '../shared/components/tales-navbar'
 import TalesNavDrawer from '../shared/components/tales-navdrawer'
+import StuInfocardBase from '../shared/components/stu-infocards/stu-infocard-base'
 
 export default {
   name: 'student-profile',
@@ -14,7 +15,17 @@ export default {
       email: 'jane.shepard@gmail.com',
       address: 'Normandy, SSR4',
       dob: '2017, 14th May',
-      phonenumber: '+200 9158248424'
+      phonenumber: '+200 9158248424',
+      infoCards: {
+        'Education': { },
+        'Work History': { },
+        'Gigs and Freelances': { },
+        'Skills': { },
+        'Volunteers': { },
+        'Leadership': { },
+        'Videos': { },
+        'Add New Module': { }
+      }
     }
   },
 
@@ -22,10 +33,24 @@ export default {
 
   beforeDestroy () { },
 
+  methods: {
+    getInfoCards (isOdd = false) {
+      let cards = []
+      let index = 0
+      let remainder = (isOdd ? 1 : 0)
+      for (let i in this.infoCards) {
+        if (index % 2 === remainder) cards.push(i)
+        ++index
+      }
+      return cards
+    }
+  },
+
   components: {
     'tales-navbar': TalesNavBar,
     'tales-navdrawer': TalesNavDrawer,
-    'stu-navbar-logged': StuNavbarLogged
+    'stu-navbar-logged': StuNavbarLogged,
+    'stu-infocard-base': StuInfocardBase
   }
 
 }
@@ -85,33 +110,13 @@ div
         v-layout(wrap align-content-start).info-card-layout
           v-flex(d-flex).info-card.general-margin
             v-layout(column)
-              v-flex.general-margin-bottom
-                v-card
-                  v-card-title Profile Bill Board
-                  v-card-text This is a sample  
-              v-flex.general-margin-bottom
-                v-card
-                  v-card-title Profile Bill Board
-                  v-card-text This is a sample  
-              v-flex.general-margin-bottom
-                v-card
-                  v-card-title Profile Bill Board
-                  v-card-text This is a sample  
+              v-flex(v-for="i in getInfoCards()" :key="i").general-margin-bottom
+                stu-infocard-base(:title="i")
 
           v-flex(d-flex).info-card.general-margin
             v-layout(column)
-              v-flex.general-margin-bottom
-                v-card
-                  v-card-title Profile Bill Board
-                  v-card-text This is a sample  
-              v-flex.general-margin-bottom
-                v-card
-                  v-card-title Profile Bill Board
-                  v-card-text This is a sample  
-              v-flex.general-margin-bottom
-                v-card
-                  v-card-title Profile Bill Board
-                  v-card-text This is a sample  
+              v-flex(v-for="i in getInfoCards(true)" :key="i").general-margin-bottom
+                stu-infocard-base(:title="i")
 
   </template>
 
