@@ -27,6 +27,7 @@ import {
   VSelect,
   VMenu,
   VExpansionPanel,
+  VCheckbox,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -52,6 +53,7 @@ Vue.use(Vuetify, {
     VSelect,
     VExpansionPanel,
     VMenu,
+    VCheckbox,
     transitions
   },
   theme: {
