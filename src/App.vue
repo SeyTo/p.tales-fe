@@ -36,4 +36,3 @@ export default {
       span &copy; 2018
 
 </template>
-

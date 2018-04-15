@@ -91,7 +91,9 @@ div
     v-layout(justify-center align-start).sm-col
       
       // profile bill board
-      v-flex(d-flex).profile-board.sm-full.ml
+      // TODO change to masonry layout
+      // TODO move to separate component
+      v-flex(d-flex).profile-board.sm-full
         v-card.profile-board-pad
           v-layout(column)
 
@@ -131,16 +133,27 @@ div
                 v-btn(icon fab small flat)
                   img(src="../assets/svg/twitter.svg" height="36") 
 
-      // info cards
-      v-flex(d-flex).info-card-container.sm-full.mt.ml
-        v-layout(wrap align-content-start row).info-card-layout
-          v-flex(v-for="i of infoCards" :key="i.name").info-card.mb.mr
-            stu-infocard-base(:title="i.name" :nullText="i.nullText" :slotActive="i.contents").info-card
+      // -- info cards
+      div.info-card-container.sm-full.ml-3.mt-3
+        div(
+            v-masonry 
+            transition-duration="0.3s" 
+            item-selector=".item"
+          )
+          div(v-for="(i, index) in infoCards" :key="i.name")
+            stu-infocard-base(
+                v-masonry-tile 
+                class="item" 
+                :title="i.name" 
+                :nullText="i.nullText" 
+                :slotActive="i.contents"
+              ).info-card.mb-3.mr-3
               template(v-if="i.contents")
-                component(:is="i.contents[0].component" :args="i.contents[0].args") 
-                // component(:is="i.contents[0].component") 
+                div
+                  component(:is="i.contents[0].component" :args="i.contents[0].args")
+                  component(:is="i.contents[0].component" :args="i.contents[0].args")
 
-  </template>
+</template>
 
 <style lang="stylus">
 _general-margin             = (16 * 1.5)px
@@ -163,20 +176,10 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   max-width _card-container-full-width
   min-width _card-container-full-width
 .info-card
-  // having a fixed width help in illusion that there are 2 columns
   max-width _card-max-width
   min-width _card-max-width
 .profile-board-pad
   padding _profile-board-padding
-// common margin for all cards
-.mb
-  margin-bottom _general-margin
-.mt
-  margin-top _general-margin
-.mr
-  margin-right _general-margin
-.ml
-  margin-left _general-margin
 .self-center
   align-self center
 
@@ -192,25 +195,21 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   .info-card
     // occupy its parent
     @extend .sm-full
+  // profile padding
   .profile-board-pad
-    // profile padding
     padding _profile-board-padding
   .container
     padding-left 0 !important
     padding-right 0 !important
-  .ml
-    margin-left 0
+  .ml-3
+    margin-left 0 !important
 
 @media screen and (min-width: 450px)
   .md-row
     flex-direction row
 
 @media screen and (max-width: (_full-width - 150px))
-  .info-card-layout
-    flex-direction column
   .info-card-container
     max-width _card-max-width
-    // max-width _card-max-width + (_general-margin * 2)
     min-width _card-max-width
-    // min-width _card-max-width + (_general-margin * 2)
 </style>

@@ -3,6 +3,8 @@ import App from './App'
 import router from './router'
 import store from './stores/index.js'
 
+import { VueMasonryPlugin } from 'vue-masonry'
+
 import './assets/styles/main.styl'
 
 import {
@@ -29,6 +31,7 @@ import {
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 
+Vue.use(VueMasonryPlugin)
 Vue.use(Vuetify, {
   components: {
     VApp,
