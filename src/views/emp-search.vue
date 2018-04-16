@@ -9,7 +9,9 @@ export default {
 
   data () {
     return {
-      filterHidden: false
+      filterShow: false,
+      resultFilterShow: false,
+      filterDialog: false
     }
   },
 
@@ -19,8 +21,34 @@ export default {
     'emp-navbar-logged': EmpNavbarLogged
   },
 
-  method: {
-    do () { }
+  computed: {
+    onSmall () {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        console.log('lgAndDown')
+        this.filterShow = false
+        this.resultFilterShow = false
+        return true
+      } else if (this.$vuetify.breakpoint.smAndUp) {
+        console.log('lgAndUp')
+        this.filterShow = true
+        this.resultFilterShow = true
+        return false
+      }
+    }
+  },
+
+  method: { },
+
+  watch: { },
+
+  mounted () {
+    // watch window size
+    // let that = this
+    // this.$nextTick(function () {
+    //   window.addEventListener('resize', function (e) {
+    //     that.windowHeight = window.innerHeight
+    //   })
+    // })
   }
 
 }
@@ -35,8 +63,6 @@ div
   tales-navdrawer
     emp-navbar-logged(compactView="true")
 
-  
-
   v-container(fluid)
     .search-container
       v-text-field(solo label="Search").search-bar
@@ -44,31 +70,35 @@ div
     // -- main container
     .body-container
       // -- master filter (pre-filter)
-      v-card(ref="filter" v-if="!filterHidden")#filter.ml-3.mt-3
+      v-card(ref="filter" v-if="filterShow")#filter.ml-3.mt-3
         | master filter
-      .search-body
+
+      // -- result container + result filter
+      div.search-body
         // -- post-filter for results
-        v-layout(ref="resultFilter" wrap)#result-filter.ml-3.mt-3.mr-3
+        v-layout(ref="resultFilter" v-if="resultFilterShow" wrap)#result-filter.ml-3.mt-3.mr-3
           template(v-for="i in 10")
             v-checkbox(:label="'filter' + i")
 
         // -- contains a list of results 
-        v-layout(wrap).result-container.ml-3.mt-3.mr-3.justify-center
+        v-layout(wrap).result-container.ml-3.mt-3.mr-3
           template(v-for="i in 10")
             v-card {{ i }} Testing
-  v-btn(@click.stop="filterHidden = !filterHidden") DO IT
 
-  v-menu(left top) 
-    v-btn(slot="activator" fab hover)
-      img(src="@/assets/svg/avatar.svg").round
-    v-list
-      v-list-tile(@click="") 
-        v-list-tile-title Filter Cards
-      v-list-tile(@click="") 
-        v-list-tile-title Filter Results
+  // -- fab
+  v-menu(left top v-if="onSmall") 
+    v-btn(slot="activator" fab hover @click="filterDialog = true")
+      img(src="@/assets/svg/filter.svg").round
+
+  // -- filter dialog
+  v-dialog(fullscreen transition="dialog-bottom-transition" :overlay="false" v-model="filterDialog")
+    v-card
+      v-card-title Testing
+      v-card-text
+        | more testing
+        v-btn(@click="filterDialog = false") Close
 
 </template>
-
 
 <style lang="stylus">
 .search-container
@@ -101,7 +131,7 @@ div
       background-color red
       min-height 100px
       min-width 100px
-      // justify-content center
+      justify-content start
       .card
         max-width 304px
         min-width 304px 
@@ -110,18 +140,16 @@ div
   position fixed !important
   right 34px
   bottom 64px
-@media screen and (min-width: 601px)
-  .menu
-    display none !important
-
+// @media screen and (min-width: 601px)
+//   .menu
+//     display none !important
+    
 @media screen and (max-width: 600px)
-  #result-filter
-    display none
-      
+  .result-container
+    justify-content center !important
 @media screen and (max-width: 450px)
-  #filter 
-    display none
   .card
+    // TODO remove
     max-width 100% !important
     min-width 100% !important
     width 100% !important
