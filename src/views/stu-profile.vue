@@ -1,9 +1,10 @@
 <script>
-import StuNavbarLogged from '../shared/components/navbar-slots/stu-navbar-logged'
-import TalesNavBar from '../shared/components/tales-navbar'
-import TalesNavDrawer from '../shared/components/tales-navdrawer'
 import StuInfocardBase from '../shared/components/stu-infocards/stu-infocard-base'
 import StuInfocardContentIcontext from '../shared/components/stu-infocards/stu-infocard-content-icontext'
+
+// navbars
+import StuLoggedinNavbar from '../shared/components/navbars/stu-loggedin-navbar'
+import StuLoggedinNavdraw from '../shared/components/navdrawers/stu-loggedin-navdraw'
 
 export default {
   name: 'student-profile',
@@ -67,9 +68,8 @@ export default {
   methods: { },
 
   components: {
-    'tales-navbar': TalesNavBar,
-    'tales-navdrawer': TalesNavDrawer,
-    'stu-navbar-logged': StuNavbarLogged,
+    'stu-loggedin-navbar': StuLoggedinNavbar,
+    'stu-loggedin-navdraw': StuLoggedinNavdraw,
     'stu-infocard-base': StuInfocardBase,
     'stu-infocard-content-icontext': StuInfocardContentIcontext
   }
@@ -80,11 +80,8 @@ export default {
 
 <template lang="pug">
 div
-  tales-navbar
-    stu-navbar-logged
-  
-  tales-navdrawer
-    stu-navbar-logged(compactView="true")
+  stu-loggedin-navbar
+  stu-loggedin-navdraw
 
   // main content
   v-container

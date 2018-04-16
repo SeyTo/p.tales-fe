@@ -1,8 +1,6 @@
 <script>
-import TalesNavBar from '../shared/components/tales-navbar'
-import TalesNavDrawer from '../shared/components/tales-navdrawer'
-
-import EmpNavbarLogged from '../shared/components/navbar-slots/emp-navbar-logged.vue'
+import EmpLoggedinNavbar from '../shared/components/navbars/emp-loggedin-navbar'
+import EmpLoggedinNavdraw from '../shared/components/navdrawers/emp-loggedin-navdraw'
 
 export default {
   name: 'emp-search',
@@ -16,9 +14,8 @@ export default {
   },
 
   components: {
-    'tales-navbar': TalesNavBar,
-    'tales-navdrawer': TalesNavDrawer,
-    'emp-navbar-logged': EmpNavbarLogged
+    'emp-loggedin-navbar': EmpLoggedinNavbar,
+    'emp-loggedin-navdraw': EmpLoggedinNavdraw
   },
 
   computed: {
@@ -57,11 +54,8 @@ export default {
 
 <template lang="pug">
 div
-  tales-navbar(lockNotif="true")
-    emp-navbar-logged
-
-  tales-navdrawer
-    emp-navbar-logged(compactView="true")
+  emp-loggedin-navbar
+  emp-loggedin-navdraw
 
   v-container(fluid)
     .search-container
