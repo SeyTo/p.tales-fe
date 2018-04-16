@@ -1,7 +1,6 @@
 <script>
-import TalesNavBar from '../shared/components/tales-navbar'
-import StuNavbarLanding from '../shared/components/navbar-slots/stu-navbar-landing'
-import TalesNavDrawer from '../shared/components/tales-navdrawer'
+import StuLoggedoutNavBar from '../shared/components/navbars/stu-loggedout-navbar'
+import StuLoggedoutNavDrawer from '../shared/components/navdrawers/stu-loggedout-navdraw'
 
 export default {
   name: 'landing',
@@ -11,9 +10,8 @@ export default {
   beforeDestroy () { },
 
   components: {
-    'tales-navbar': TalesNavBar,
-    'tales-navdrawer': TalesNavDrawer,
-    'stu-navbar-landing': StuNavbarLanding
+    'stu-loggedout-navbar': StuLoggedoutNavBar,
+    'stu-loggedout-navdrawer': StuLoggedoutNavDrawer
   }
 }
 </script>
@@ -21,11 +19,8 @@ export default {
 
 <template lang="pug">
 div
-  tales-navbar
-    stu-navbar-landing
-
-  tales-navdrawer
-    stu-navbar-landing(compactView="true")
+  stu-loggedout-navbar
+  stu-loggedout-navdrawer
 
   v-container(fluid)
     v-slide-y-transition(mode="out-in") 
@@ -36,19 +31,4 @@ div
 
 
 <style lang="stylus" scoped>
-h1
-h2 
-  font-weight normal
-
-ul
-  list-style-type none
-  padding 0
-
-li
-  display inline-block
-  margin 0 10px
-
-a
-  color #42b983
-
 </style>

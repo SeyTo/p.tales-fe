@@ -41,8 +41,9 @@ div
           v-list-tile-title {{ item.text }}
 
   div(v-show="compactView").compact
-    v-btn(flat) Blogs
-    v-btn(flat) Notifs
+    v-btn(flat) Post a Job
+    v-btn(flat) Search
+    v-btn(flat) Listings
     v-expansion-panel(inset)
       v-expansion-panel-content
         div(slot="header") Profile

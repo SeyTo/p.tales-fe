@@ -19,6 +19,12 @@ export default {
     },
     containerSize: {
       default: false
+    },
+    lockNotif: {
+      default: false
+    },
+    lockAvatar: {
+      default: false
     }
   },
 
@@ -41,9 +47,14 @@ export default {
     },
     isSmall () {
       return this.$vuetify.breakpoint.smAndDown
+    },
+    showNotif () {
+      return (this.lockNotif || (!this.isSmall && !this.noSlot))
+    },
+    showAvatar () {
+      return (this.lockAvatar || (!this.isSmall && !this.noSlot))
     }
   }
-
 }
 </script>
 
@@ -63,9 +74,11 @@ div
       img(src="@/assets/favicon.64.png" alt="Tales logo").logo 
       v-toolbar-title {{ title }}
       v-spacer
-      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
       // everything from ./navbar-slots/*
       slot(v-if="!isSmall && !noSlot")
+      slot(name="notif" v-if="showNotif")
+      slot(name="avatar" v-if="showAvatar")
+      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
 
 </template> 
 

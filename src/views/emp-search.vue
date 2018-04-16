@@ -57,7 +57,7 @@ export default {
 
 <template lang="pug">
 div
-  tales-navbar
+  tales-navbar(lockNotif="true")
     emp-navbar-logged
 
   tales-navdrawer
@@ -86,12 +86,12 @@ div
             v-card {{ i }} Testing
 
   // -- fab
-  v-menu(left top v-if="onSmall") 
+  v-menu(left top v-if="onSmall")#master-fab
     v-btn(slot="activator" fab hover @click="filterDialog = true")
       img(src="@/assets/svg/filter.svg").round
 
   // -- filter dialog
-  v-dialog(fullscreen transition="dialog-bottom-transition" :overlay="false" v-model="filterDialog")
+  v-dialog(fullscreen transition="dialog-bottom-transition" :overlay="false" v-model="filterDialog").filter-dialog
     v-card
       v-card-title Testing
       v-card-text
@@ -136,7 +136,7 @@ div
         max-width 304px
         min-width 304px 
         min-height 200px
-.menu
+#master-fab
   position fixed !important
   right 34px
   bottom 64px

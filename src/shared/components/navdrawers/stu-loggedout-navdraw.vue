@@ -1,0 +1,51 @@
+<script>
+import TalesNavdrawer from '../tales-navdrawer'
+// TODO remove to universal dialog
+import StuAuthTab from '../stu-authtab'
+
+export default {
+  name: 'stu-loggedout-navdraw',
+
+  data () {
+    return {
+      authDialogToggle: false
+    }
+  },
+
+  components: {
+    'tales-navdrawer': TalesNavdrawer,
+    'stu-auth-tab': StuAuthTab
+  }
+}
+</script>
+
+
+<template lang="pug">
+tales-navdrawer.navdrawer
+  template
+    img(src="../../../assets/svg/favicon.svg" height="64").ma-4
+    v-btn(flat large) FOR EMPLOYERS
+    v-btn(flat large) Blogs
+    v-btn(
+        flat 
+        large 
+        @click.native.stop="authDialogToggle = !authDialogToggle"
+      ) Log In
+    v-btn(
+        depressed 
+        large 
+        color="primary" 
+        @click.native.stop="authDialogToggle = !authDialogToggle"
+      ) Sign Up
+
+  // -- dialogs
+  stu-auth-tab(v-model="authDialogToggle")
+
+</template>
+
+
+<style scoped lang="stylus">
+.navdrawer
+  display flex
+  flex-direction column
+</style>
