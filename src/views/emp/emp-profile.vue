@@ -1,6 +1,6 @@
 <script>
-import EmpLoggedinNavbar from '../shared/components/navbars/emp-loggedin-navbar'
-import EmpLoggedinNavdraw from '../shared/components/navdrawers/emp-loggedin-navdraw'
+import EmpLoggedinNavbar from '@/shared/components/navbars/emp-loggedin-navbar'
+import EmpLoggedinNavdraw from '@/shared/components/navdrawers/emp-loggedin-navdraw'
 
 /**
  *
@@ -23,7 +23,7 @@ div
   v-container
     v-layout
       v-flex
-        | Under-construction
+        h1 Employer profile 
 
 </template>
 

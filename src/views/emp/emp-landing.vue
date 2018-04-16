@@ -1,6 +1,6 @@
 <script>
-import EmpLoggedoutNavbar from '../shared/components/navbars/emp-loggedout-navbar'
-import EmpLoggedoutNavdraw from '../shared/components/navdrawers/emp-loggedout-navdraw.vue'
+import EmpLoggedoutNavbar from '@/shared/components/navbars/emp-loggedout-navbar'
+import EmpLoggedoutNavdraw from '@/shared/components/navdrawers/emp-loggedout-navdraw.vue'
 
 export default {
   name: 'emp-landing',
@@ -30,5 +30,5 @@ div
 </template>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 </style>

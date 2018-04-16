@@ -1,10 +1,10 @@
 <script>
-import StuInfocardBase from '../shared/components/stu-infocards/stu-infocard-base'
-import StuInfocardContentIcontext from '../shared/components/stu-infocards/stu-infocard-content-icontext'
+import StuInfocardBase from '@/shared/components/stu-infocards/stu-infocard-base'
+import StuInfocardContentIcontext from '@/shared/components/stu-infocards/stu-infocard-content-icontext'
 
 // navbars
-import StuLoggedinNavbar from '../shared/components/navbars/stu-loggedin-navbar'
-import StuLoggedinNavdraw from '../shared/components/navdrawers/stu-loggedin-navdraw'
+import StuLoggedinNavbar from '@/shared/components/navbars/stu-loggedin-navbar'
+import StuLoggedinNavdraw from '@/shared/components/navdrawers/stu-loggedin-navdraw'
 
 export default {
   name: 'student-profile',
@@ -100,7 +100,7 @@ div
               v-flex(d-flex)
                 v-flex(d-flex justify-center pb-2)
                   v-avatar(:tile="false" :size=168)
-                    img(src="../assets/svg/avatar.svg")
+                    img(src="@/assets/svg/avatar.svg")
               // name & about me container
               v-flex(d-flex)
                 v-layout(column)
@@ -126,9 +126,9 @@ div
             v-layout(column)
               v-flex.self-center
                 v-btn(icon fab small flat)
-                  img(src="../assets/svg/facebook.svg" height="36") 
+                  img(src="@/assets/svg/facebook.svg" height="36") 
                 v-btn(icon fab small flat)
-                  img(src="../assets/svg/twitter.svg" height="36") 
+                  img(src="@/assets/svg/twitter.svg" height="36") 
 
       // -- info cards
       div.info-card-container.sm-full.ml-3.mt-3

@@ -2,12 +2,29 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Landing from '@/views/landing'
-import EmpLanding from '@/views/emp-landing'
-import StuProfile from '@/views/stu-profile'
-import EmpProfile from '@/views/emp-profile'
-import StuPostsignupQuery from '@/views/stu-postsignup-query'
-import EmpSearch from '@/views/emp-search'
-import StuJobsearch from '@/views/stu-jobsearch'
+
+// employer pages
+// import EmpAnalytics from '@/views/emp/emp-analytics'
+// import EmpCreateNew from '@/views/emp/emp-create-new'
+import EmpLanding from '@/views/emp/emp-landing'
+// import EmpListingsApplications from '@/views/emp/emp-listings-applications'
+// import EmpListingsBookmarks from '@/views/emp/emp-listings-bookmarks'
+// import EmpMessages from '@/views/emp/emp-messages'
+import EmpPostsignupquery from '@/views/emp/emp-postsignupquery'
+// import EmpPrefs from '@/views/emp/emp-prefs'
+import EmpProfile from '@/views/emp/emp-profile'
+import EmpRoot from '@/views/emp/emp-root'
+import EmpSearch from '@/views/emp/emp-search'
+
+// student pages
+import StuJobsApplications from '@/views/stu/stu-jobs-applications'
+import StuJobsBookmarks from '@/views/stu/stu-jobs-bookmarks'
+import StuJobsSearch from '@/views/stu/stu-jobs-search'
+// import StuMessages from '@/views/stu/stu-messages'
+import StuPostsignupQuery from '@/views/stu/stu-postsignup-query'
+import StuPrefs from '@/views/stu/stu-prefs'
+import StuProfile from '@/views/stu/stu-profile'
+import StuRoot from '@/views/stu/stu-root'
 
 Vue.use(Router)
 
@@ -19,41 +36,73 @@ export default new Router({
     {
       path: '/',
       name: 'Landing',
-      components: {
-        default: Landing
-      }
+      component: Landing
     },
     {
-      path: '/employer/',
-      name: 'EmployerLanding',
-      component: EmpLanding
+      path: '/emp/postsignup',
+      name: 'EmployerPostSignupQuery',
+      component: EmpPostsignupquery
     },
     {
-      path: '/employer/profile',
-      name: 'EmployerProfile',
-      component: EmpProfile
+      path: '/emp',
+      component: EmpRoot,
+      children: [
+        {
+          path: '',
+          name: 'EmployerLanding',
+          component: EmpLanding
+        },
+        {
+          path: 'profile',
+          name: 'EmployerProfile',
+          component: EmpProfile
+        },
+        {
+          path: 'search',
+          name: 'EmployerSearch',
+          component: EmpSearch
+        }
+      ]
     },
     {
-      path: '/employer/search',
-      name: 'EmployerSearch',
-      component: EmpSearch
-    },
-    {
-      path: '/student/profile',
-      name: 'StudentProfile',
-      component: StuProfile
-    },
-    {
-      path: '/student/postlogin',
+      path: '/stu/postsignup',
       name: 'StuPostSignupQuery',
-      components: {
-        default: StuPostsignupQuery
-      }
+      component: StuPostsignupQuery
     },
     {
-      path: '/student/search',
-      name: 'StudentJobSearch',
-      component: StuJobsearch
+      path: '/stu',
+      component: StuRoot,
+      children: [
+        {
+          path: '',
+          redirect: { name: 'StudentJobSearch' }
+        },
+        {
+          path: 'profile',
+          name: 'StudentProfile',
+          component: StuProfile
+        },
+        {
+          path: 'jobs/search',
+          name: 'StudentJobsSearch',
+          component: StuJobsSearch
+        },
+        {
+          path: 'jobs/applications',
+          name: 'StudentJobsApplications',
+          component: StuJobsApplications
+        },
+        {
+          path: 'jobs/bookmarks',
+          name: 'StudentJobsBookmarks',
+          component: StuJobsBookmarks
+        },
+        {
+          path: 'prefs',
+          name: 'StudentUserPrefs',
+          component: StuPrefs
+        }
+      ]
     }
   ]
 })

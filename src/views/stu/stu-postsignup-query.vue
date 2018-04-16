@@ -1,5 +1,5 @@
 <script>
-import TalesNavBar from '../shared/components/tales-navbar'
+import TalesNavBar from '@/shared/components/tales-navbar'
 
 export default {
   name: 'student-post-loginquery',
@@ -82,7 +82,7 @@ div
 
 
   <style lang="stylus">
-  @import '../assets/styles/main.styl'
+  @import '../../assets/styles/main.styl'
   inline-padding-left=6px
   .med
     max-width 200px

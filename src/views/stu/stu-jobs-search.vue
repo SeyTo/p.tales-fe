@@ -1,9 +1,9 @@
 <script>
-import StuLoggedinNavbar from '../shared/components/navbars/stu-loggedin-navbar'
-import StuLoggedinNavdraw from '../shared/components/navdrawers/stu-loggedin-navdraw'
+import StuLoggedinNavbar from '@/shared/components/navbars/stu-loggedin-navbar'
+import StuLoggedinNavdraw from '@/shared/components/navdrawers/stu-loggedin-navdraw'
 
 export default {
-  name: 'stu-jobsearch',
+  name: 'stu-jobs-search',
 
   data () {
     return { }

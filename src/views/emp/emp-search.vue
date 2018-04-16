@@ -1,6 +1,6 @@
 <script>
-import EmpLoggedinNavbar from '../shared/components/navbars/emp-loggedin-navbar'
-import EmpLoggedinNavdraw from '../shared/components/navdrawers/emp-loggedin-navdraw'
+import EmpLoggedinNavbar from '@/shared/components/navbars/emp-loggedin-navbar'
+import EmpLoggedinNavdraw from '@/shared/components/navdrawers/emp-loggedin-navdraw'
 
 export default {
   name: 'emp-search',
