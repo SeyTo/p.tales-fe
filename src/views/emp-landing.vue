@@ -1,7 +1,4 @@
 <script>
-import TalesNavBar from '../shared/components/tales-navbar'
-import TalesNavDrawer from '../shared/components/tales-navdrawer'
-import EmpNavbarLanding from '../shared/components/navbar-slots/emp-navbar-landing'
 import EmpLoggedoutNavbar from '../shared/components/navbars/emp-loggedout-navbar'
 import EmpLoggedoutNavdraw from '../shared/components/navdrawers/emp-loggedout-navdraw.vue'
 
@@ -13,9 +10,6 @@ export default {
   },
 
   components: {
-    'tales-navbar': TalesNavBar,
-    'tales-navdrawer': TalesNavDrawer,
-    'emp-navbar-landing': EmpNavbarLanding,
     'emp-loggedout-navbar': EmpLoggedoutNavbar,
     'emp-loggedout-navdraw': EmpLoggedoutNavdraw
   }
@@ -27,11 +21,6 @@ export default {
 div
   emp-loggedout-navbar
   emp-loggedout-navdraw
-  // tales-navbar
-  //   emp-navbar-landing
-
-  // tales-navdrawer
-  //   emp-navbar-landing(compactView="true")
 
   v-container(fluid)
     v-slide-y-transition(mode="out-in") 
