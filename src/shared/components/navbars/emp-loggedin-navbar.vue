@@ -24,13 +24,15 @@ export default {
 
 
 <template lang="pug">
-tales-navbar
+tales-navbar(:lockNotif="true")
   template
     v-btn(flat) Post a Job
     v-btn(flat) Search
     v-btn(flat) Listings
-    v-btn(fab icon flat small)
+  template(slot="notif")
+    v-btn(fab icon flat small) 
       img(src="@/assets/svg/notification.svg")
+  template(slot="avatar")
     v-menu(bottom left) 
       v-btn(slot="activator" fab small)
         img(src="@/assets/svg/avatar.svg").round

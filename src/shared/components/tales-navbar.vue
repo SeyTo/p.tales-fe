@@ -6,6 +6,7 @@
 export default {
   // TODO: set sticky attribute
   // TODO: set visible attribute
+  // TODO implement container sizing
   name: 'tales-navbar',
 
   props: {
@@ -14,15 +15,19 @@ export default {
         return [ 'fixed', 'float', 'absolute', 'scroll-off' ].index(val) !== -1
       }
     },
+    /** Shows or hide the slot on the right side. */
     noSlot: {
       default: false
     },
+    /** Sets the navbar in container size */
     containerSize: {
       default: false
     },
+    /** Notification slot does not hide even on small size */
     lockNotif: {
       default: false
     },
+    /** Avatar slot does not hide even on small size */
     lockAvatar: {
       default: false
     }
@@ -49,10 +54,10 @@ export default {
       return this.$vuetify.breakpoint.smAndDown
     },
     showNotif () {
-      return (this.lockNotif || (!this.isSmall && !this.noSlot))
+      return ((this.lockNotif && !this.noSlot) || (!this.isSmall && !this.noSlot))
     },
     showAvatar () {
-      return (this.lockAvatar || (!this.isSmall && !this.noSlot))
+      return ((this.lockAvatar && !this.noSlot) || (!this.isSmall && !this.noSlot))
     }
   }
 }
@@ -64,29 +69,28 @@ export default {
 div
   // -- master navtoolbar
   v-toolbar(
-    app 
-    flat
-    color="white"
-    :clipped-left="clipped"
+      app 
+      flat
+      color="white"
+      :clipped-left="clipped"
     )
-      // TODO: use container to get container size for toolbar content
       // TODO: use svg
-      img(src="@/assets/favicon.64.png" alt="Tales logo").logo 
+      img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo 
       v-toolbar-title {{ title }}
+
       v-spacer
-      // everything from ./navbar-slots/*
+
       slot(v-if="!isSmall && !noSlot")
       slot(name="notif" v-if="showNotif")
       slot(name="avatar" v-if="showAvatar")
+
       v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
 
 </template> 
 
 
-<style lang="stylus">
-
+<style lang="stylus" scoped>
 .logo
   height 80% 
-
 </style>
 
