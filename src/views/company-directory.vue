@@ -30,7 +30,7 @@ div
   .name-container Github
 
   v-container(fluid)
-    v-layout
+    v-layout(wrap)
       emp-profile-billboard
       v-flex
         v-card
@@ -86,5 +86,13 @@ _billboard_translate = -(_pad-3 + _pad-5 + _profile_pic_width/2 + _name_containe
   left _name_container_left
 .profile-board
   transform translateY(_billboard_translate)
+@media all and (max-width: 500px)
+  .profile-board 
+    min-width 100% !important
+    width 100% !important
+  .name-container
+    top _pad-4
+    left _pad-4
+    right _pad-4
 </style>
 

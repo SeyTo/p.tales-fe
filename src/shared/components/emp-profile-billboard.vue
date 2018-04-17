@@ -15,7 +15,8 @@ export default {
 
 <template lang="pug">
 v-card.profile-board
-  img(src="../../assets/svg/github-logo.svg").profile-pic
+  div.centered
+    img(src="../../assets/svg/github-logo.svg").profile-pic
   v-divider.mb-4
   .contact-info
     div.subheading Location 
@@ -61,6 +62,9 @@ _padding-5 = (16 * 3)px
 _profile_pic_width = 168px
 _min_width = (_padding-4 * 2) + _profile_pic_width
 
+.centered
+  display flex
+  justify-content center
 .profile-board
   display flex
   flex-direction column
