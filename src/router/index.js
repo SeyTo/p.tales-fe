@@ -27,6 +27,8 @@ import StuPrefs from '@/views/stu/stu-prefs'
 import StuProfile from '@/views/stu/stu-profile'
 import StuRoot from '@/views/stu/stu-root'
 
+import CompanyDirectory from '@/views/company-directory'
+
 Vue.use(Router)
 
 export default new Router({
@@ -43,6 +45,11 @@ export default new Router({
       path: '/emp/postsignup',
       name: 'EmployerPostSignupQuery',
       component: EmpPostsignupquery
+    },
+    {
+      path: '/companydirectory',
+      name: 'CompanyDirectory',
+      component: CompanyDirectory
     },
     {
       path: '/emp',

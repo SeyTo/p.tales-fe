@@ -27,7 +27,7 @@ v-container
 
   // -- result container
   v-layout(wrap)#result-container
-    v-flex(v-for="i in 10")
+    v-flex(v-for="i in 10" :key="i")
         v-card {{ i }} Testing
 </template>
 

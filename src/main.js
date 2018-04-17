@@ -28,6 +28,7 @@ import {
   VMenu,
   VExpansionPanel,
   VCheckbox,
+  VJumbotron,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -54,6 +55,7 @@ Vue.use(Vuetify, {
     VExpansionPanel,
     VMenu,
     VCheckbox,
+    VJumbotron,
     transitions
   },
   theme: {
