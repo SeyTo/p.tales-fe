@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'emp-profile-billboard',
+  name: 'stu-profile-billboard',
 
   data () {
     return { }
@@ -15,8 +15,11 @@ export default {
 
 <template lang="pug">
 v-card.profile-board
-  div.centered
-    img(src="../../assets/svg/github-logo.svg").profile-pic
+  // div.colored
+  div.this
+  div.picture-container.mt-5.mx-5.mb-4
+    img(src="../../assets/svg/avatar.svg").profile-pic
+    div.headline.name Rita Maharjan
   v-divider.mb-4
   .contact-info
     div.subheading Location 
@@ -62,20 +65,42 @@ _padding-5 = (16 * 3)px
 _profile_pic_width = 168px
 _min_width = (_padding-4 * 2) + _profile_pic_width
 
+
+
 .centered
   display flex
   justify-content center
+  flex-direction column
+  
 .profile-board
+  position relative
+  overflow hidden
   display flex
   flex-direction column
   justify-content center
   min-width _min_width
-  .profile-pic
-    margin _padding-5
-    width _profile_pic_width
+  .this
+    // TODO calculate
+    position absolute
+    // height 300px
+    height _min_width * 2
+    width 166px 
+    background-color #9b4
+    top -145px
+    left -36px
+    z-index 2 
+    transform rotate(45deg)
+  .picture-container
     // TODO generalize
-    border-radius 50%
-    box-shadow 0px 2px 2px #ccc
+    overflow hidden
+    position relative
+    z-index 10 
+    .profile-pic
+      width _profile_pic_width
+      // TODO generalize
+      border-radius 50%
+    .name
+      text-align center
   .contact-info
     padding 0 _padding-5 _padding _padding-5
   .social-container
