@@ -1,6 +1,4 @@
 <script>
-import EmpLoggedinNavbar from '@/shared/components/navbars/emp-loggedin-navbar'
-import EmpLoggedinNavdraw from '@/shared/components/navdrawers/emp-loggedin-navdraw'
 
 /**
  *
@@ -8,22 +6,15 @@ import EmpLoggedinNavdraw from '@/shared/components/navdrawers/emp-loggedin-navd
 export default {
   name: 'employer-profile',
 
-  components: {
-    'emp-loggedin-navbar': EmpLoggedinNavbar,
-    'emp-loggedin-navdraw': EmpLoggedinNavdraw
-  }
+  components: { }
 }
 </script>
 
 <template lang="pug">
-div
-  emp-loggedin-navbar
-  emp-loggedin-navdraw
-
-  v-container
-    v-layout
-      v-flex
-        h1 Employer profile 
+v-container
+  v-layout
+    v-flex
+      h1 Employer profile 
 
 </template>
 

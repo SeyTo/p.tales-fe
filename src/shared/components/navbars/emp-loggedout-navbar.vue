@@ -22,7 +22,7 @@ export default {
 
 <template lang="pug">
 tales-navbar
-  template
+  div 
     v-btn(
         flat 
         large

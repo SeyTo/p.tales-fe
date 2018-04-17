@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'stu-messages',
+  name: 'emp-listings-applications',
 
   data () {
     return { }
@@ -15,7 +15,7 @@ export default {
 
 <template lang="pug">
 div
-  h1 Student Messages
+  h1 emp-listings-applications 
 </template>
 
 

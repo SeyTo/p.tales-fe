@@ -2,10 +2,6 @@
 import StuInfocardBase from '@/shared/components/stu-infocards/stu-infocard-base'
 import StuInfocardContentIcontext from '@/shared/components/stu-infocards/stu-infocard-content-icontext'
 
-// navbars
-import StuLoggedinNavbar from '@/shared/components/navbars/stu-loggedin-navbar'
-import StuLoggedinNavdraw from '@/shared/components/navdrawers/stu-loggedin-navdraw'
-
 export default {
   name: 'student-profile',
 
@@ -68,8 +64,6 @@ export default {
   methods: { },
 
   components: {
-    'stu-loggedin-navbar': StuLoggedinNavbar,
-    'stu-loggedin-navdraw': StuLoggedinNavdraw,
     'stu-infocard-base': StuInfocardBase,
     'stu-infocard-content-icontext': StuInfocardContentIcontext
   }
@@ -80,14 +74,11 @@ export default {
 
 <template lang="pug">
 div
-  stu-loggedin-navbar
-  stu-loggedin-navdraw
-
-  // main content
+  // -- main content
   v-container
     v-layout(justify-center align-start).sm-col
       
-      // profile bill board
+      // -- profile bill board
       // TODO change to masonry layout
       // TODO move to separate component
       v-flex(d-flex).profile-board.sm-full

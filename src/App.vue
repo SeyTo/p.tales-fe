@@ -30,14 +30,20 @@ export default {
             li: router-link(:to="{ name: 'EmployerLanding' }") Employer Landing Page
             li: router-link(:to="{ name: 'EmployerProfile' }") Employer Profile Page
             li: router-link(:to="{ name: 'EmployerSearch' }") Employer Search Page
+            li: router-link(:to="{ name: 'EmployerAnalytics' }") Analytics
+            li: router-link(:to="{ name: 'EmployerCreateNew' }") Create New
+            li: router-link(:to="{ name: 'EmployerListingsApplications' }") Listings Applications
+            li: router-link(:to="{ name: 'EmployerListingsBookmarks' }") Listings Bookmarks
+            li: router-link(:to="{ name: 'EmployerMessages' }") Messages
+            li: router-link(:to="{ name: 'EmployerPrefs' }") Prefs
 
             li: h3 Student Pages
-            li: router-link(:to="{ name: 'StuPostSignupQuery' }") Student Post Log In Query Page 
-            li: router-link(:to="{ name: 'StudentProfile' }") Student Profile Page
-            li: router-link(:to="{ name: 'StudentJobsSearch' }") Student Job Search Page
-            li: router-link(:to="{ name: 'StudentJobsApplications' }") Student Job Applications
-            li: router-link(:to="{ name: 'StudentJobsBookmarks' }") Student Job Bookmarks 
-            li: router-link(:to="{ name: 'StudentUserPrefs' }") Student User Prefs 
+            li: router-link(:to="{ name: 'StuPostSignupQuery' }") Post Sign Up Query Page 
+            li: router-link(:to="{ name: 'StudentProfile' }") Profile
+            li: router-link(:to="{ name: 'StudentJobsSearch' }") Job Search
+            li: router-link(:to="{ name: 'StudentJobsApplications' }") Applications
+            li: router-link(:to="{ name: 'StudentJobsBookmarks' }") Job > Bookmarks 
+            li: router-link(:to="{ name: 'StudentUserPrefs' }") Prefs 
       
     // -- footer start
     v-footer(app) 

@@ -4,14 +4,15 @@ import Router from 'vue-router'
 import Landing from '@/views/landing'
 
 // employer pages
-// import EmpAnalytics from '@/views/emp/emp-analytics'
-// import EmpCreateNew from '@/views/emp/emp-create-new'
+import EmpAnalytics from '@/views/emp/emp-analytics'
+import EmpCreateNew from '@/views/emp/emp-create-new'
 import EmpLanding from '@/views/emp/emp-landing'
-// import EmpListingsApplications from '@/views/emp/emp-listings-applications'
-// import EmpListingsBookmarks from '@/views/emp/emp-listings-bookmarks'
-// import EmpMessages from '@/views/emp/emp-messages'
+import EmpListingsRoot from '@/views/emp/listings/emp-listings-root'
+import EmpListingsApplications from '@/views/emp/listings/emp-listings-applications'
+import EmpListingsBookmarks from '@/views/emp/listings/emp-listings-bookmarks'
+import EmpMessages from '@/views/emp/emp-messages'
 import EmpPostsignupquery from '@/views/emp/emp-postsignupquery'
-// import EmpPrefs from '@/views/emp/emp-prefs'
+import EmpPrefs from '@/views/emp/emp-prefs'
 import EmpProfile from '@/views/emp/emp-profile'
 import EmpRoot from '@/views/emp/emp-root'
 import EmpSearch from '@/views/emp/emp-search'
@@ -61,6 +62,46 @@ export default new Router({
           path: 'search',
           name: 'EmployerSearch',
           component: EmpSearch
+        },
+        {
+          path: 'analytics',
+          name: 'EmployerAnalytics',
+          component: EmpAnalytics
+        },
+        {
+          path: 'newpost',
+          name: 'EmployerCreateNew',
+          component: EmpCreateNew
+        },
+        {
+          path: 'messages',
+          name: 'EmployerMessages',
+          component: EmpMessages
+        },
+        {
+          path: 'prefs',
+          name: 'EmployerPrefs',
+          component: EmpPrefs
+        },
+        {
+          path: 'listings',
+          component: EmpListingsRoot,
+          children: [
+            {
+              path: '',
+              redirect: { name: 'EmployerListingsApplications' }
+            },
+            {
+              path: 'applications',
+              name: 'EmployerListingsApplications',
+              component: EmpListingsApplications
+            },
+            {
+              path: 'bookmarks',
+              name: 'EmployerListingsBookmarks',
+              component: EmpListingsBookmarks
+            }
+          ]
         }
       ]
     },

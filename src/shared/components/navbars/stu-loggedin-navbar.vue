@@ -30,34 +30,32 @@ export default {
 <template lang="pug">
 tales-navbar(:lockNotif="true")
   // -- jobs & interns menu
-  template
-    v-menu(
-        bottom 
-        left
-      ) 
-      v-btn(slot="activator" flat) Jobs & Interns
-      v-list
-        v-list-tile(
-            v-for="(item, i) in jobsOptions" 
-            :key="i" 
-            @click=""
+  v-menu(
+      bottom 
+      left
+    ) 
+    v-btn(slot="activator" flat) Jobs & Interns
+    v-list
+      v-list-tile(
+          v-for="(item, i) in jobsOptions" 
+          :key="i" 
+          @click=""
           ) 
           v-list-tile-title {{ item.text }}
 
-    v-btn(flat) Blogs
+  v-btn(flat) Blogs
 
-  template(slot="notif")
-    v-btn(flat fab small)
-      img(src="../../../assets/svg/notification.svg")
+  // -- notification 
+  v-btn(slot="notif" flat fab small)
+    img(src="../../../assets/svg/notification.svg")
 
-  // -- Profile Menu
-  template(slot="avatar")
-    v-menu(bottom left) 
-      v-btn(slot="activator" fab small)
-        img(src="@/assets/svg/avatar.svg").round
-      v-list
-        v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
-          v-list-tile-title {{ item.text }}
+  // -- profile menu
+  v-menu(slot="avatar" bottom left) 
+    v-btn(slot="activator" fab small)
+      img(src="@/assets/svg/avatar.svg").round
+    v-list
+      v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
+        v-list-tile-title {{ item.text }}
 
 </template>
 

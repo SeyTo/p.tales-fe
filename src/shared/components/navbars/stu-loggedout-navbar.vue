@@ -22,7 +22,7 @@ export default {
 <template lang="pug">
 div
   tales-navbar
-    template
+    div
       v-btn(flat large) FOR EMPLOYERS
       v-btn(flat large) Blogs
       v-btn(

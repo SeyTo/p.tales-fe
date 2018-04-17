@@ -1,6 +1,4 @@
 <script>
-import EmpLoggedinNavbar from '@/shared/components/navbars/emp-loggedin-navbar'
-import EmpLoggedinNavdraw from '@/shared/components/navdrawers/emp-loggedin-navdraw'
 
 export default {
   name: 'emp-search',
@@ -13,10 +11,7 @@ export default {
     }
   },
 
-  components: {
-    'emp-loggedin-navbar': EmpLoggedinNavbar,
-    'emp-loggedin-navdraw': EmpLoggedinNavdraw
-  },
+  components: { },
 
   computed: {
     onSmall () {
@@ -53,31 +48,28 @@ export default {
 
 
 <template lang="pug">
-div
-  emp-loggedin-navbar
-  emp-loggedin-navdraw
 
-  v-container(fluid)
-    .search-container
-      v-text-field(solo label="Search").search-bar
+v-container(fluid)
+  .search-container
+    v-text-field(solo label="Search").search-bar
 
-    // -- main container
-    .body-container
-      // -- master filter (pre-filter)
-      v-card(ref="filter" v-if="filterShow")#filter.ml-3.mt-3
-        | master filter
+  // -- main container
+  .body-container
+    // -- master filter (pre-filter)
+    v-card(ref="filter" v-if="filterShow")#filter.ml-3.mt-3
+      | master filter
 
-      // -- result container + result filter
-      div.search-body
-        // -- post-filter for results
-        v-layout(ref="resultFilter" v-if="resultFilterShow" wrap)#result-filter.ml-3.mt-3.mr-3
-          template(v-for="i in 10")
-            v-checkbox(:label="'filter' + i")
+    // -- result container + result filter
+    div.search-body
+      // -- post-filter for results
+      v-layout(ref="resultFilter" v-if="resultFilterShow" wrap)#result-filter.ml-3.mt-3.mr-3
+        template(v-for="i in 10")
+          v-checkbox(:label="'filter' + i")
 
-        // -- contains a list of results 
-        v-layout(wrap).result-container.ml-3.mt-3.mr-3
-          template(v-for="i in 10")
-            v-card {{ i }} Testing
+      // -- contains a list of results 
+      v-layout(wrap).result-container.ml-3.mt-3.mr-3
+        template(v-for="i in 10")
+          v-card {{ i }} Testing
 
   // -- fab
   v-menu(left top v-if="onSmall")#master-fab

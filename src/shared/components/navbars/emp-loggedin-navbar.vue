@@ -25,20 +25,19 @@ export default {
 
 <template lang="pug">
 tales-navbar(:lockNotif="true")
-  template
+  div 
     v-btn(flat) Post a Job
     v-btn(flat) Search
     v-btn(flat) Listings
-  template(slot="notif")
-    v-btn(fab icon flat small) 
-      img(src="@/assets/svg/notification.svg")
-  template(slot="avatar")
-    v-menu(bottom left) 
-      v-btn(slot="activator" fab small)
-        img(src="@/assets/svg/avatar.svg").round
-      v-list
-        v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
-          v-list-tile-title {{ item.text }}
+  v-btn(fab icon flat small slot="notif") 
+    img(src="@/assets/svg/notification.svg")
+  v-menu(slot="avatar" bottom left) 
+    v-btn(slot="activator" fab small)
+      img(src="@/assets/svg/avatar.svg").round
+    v-list
+      v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
+        v-list-tile-title {{ item.text }}
+
 </template>
 
 

@@ -1,7 +1,8 @@
 <script>
-import StuLoggedinNavbar from '@/shared/components/navbars/stu-loggedin-navbar'
-import StuLoggedinNavdraw from '@/shared/components/navdrawers/stu-loggedin-navdraw'
 
+/**
+ * Jobs search page.
+ */
 export default {
   name: 'stu-jobs-search',
 
@@ -9,31 +10,25 @@ export default {
     return { }
   },
 
-  components: {
-    'stu-loggedin-navbar': StuLoggedinNavbar,
-    'stu-loggedin-navdraw': StuLoggedinNavdraw
-  }
+  components: { }
 }
 </script>
 
 
 <template lang="pug">
-div
-  stu-loggedin-navbar(:lockNotif="true")
-  stu-loggedin-navdraw
+v-container
+  // -- main search bar
+  .search-container
+    v-text-field(solo label="Search").search-bar
 
-  v-container
-    .search-container
-      v-text-field(solo label="Search").search-bar
+  // -- master filter
+  div#filter.ml-3.mt-3
+    | master filter
 
-    // -- master filter
-    div#filter.ml-3.mt-3
-      | master filter
-
-    // -- result container
-    v-layout(wrap)#result-container
-      v-flex(v-for="i in 10")
-          v-card {{ i }} Testing
+  // -- result container
+  v-layout(wrap)#result-container
+    v-flex(v-for="i in 10")
+        v-card {{ i }} Testing
 </template>
 
 

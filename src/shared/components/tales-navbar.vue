@@ -74,15 +74,18 @@ div
       color="white"
       :clipped-left="clipped"
     )
-      // TODO: use svg
       img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo 
       v-toolbar-title {{ title }}
 
       v-spacer
 
-      slot(v-if="!isSmall && !noSlot")
-      slot(name="notif" v-if="showNotif")
-      slot(name="avatar" v-if="showAvatar")
+      // placing slot inside div forces slots to render in correct order (maybe idk really)
+      div
+        slot(v-if="!isSmall && !noSlot")
+      div
+        slot(name="notif" v-if="showNotif")
+      div
+        slot(name="avatar" v-if="showAvatar")
 
       v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
 
