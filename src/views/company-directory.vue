@@ -1,4 +1,5 @@
 <script>
+import EmpProfileBillBoard from '@/shared/components/emp-profile-billboard'
 
 export default {
   name: 'company-directory',
@@ -12,7 +13,9 @@ export default {
 
   computed: { },
 
-  components: { }
+  components: {
+    'emp-profile-billboard': EmpProfileBillBoard
+  }
 }
 </script>
 
@@ -20,15 +23,14 @@ export default {
 <template lang="pug">
 div
   // -- background image
-  .img-jumbotron(style="background-image: url('/static/doc-images/mountain.jpg')")
+  // TODO find alternative to this imaging
+  .img-jumbotron(style="background-image: url('/static/doc-images/mountain.jpg'); background-size: cover; background-position-y: center")
 
   // -- name container
   .name-container Github
   v-container(fluid)
     v-layout
-      v-flex
-        v-card
-          | Profile Bill Board
+      emp-profile-billboard
       v-flex
         v-card
           | About Me
@@ -44,9 +46,6 @@ _img_jumbotron_height = 400px
 .img-jumbotron
   width 100%
   height _img_jumbotron_height
-  background-repeat no-repeat
-  backgroud-size cover
-  backgroud-position-y center
 .name-container
   _height = 100px
   position absolute
