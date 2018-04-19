@@ -1,6 +1,26 @@
 <script>
-import JobDescCard from '../../shared/components/job-desc-card'
+import JobDescCard from '@/shared/components/job-desc-card'
+import JobDescCardMax from '@/shared/components/job-desc-card-max'
 
+var jobA = {
+  role: 'Get me a tea gal',
+  emp: {
+    name: 'Tales',
+    address: 'Somewhere in Nepal'
+  },
+  about: 'This is a song about the greatest song in the world. This is just a tribute.',
+  deadline: 'Today. LOL'
+}
+
+var jobB = {
+  role: 'Get me my hat boy',
+  emp: {
+    name: 'Yogurt Co.',
+    address: 'Somewhere in Nepal'
+  },
+  about: 'We dont see the world the same way as us but we see the world as someone else. I dont know what Im talking at this point. So Im just going to stfu.',
+  deadline: 'Yesterday. WTF'
+}
 /**
  * Jobs search page.
  */
@@ -9,21 +29,25 @@ export default {
 
   data () {
     return {
-      job: {
-        role: 'Get me a tea gal',
-        emp: {
-          name: 'Tales',
-          address: 'Somewhere in Nepal'
-        },
-        about: 'This is a song about the greatest song in the world. This is just a tribute.',
-        deadline: 'Today. LOL'
-      },
-      isPaid: false
+      jobs: [
+        jobA, jobB, jobA, jobB
+      ],
+      isPaid: false,
+      dialog: false,
+      selectedJobIndex: 0
     }
   },
 
   components: {
-    'job-desc-card': JobDescCard
+    'job-desc-card': JobDescCard,
+    'job-desc-card-max': JobDescCardMax
+  },
+
+  methods: {
+    openJobDialog (i) {
+      this.selectedJobIndex = i
+      this.dialog = true
+    }
   }
 }
 </script>
@@ -60,8 +84,11 @@ v-container(fluid)
     // -- result container
     div.result-wrapper
       div.result-container
-        div(v-for="i in 4" :key="i")
-          job-desc-card(:job="job") 
+        div(v-for="(i, index) in jobs")
+          job-desc-card(:job="i" @click.native.stop="openJobDialog(index)")
+
+  v-dialog(v-model="dialog" max-width="500px")
+    job-desc-card-max(:job="jobs[selectedJobIndex]")
 </template>
 
 
