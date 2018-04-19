@@ -10,8 +10,15 @@ export default {
   data () {
     return {
       job: {
-        role: 'Get me a tea gal'
-      }
+        role: 'Get me a tea gal',
+        emp: {
+          name: 'Tales',
+          address: 'Somewhere in Nepal'
+        },
+        about: 'This is a song about the greatest song in the world. This is just a tribute.',
+        deadline: 'Today. LOL'
+      },
+      isPaid: false
     }
   },
 
@@ -23,15 +30,32 @@ export default {
 
 
 <template lang="pug">
-v-container
+// TODO increase container width
+v-container(fluid)
   v-layout(column)
     // -- main search bar
     .search-container
       v-text-field(solo label="Search").search-bar
 
     // -- master filter
-    div#filter.ml-3.mt-3
-      | master filter
+    v-container(grid-list-md v-if="!this.$vuetify.breakpoint.smAndDown")#filter
+      // v-card.pt-3.pl-3.pr-3.pb-2
+      v-layout
+        v-flex
+          v-select(label="Jobs By Categories"  hide-details dense single-line)
+        v-flex
+          v-select(label="Jobs By Industries"  hide-details dense single-line)
+        v-flex
+          v-select(label="Jobs By Types"  hide-details dense single-line)
+        v-flex
+          v-select(label="Jobs By Location"  hide-details dense single-line)
+        v-flex
+          v-select(label="Relevant Jobs First"  hide-details dense single-line)
+      v-layout(justify-space-between).mt-1.mb-1
+        v-flex
+          v-checkbox(label="Paid Only" hide-details v-model="isPaid")
+        div
+          v-btn(flat).ma-0 Reset
 
     // -- result container
     div.result-wrapper
@@ -43,21 +67,20 @@ v-container
 
 <style lang="stylus" scoped>
 _card_pad = (16 * 1)px
-_card_width = 250px
+_card_width = 300px
 _card_container_width_triple = (3 * _card_width) + (4 * _card_pad)
 _card_container_width_double = (2 * _card_width) + (3 * _card_pad)
 _card_container_width_single = (1 * _card_width) + (2 * _card_pad)
 .search-container
   width 100%
 #filter
-  background-color blue
-  width 100%
+  // end
 .result-wrapper
-  background-color green
+  // background-color green
   display flex
   justify-content center
   .result-container
-    background-color red
+    // background-color red
     width _card_container_width_triple
     display flex
     justify-content flex-start 
