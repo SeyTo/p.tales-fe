@@ -44,6 +44,7 @@ export default {
             li: router-link(:to="{ name: 'StudentJobsApplications' }") Applications
             li: router-link(:to="{ name: 'StudentJobsBookmarks' }") Job > Bookmarks 
             li: router-link(:to="{ name: 'StudentUserPrefs' }") Prefs 
+            li: router-link(:to="{ name: 'StudentMessages' }") Student Messages
 
             li: h3 Misc
             li: router-link(:to="{ name: 'CompanyDirectory' }") Company Directory

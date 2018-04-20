@@ -21,7 +21,7 @@ import EmpSearch from '@/views/emp/emp-search'
 import StuJobsApplications from '@/views/stu/stu-jobs-applications'
 import StuJobsBookmarks from '@/views/stu/stu-jobs-bookmarks'
 import StuJobsSearch from '@/views/stu/stu-jobs-search'
-// import StuMessages from '@/views/stu/stu-messages'
+import StuMessages from '@/views/stu/stu-messages'
 import StuPostsignupQuery from '@/views/stu/stu-postsignup-query'
 import StuPrefs from '@/views/stu/stu-prefs'
 import StuProfile from '@/views/stu/stu-profile'
@@ -149,6 +149,11 @@ export default new Router({
           path: 'prefs',
           name: 'StudentUserPrefs',
           component: StuPrefs
+        },
+        {
+          path: 'messages',
+          name: 'StudentMessages',
+          component: StuMessages
         }
       ]
     }
