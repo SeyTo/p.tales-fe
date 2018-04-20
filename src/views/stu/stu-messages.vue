@@ -1,6 +1,15 @@
 <script>
 import MessageCard from '../../shared/components/message-card'
 
+// TODO remove
+const msg = [
+  { title: 'Some Title', shortContent: 'Some content here.', type: 'mod', content: 'https://' },
+  { title: 'Found an article you like', shortContent: 'This article is a pure ad.', type: 'blog', content: 'https://' },
+  { title: 'Come Work fo us Dawg', shortContent: 'Imma wanna hire yo dog', type: 'employer', content: 'https://' },
+  { title: 'Rejacted', shortContent: 'We dont like your attitude', type: 'employer', content: 'https://' },
+  { title: 'Your account is wack', shortContent: 'How not to get wacked.', type: 'mod', content: 'https://' }
+]
+
 export default {
   name: 'stu-messages',
 
@@ -8,7 +17,17 @@ export default {
     return {
       showModMails: true,
       showEmployerMails: true,
-      showBlogsMails: true
+      showBlogsMails: true,
+      selectedMailIndex: 0,
+      dialog: false,
+      msgs: msg
+    }
+  },
+
+  methods: {
+    openDialog (index) {
+      this.selectedMailIndex = index
+      this.dialog = true
     }
   },
 
@@ -17,6 +36,7 @@ export default {
   components: {
     'message-card': MessageCard
   }
+
 }
 </script>
 
@@ -31,11 +51,12 @@ v-content
         v-checkbox(:label="'Blogs Mails'" v-model="showBlogsMails")
     v-flex(lg4 md6 sm7 xs12).messages-contain
       div.messages
-        message-card(type="mod" title="Some Title" content="Some Content")
-        message-card(type="blog" title="Some Blog" content="Some Content")
-        message-card(type="employer" title="Imma Hire you NAW" content="Work fo me man.")
-        message-card(type="mod" title="You got wrecked" content="How to get wrecked")
+        // TODO replace with render
+        div(v-for="(i, index) in msgs" :key="i.title")
+          message-card(:type="i.type" :title="i.title" :content="i.shortContent" @click.native.stop="openDialog(index)")
     v-flex(lg4 md2 xs1).empty
+  v-dialog(v-model="dialog")
+    message-card(:type="this.msgs[selectedMailIndex].type" :title="this.msgs[selectedMailIndex].title" :content="this.msgs[selectedMailIndex].shortContent")
 </template>
 
 

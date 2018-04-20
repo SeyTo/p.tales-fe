@@ -1,5 +1,6 @@
 <script>
 
+// TODO generalize this
 const messageMeta = {
   mod: {
     color: 'blue',
@@ -27,12 +28,14 @@ export default {
     },
     content: {
       default: ''
+    },
+    compact: {
+      default: false
     }
   },
 
   data () {
     return {
-
     }
   },
 
