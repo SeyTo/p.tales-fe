@@ -31,6 +31,8 @@ import {
   VCheckbox,
   VJumbotron,
   VDivider,
+  VDatePicker,
+  VRadioGroup,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -60,6 +62,8 @@ Vue.use(Vuetify, {
     VCheckbox,
     VJumbotron,
     VDivider,
+    VDatePicker,
+    VRadioGroup,
     transitions
   },
   theme: {

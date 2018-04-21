@@ -1,6 +1,7 @@
 <script>
 import StuInfocardBase from '@/shared/components/stu-infocards/stu-infocard-base'
 import StuInfocardContentIcontext from '@/shared/components/stu-infocards/stu-infocard-content-icontext'
+import StuProfileBoard from '../../shared/components/stu-profile-billboard'
 
 export default {
   name: 'student-profile',
@@ -27,7 +28,7 @@ export default {
         },
         'workhistory': {
           'name': 'Work History',
-          'nullText': 'List out some of your education, courses you took and certifications'
+          'nullText': 'List here the places you have worked before.'
         },
         'gigsfreelances': {
           'name': 'Gigs and Freelances',
@@ -65,7 +66,8 @@ export default {
 
   components: {
     'stu-infocard-base': StuInfocardBase,
-    'stu-infocard-content-icontext': StuInfocardContentIcontext
+    'stu-infocard-content-icontext': StuInfocardContentIcontext,
+    'stu-profile-billboard': StuProfileBoard
   }
 
 }
@@ -81,45 +83,47 @@ div
       // -- profile bill board
       // TODO change to masonry layout
       // TODO move to separate component
-      v-flex(d-flex).profile-board.sm-full
-        v-card.profile-board-pad
-          v-layout(column)
+      .sm-full.profile-board
+        stu-profile-billboard
+      // v-flex(d-flex).profile-board.sm-full
+      //   v-card.profile-board-pad
+      //     v-layout(column)
 
-            // top half contains avatar, name & about
-            v-layout(justify-center column).sm-row
-              // avatar container
-              v-flex(d-flex)
-                v-flex(d-flex justify-center pb-2)
-                  v-avatar(:tile="false" :size=168)
-                    img(src="@/assets/svg/avatar.svg")
-              // name & about me container
-              v-flex(d-flex)
-                v-layout(column)
-                  h2.text-sm-center {{ name }}
-                  hr
-                  p.text-sm-justify {{ aboutme }}
+      //       // top half contains avatar, name & about
+      //       v-layout(justify-center column).sm-row
+      //         // avatar container
+      //         v-flex(d-flex)
+      //           v-flex(d-flex justify-center pb-2)
+      //             v-avatar(:tile="false" :size=168)
+      //               img(src="@/assets/svg/avatar.svg")
+      //         // name & about me container
+      //         v-flex(d-flex)
+      //           v-layout(column)
+      //             h2.text-sm-center {{ name }}
+      //             hr
+      //             p.text-sm-justify {{ aboutme }}
 
-            // bottom half contains other details
-            v-layout(justify-center column).sm-row
-              v-flex
-                div Email
-                div {{ email }}
-              v-flex
-                div Address
-                div {{ address }}
-            v-layout(justify-center column).sm-row
-              v-flex
-                div Phone Number
-                div {{ phonenumber }}
-              v-flex
-                div Date of Birth
-                div {{ dob }} 
-            v-layout(column)
-              v-flex.self-center
-                v-btn(icon fab small flat)
-                  img(src="@/assets/svg/facebook.svg" height="36") 
-                v-btn(icon fab small flat)
-                  img(src="@/assets/svg/twitter.svg" height="36") 
+      //       // bottom half contains other details
+      //       v-layout(justify-center column).sm-row
+      //         v-flex
+      //           div Email
+      //           div {{ email }}
+      //         v-flex
+      //           div Address
+      //           div {{ address }}
+      //       v-layout(justify-center column).sm-row
+      //         v-flex
+      //           div Phone Number
+      //           div {{ phonenumber }}
+      //         v-flex
+      //           div Date of Birth
+      //           div {{ dob }} 
+      //       v-layout(column)
+      //         v-flex.self-center
+      //           v-btn(icon fab small flat)
+      //             img(src="@/assets/svg/facebook.svg" height="36") 
+      //           v-btn(icon fab small flat)
+      //             img(src="@/assets/svg/twitter.svg" height="36") 
 
       // -- info cards
       div.info-card-container.sm-full.ml-3.mt-3
@@ -144,6 +148,7 @@ div
 </template>
 
 <style lang="stylus">
+_pair_col_full_width      = 600px
 _general-margin             = (16 * 1.5)px
 _profile-pic                = (168)px
 _board-padding              = 36px
@@ -158,8 +163,8 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   max-width _profile-board-max-width
   max-width _profile-board-max-width
 .profile-board
-  max-width _profile-board-max-width 
-  min-width _profile-board-max-width
+  // max-width _profile-board-max-width 
+  // min-width _profile-board-max-width
 .info-card-container
   max-width _card-container-full-width
   min-width _card-container-full-width
@@ -171,7 +176,7 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
 .self-center
   align-self center
 
-@media screen and (max-width: 600px)
+@media screen and (max-width: _pair_col_full_width)
   // when screen small, do
   .sm-row
     flex-direction row !important
