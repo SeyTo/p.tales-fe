@@ -1,7 +1,7 @@
 <script>
 import StuInfocardBase from '@/shared/components/stu-infocards/stu-infocard-base'
 import StuInfocardContentIcontext from '@/shared/components/stu-infocards/stu-infocard-content-icontext'
-import StuProfileBoard from '../../shared/components/stu-profile-billboard'
+import StuProfileBoard from '@/shared/components/stu-profile-billboard'
 
 export default {
   name: 'student-profile',
@@ -9,6 +9,7 @@ export default {
   data () {
     return {
       avatar: 'need absolute path/proper url, else wont load, cause webpack',
+      favcolor: '#04a',
       name: 'Jane Shepard',
       aboutme: 'I am Commander Shepard and I approve of this message.',
       email: 'jane.shepard@gmail.com',
@@ -23,6 +24,10 @@ export default {
             {
               component: StuInfocardContentIcontext,
               args: { title: 'Kathmandu University', date: '2017-8-19' }
+            },
+            {
+              component: StuInfocardContentIcontext,
+              args: { title: 'Tribhuwan University', date: '2017-8-19' }
             }
           ]
         },
@@ -81,49 +86,16 @@ div
     v-layout(justify-center align-start).sm-col
       
       // -- profile bill board
-      // TODO change to masonry layout
-      // TODO move to separate component
-      .sm-full.profile-board
-        stu-profile-billboard
-      // v-flex(d-flex).profile-board.sm-full
-      //   v-card.profile-board-pad
-      //     v-layout(column)
-
-      //       // top half contains avatar, name & about
-      //       v-layout(justify-center column).sm-row
-      //         // avatar container
-      //         v-flex(d-flex)
-      //           v-flex(d-flex justify-center pb-2)
-      //             v-avatar(:tile="false" :size=168)
-      //               img(src="@/assets/svg/avatar.svg")
-      //         // name & about me container
-      //         v-flex(d-flex)
-      //           v-layout(column)
-      //             h2.text-sm-center {{ name }}
-      //             hr
-      //             p.text-sm-justify {{ aboutme }}
-
-      //       // bottom half contains other details
-      //       v-layout(justify-center column).sm-row
-      //         v-flex
-      //           div Email
-      //           div {{ email }}
-      //         v-flex
-      //           div Address
-      //           div {{ address }}
-      //       v-layout(justify-center column).sm-row
-      //         v-flex
-      //           div Phone Number
-      //           div {{ phonenumber }}
-      //         v-flex
-      //           div Date of Birth
-      //           div {{ dob }} 
-      //       v-layout(column)
-      //         v-flex.self-center
-      //           v-btn(icon fab small flat)
-      //             img(src="@/assets/svg/facebook.svg" height="36") 
-      //           v-btn(icon fab small flat)
-      //             img(src="@/assets/svg/twitter.svg" height="36") 
+      div.sm-full
+        stu-profile-billboard(
+          :name="name" 
+          :aboutme="aboutme" 
+          :email="email" 
+          :address="address"
+          :dob="dob"
+          :phonenumber="phonenumber"
+          :favcolor="favcolor"
+        )
 
       // -- info cards
       div.info-card-container.sm-full.ml-3.mt-3
@@ -140,10 +112,12 @@ div
                 :nullText="i.nullText" 
                 :slotActive="i.contents"
               ).info-card.mb-3.mr-3
-              template(v-if="i.contents")
-                div
-                  component(:is="i.contents[0].component" :args="i.contents[0].args")
-                  component(:is="i.contents[0].component" :args="i.contents[0].args")
+              template(v-show="i.contents")
+                template(v-for="part in i.contents")
+                  component(
+                      :is="part.component" 
+                      :args="part.args"
+                    )
 
 </template>
 
@@ -159,22 +133,12 @@ _profile-board-max-width    = _profile-pic + (_board-padding * 2)px
 _full-width                 = _profile-board-max-width + (2 * _card-max-width) + 20px + (_general-margin * 4)
 _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
 
-.at-width
-  max-width _profile-board-max-width
-  max-width _profile-board-max-width
-.profile-board
-  // max-width _profile-board-max-width 
-  // min-width _profile-board-max-width
 .info-card-container
   max-width _card-container-full-width
   min-width _card-container-full-width
 .info-card
   max-width _card-max-width
   min-width _card-max-width
-.profile-board-pad
-  padding _profile-board-padding
-.self-center
-  align-self center
 
 @media screen and (max-width: _pair_col_full_width)
   // when screen small, do
@@ -188,9 +152,6 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   .info-card
     // occupy its parent
     @extend .sm-full
-  // profile padding
-  .profile-board-pad
-    padding _profile-board-padding
   .container
     padding-left 0 !important
     padding-right 0 !important

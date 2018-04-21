@@ -2,8 +2,20 @@
 export default {
   name: 'stu-profile-billboard',
 
+  props: [ 
+    'name', 
+    'aboutme', 
+    'email', 
+    'address', 
+    'dob', 
+    'phonenumber',
+    'favcolor'
+  ],
+
   data () {
-    return { }
+    return {
+
+    }
   },
 
   computed: { },
@@ -16,33 +28,26 @@ export default {
 <template lang="pug">
 v-card.profile-board
   // div.colored
-  div.this
+  div.this(v-bind:style="{ 'background-color': favcolor }")
   div.picture-container.mt-5.mx-5.mb-4
-    img(src="../../assets/svg/avatar.svg").profile-pic
-    .headline.name Rita Maharjan
+    img(src="../../assets/svg/avatar.svg").profile-pic.pb-4
+    .headline.name {{ name }}
   v-divider.mb-4
   .user-info
     div.subheading About Me
-    div.body-2 Test
+    div.body-2 {{ aboutme }}
   .user-info
     div.subheading Email
-    div.body-2 atleast 1
+    div.body-2 {{ email }}
   .user-info
     div.subheading Phone Number
-    div.body-2 +981 123124125
-  v-divider.mb-4
+    div.body-2 {{ phonenumber }}
   .user-info
     div.subheading Date of Birth
-    div.body-2 Software
+    div.body-2 {{ dob }}
   .user-info
-    div.subheading Location
-    div.body-2 Internet
-  .user-info
-    div.subheading Founded
-    div.body-2 1520 
-  .user-info
-    div.subheading Website 
-    div.body-2 www.github.com 
+    div.subheading Address
+    div.body-2 {{ address }}
   v-divider.mb-4
   v-layout(column).social-container
     v-flex.self-center
@@ -50,9 +55,8 @@ v-card.profile-board
         img(src="@/assets/svg/facebook.svg") 
       v-btn(icon fab flat)
         img(src="@/assets/svg/twitter.svg") 
-  div.mb-3.mx-5.text-xs-right
-    | EDIT
-
+  div.mb-3.mx-4.text-xs-right
+    a EDIT
 
 </template>
 
@@ -81,10 +85,8 @@ _min_width = (_padding-4 * 2) + _profile_pic_width
   .this
     // TODO calculate
     position absolute
-    // height 300px
     height _min_width * 2
     width 166px 
-    background-color #9b4
     top -145px
     left -36px
     z-index 1 
@@ -106,7 +108,7 @@ _min_width = (_padding-4 * 2) + _profile_pic_width
   .user-info
     padding 0 _padding-5 _padding _padding-5
   .social-container
-    padding-bottom _padding-4
+    // padding-bottom _padding-4
 // TODO generalize
 .self-center
   align-self center
