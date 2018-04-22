@@ -7,7 +7,6 @@ import Landing from '@/views/landing'
 import EmpAnalytics from '@/views/emp/emp-analytics'
 import EmpCreateNew from '@/views/emp/emp-create-new'
 import EmpLanding from '@/views/emp/emp-landing'
-import EmpListingsRoot from '@/views/emp/listings/emp-listings-root'
 import EmpListingsApplications from '@/views/emp/listings/emp-listings-applications'
 import EmpListingsBookmarks from '@/views/emp/listings/emp-listings-bookmarks'
 import EmpMessages from '@/views/emp/emp-messages'
@@ -92,23 +91,17 @@ export default new Router({
         },
         {
           path: 'listings',
-          component: EmpListingsRoot,
-          children: [
-            {
-              path: '',
-              redirect: { name: 'EmployerListingsApplications' }
-            },
-            {
-              path: 'applications',
-              name: 'EmployerListingsApplications',
-              component: EmpListingsApplications
-            },
-            {
-              path: 'bookmarks',
-              name: 'EmployerListingsBookmarks',
-              component: EmpListingsBookmarks
-            }
-          ]
+          redirect: { name: 'EmpListingsApplications' }
+        },
+        {
+          path: 'listings/applications',
+          name: 'EmployerListingsApplications',
+          component: EmpListingsApplications
+        },
+        {
+          path: 'listings/bookmarks',
+          name: 'EmployerListingsBookmarks',
+          component: EmpListingsBookmarks
         }
       ]
     },
