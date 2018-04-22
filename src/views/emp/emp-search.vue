@@ -1,4 +1,5 @@
 <script>
+import StuDescCard from '@/shared/components/stu-desc-card'
 
 export default {
   name: 'emp-search',
@@ -11,7 +12,9 @@ export default {
     }
   },
 
-  components: { },
+  components: {
+    'stu-desc-card': StuDescCard
+  },
 
   computed: {
     onSmall () {
@@ -68,8 +71,8 @@ v-container(fluid)
 
       // -- contains a list of results 
       v-layout(wrap).result-container.ml-3.mt-3.mr-3
-        template(v-for="i in 10")
-          v-card {{ i }} Testing
+        template(v-for="i in 5")
+          stu-desc-card.ml-3.mt-3
 
   // -- fab
   v-menu(left top v-if="onSmall")#master-fab
@@ -114,7 +117,7 @@ v-container(fluid)
         flex-grow 0
 
     .result-container
-      background-color red
+      background-color #fbc
       min-height 100px
       min-width 100px
       justify-content start
@@ -130,14 +133,23 @@ v-container(fluid)
 //   .menu
 //     display none !important
     
-@media screen and (max-width: 600px)
+@media screen and (max-width: 600px) and (min-width: 451px)
   .result-container
     justify-content center !important
 @media screen and (max-width: 450px)
+  .container
+    // padding-left 0px !important
+    // padding-right 0px !important
   .card
     // TODO remove
     max-width 100% !important
     min-width 100% !important
     width 100% !important
+    margin-left 0 !important
+    margin-right 0 !important
+  .result-container
+    margin-left 0 !important
+    margin-right 0 !important
+
 </style>
 
