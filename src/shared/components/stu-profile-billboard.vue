@@ -2,12 +2,12 @@
 export default {
   name: 'stu-profile-billboard',
 
-  props: [ 
-    'name', 
-    'aboutme', 
-    'email', 
-    'address', 
-    'dob', 
+  props: [
+    'name',
+    'aboutme',
+    'email',
+    'address',
+    'dob',
     'phonenumber',
     'favcolor'
   ],
@@ -63,12 +63,12 @@ v-card.profile-board
 
 <style lang="stylus" scoped>
 // TODO generalize
-_pair_col_full_width      = 600px
-_padding = (16)px
-_padding-4 = (16 * 1.5)px
-_padding-5 = (16 * 3)px
-_profile_pic_width = 168px
-_min_width = (_padding-4 * 2) + _profile_pic_width
+_sm_size             = 600px
+_padding              = (16)px
+_padding-4            = (16 * 1.5)px
+_padding-5            = (16 * 3)px
+_profile_pic_width    = 168px
+_min_width            = (_padding-5 * 2) + _profile_pic_width
 
 .centered
   display flex
@@ -82,10 +82,11 @@ _min_width = (_padding-4 * 2) + _profile_pic_width
   flex-direction column
   justify-content center
   min-width _min_width
+  width _min_width
   .this
     // TODO calculate
     position absolute
-    height _min_width * 2
+    height _min_width * 1.5 
     width 166px 
     top -145px
     left -36px
@@ -113,6 +114,7 @@ _min_width = (_padding-4 * 2) + _profile_pic_width
 .self-center
   align-self center
 
-@media screen and (max-width: _pair_col_full_width)
-  //   
+@media screen and (max-width: _sm_size)
+  .profile-board   
+    width 100%
 </style>

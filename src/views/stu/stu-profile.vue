@@ -95,7 +95,7 @@ div
           :dob="dob"
           :phonenumber="phonenumber"
           :favcolor="favcolor"
-        )
+        ).sm-full
 
       // -- info cards
       div.info-card-container.sm-full.ml-3.mt-3
@@ -122,7 +122,8 @@ div
 </template>
 
 <style lang="stylus">
-_pair_col_full_width      = 600px
+// TODO generalize
+_sm_size                    = 600px
 _general-margin             = (16 * 1.5)px
 _profile-pic                = (168)px
 _board-padding              = 36px
@@ -140,7 +141,7 @@ _card-container-full-width  = 2 * (_card-max-width) + (_general-margin * 2)
   max-width _card-max-width
   min-width _card-max-width
 
-@media screen and (max-width: _pair_col_full_width)
+@media screen and (max-width: _sm_size)
   // when screen small, do
   .sm-row
     flex-direction row !important
