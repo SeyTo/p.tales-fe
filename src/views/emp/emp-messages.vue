@@ -14,8 +14,6 @@ export default {
 
 
 <template lang="pug">
-div
-  h1 emp-messages 
 </template>
 
 
