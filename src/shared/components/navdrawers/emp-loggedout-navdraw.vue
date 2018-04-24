@@ -1,6 +1,6 @@
 <script>
 import TalesNavdrawer from '../tales-navdrawer'
-import StuAuthTab from '../stu-authtab.vue'
+import StuAuthTab from '@/shared/components/dialog/stu-authtab.vue'
 
 export default {
   name: 'emp-loggedout-navdraw',

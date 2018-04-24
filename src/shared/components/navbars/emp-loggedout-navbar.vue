@@ -1,6 +1,6 @@
 <script>
-import TalesNavbar from '../tales-navbar'
-import StuAuthTab from '../stu-authtab.vue'
+import TalesNavbar from '@/shared/components/tales-navbar'
+import StuAuthTab from '@/shared/components/dialog/stu-authtab.vue'
 
 export default {
   name: 'emp-loggedout-navbar',

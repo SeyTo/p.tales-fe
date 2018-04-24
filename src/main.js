@@ -71,13 +71,13 @@ Vue.use(Vuetify, {
     transitions
   },
   theme: {
-    primary: '#ee44aa',
-    secondary: '#424242',
-    accent: '#82B1FF',
-    error: '#FF5252',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FFC107'
+    primary: '#4fc3f7',
+    secondary: '#81d4fa',
+    accent: '#fdd835',
+    error: '#f44336',
+    info: '#2196f4',
+    success: '#4caf50',
+    warning: '#ffeb3b'
   }
 })
 

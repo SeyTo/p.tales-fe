@@ -1,5 +1,5 @@
 <script>
-import TalesNavdrawer from '../tales-navdrawer'
+import TalesNavdrawer from '@/shared/components/tales-navdrawer'
 
 export default {
   name: '',

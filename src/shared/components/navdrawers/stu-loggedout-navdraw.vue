@@ -1,7 +1,7 @@
 <script>
-import TalesNavdrawer from '../tales-navdrawer'
+import TalesNavdrawer from '@/shared/components/tales-navdrawer'
 // TODO remove to universal dialog
-import StuAuthTab from '../stu-authtab'
+import StuAuthTab from '@/shared/components/dialog/stu-authtab'
 
 export default {
   name: 'stu-loggedout-navdraw',

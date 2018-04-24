@@ -1,6 +1,6 @@
 <script>
 import TalesNavBar from '../tales-navbar'
-import StuAuthTab from '../stu-authtab'
+import StuAuthTab from '@/shared/components/dialog/stu-authtab'
 
 export default {
   name: 'stu-loggedout-navbar',
@@ -23,16 +23,11 @@ export default {
 div
   tales-navbar
     div
-      v-btn(flat large) FOR EMPLOYERS
-      v-btn(flat large) Blogs
-      v-btn(
-          flat 
-          large 
-          @click.native.stop="authDialogToggle = !authDialogToggle"
-        ) Log In
+      v-btn(depressed) FOR EMPLOYERS
+      v-btn(depressed) Blogs
+      v-btn(depressed @click.native.stop="authDialogToggle = !authDialogToggle") Log In
       v-btn(
           depressed 
-          large 
           color="primary" 
           @click.native.stop="authDialogToggle = !authDialogToggle"
         ) Sign Up
