@@ -1,15 +1,6 @@
 <script>
-import TalesNavBar from './shared/components/tales-navbar'
-import TalesNavDrawer from './shared/components/tales-navdrawer'
-
 export default {
   name: 'App',
-
-  components: {
-    'tales-navbar': TalesNavBar,
-    'tales-navdrawer': TalesNavDrawer
-  }
-
 }
 </script>
 
@@ -50,7 +41,7 @@ export default {
             li: router-link(:to="{ name: 'CompanyDirectory' }") Company Directory
       
     // -- footer start
-    v-footer(app) 
+    // v-footer(app) 
       span &copy; 2018
 
 </template>

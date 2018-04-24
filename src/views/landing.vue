@@ -5,10 +5,6 @@ import StuLoggedoutNavDrawer from '../shared/components/navdrawers/stu-loggedout
 export default {
   name: 'landing',
 
-  mounted () { },
-
-  beforeDestroy () { },
-
   components: {
     'stu-loggedout-navbar': StuLoggedoutNavBar,
     'stu-loggedout-navdrawer': StuLoggedoutNavDrawer
@@ -18,15 +14,13 @@ export default {
 
 
 <template lang="pug">
-div
+v-container(fluid fill-height)
   stu-loggedout-navbar
   stu-loggedout-navdrawer
 
-  v-container(fluid)
-    v-slide-y-transition(mode="out-in") 
-      v-layout(column align-center)
-        img(src="@/assets/favicon.64.png" alt="Tales logo" class="my-5") 
-        h1 Tales
+  v-container
+    v-layout(column align-center)
+      img(src="@/assets/favicon.64.png" alt="Tales logo") 
 </template>
 
 
