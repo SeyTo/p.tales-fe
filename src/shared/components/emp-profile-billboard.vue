@@ -2,6 +2,8 @@
 export default {
   name: 'emp-profile-billboard',
 
+  props: [ 'editable' ],
+
   data () {
     return { }
   },
