@@ -8,7 +8,8 @@ export default {
   name: 'employer-profile',
 
   data: () => ({
-    name: 'Github'
+    name: 'Github',
+    activetab: ''
   }),
 
   components: {
@@ -18,6 +19,31 @@ export default {
 </script>
 
 <template lang="pug">
+mixin joblistitem
+  .joblistitem
+    v-container(fluid)
+      v-layout
+        div
+          img(src="../../assets/svg/blogger.svg" height="36")
+        v-flex
+          | test 
+        v-flex
+          | test
+  v-divider
+
+mixin articleitem
+  .articleitem
+    v-container
+      v-layout(fluid)
+        div
+          img(src="../../assets/svg/blogger.svg" height="36")
+        v-flex
+          .subheading
+            | Title
+          div
+            | Content Description
+  v-divider
+
 div
   .img-jumbotron(style="background-image: url('/static/doc-images/mountain.jpg');background-size: cover; background-position-y: center")
     .name-container {{ name }}
@@ -25,23 +51,26 @@ div
   v-container(fluid)
     v-layout(wrap)
       emp-profile-billboard(:editable="true")
-      v-flex.main-content.ml-3
-        v-card
-          v-tabs(
-            v-model="active"
-            grow
-          )
-            v-tab About Me
-            v-tab Job Listings
-            v-tab-item
-              v-card
-                | About Me
-            v-tab-item
-              v-card
-                | Job Listings
-      v-flex.blog.ml-3
-        v-card
-          | Blogs
+      v-flex(wrap)
+        v-flex.main-content.ml-3.mb-3
+          v-card
+            v-tabs(
+              v-model="activetab"
+              grow
+            )
+              v-tab About Me
+              v-tab Job Listings
+              v-tab-item
+                v-card.pa-3.body-1
+                  | test
+              v-tab-item
+                v-card
+                  div(v-for="i in 3")
+                    +joblistitem
+        v-flex.blog.ml-3
+          v-card
+            div(v-for="i in 3")
+              +articleitem
 
 </template>
 
@@ -81,9 +110,14 @@ _billboard_translate = -(_pad-3 + _pad-5 + _profile_pic_width/2 + _name_containe
 .profile-board
   transform translateY(_billboard_translate)
 .main-content
-  max-width 600px
-  .card
+  max-width 500px
+  & > .card
     min-height 164px 
+    min-width 400px
+    .joblistitem
+      // 
+.articleitem
+  // 
 .blog
   max-width 600px
 @media all and (max-width: 500px)
