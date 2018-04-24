@@ -1,4 +1,5 @@
 <script>
+
 /**
  * Component: The master Navbar for entire website. This component
  * should be controlled from a store.
@@ -65,29 +66,26 @@ export default {
 
 
 <template lang="pug"> 
-
 div
   // -- master navtoolbar
   v-toolbar(
-      app 
-      flat
-      color="white"
-      :clipped-left="clipped"
-    )
-      img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo 
-      v-toolbar-title {{ title }}
+    app 
+    :clipped-left="false"
+  )
+    v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
+    // v-toolbar-title 
+    img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo  
 
-      v-spacer
+    v-spacer
 
-      // placing slot inside div forces slots to render in correct order (maybe idk really)
-      div
-        slot(v-if="!isSmall && !noSlot")
-      div
-        slot(name="notif" v-if="showNotif")
-      div
-        slot(name="avatar" v-if="showAvatar")
+    // placing slot inside div forces slots to render in correct order (maybe, idk really)
+    div
+      slot(v-if="!isSmall && !noSlot")
+    div
+      slot(name="notif" v-if="showNotif")
+    div
+      slot(name="avatar" v-if="showAvatar")
 
-      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
 
 </template> 
 
