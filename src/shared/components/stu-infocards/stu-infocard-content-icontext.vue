@@ -13,18 +13,24 @@ export default {
 
 <template lang="pug">
   v-layout
-    v-flex(d-flex).pa-3
-      v-avatar(:tile="true" :size="56")
-        img(src="../../../assets/svg/archive.svg")
+    v-flex
+      v-avatar(:tile="true" :size="56").mr-3.h-100
+        img(src="@/assets/svg/archive.svg")
       v-flex(column)
         h4 {{ args.title }}
-        div {{ args.date }}
+        div.pl-3.body-1.grey--text
+          div {{ args.date }}
+          div {{ args.level }}
+          div {{ args.subject }}
 </template>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .flex
   display flex
 .column
   flex-direction column
+// TODO generalize
+.h-100
+  height 100% !important
 </style>

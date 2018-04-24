@@ -23,11 +23,11 @@ export default {
           contents: [
             {
               component: StuInfocardContentIcontext,
-              args: { title: 'Kathmandu University', date: '2017-8-19' }
+              args: { title: 'Kathmandu University', date: '2017-8-19', level: 'Bachelors', subject: 'Business Arts' }
             },
             {
               component: StuInfocardContentIcontext,
-              args: { title: 'Tribhuwan University', date: '2017-8-19' }
+              args: { title: 'Tribhuwan University', date: '2017-8-19', level: 'Masters', subject: 'Physics' }
             }
           ]
         },
@@ -111,13 +111,13 @@ div
                 :title="i.name" 
                 :nullText="i.nullText" 
                 :slotActive="i.contents"
-              ).info-card.mb-3.mr-3
+              ).info-card.mb-3.mr-3.pb-3
               template(v-show="i.contents")
                 template(v-for="part in i.contents")
                   component(
                       :is="part.component" 
                       :args="part.args"
-                    )
+                    ).mt-3.mx-3
 
 </template>
 

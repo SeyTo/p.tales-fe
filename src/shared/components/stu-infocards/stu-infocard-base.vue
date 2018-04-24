@@ -27,11 +27,11 @@ export default {
 <template lang="pug">
 v-card
   div.header
-    h3 {{ title }}
+    .title {{ title }}
     v-btn(flat fab small).abs-right
       v-icon add
   hr
-  .null-text(v-if="nullText !== null && slotActive === false")
+  .subheading.null-text(v-if="nullText !== null && slotActive === false").pa-4
     | {{ nullText }}
   slot(v-if="slotActive")
      
