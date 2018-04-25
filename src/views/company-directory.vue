@@ -1,98 +1,97 @@
 <script>
+import JobDescCardMin from '@/shared/components/job-desc-card-min'
 import EmpProfileBillBoard from '@/shared/components/emp-profile-billboard'
 
 export default {
   name: 'company-directory',
 
-  data () {
-    return {
-      gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
-      height: 500
-    }
-  },
-
-  computed: { },
+  data: () => ({
+    name: 'Github',
+    activetab: ''
+  }),
 
   components: {
-    'emp-profile-billboard': EmpProfileBillBoard
+    'emp-profile-billboard': EmpProfileBillBoard,
+    'job-desc-card-min': JobDescCardMin
   }
 }
 </script>
 
 
 <template lang="pug">
-div
+v-container(fluid).pa-0
   // -- background image
-  // TODO find alternative to this imaging
-  .img-jumbotron(style="background-image: url('/static/doc-images/mountain.jpg'); background-size: cover; background-position-y: center")
-
-  // -- name container
-  .name-container Github
+  v-jumbotron(src="/static/doc-images/mountain.jpg")
+    v-container(fill-height)
+      v-layout(align-center)
+        // -- name container
+        .name-container Github
+        v-flex(text-xs-center)
+          // text overlay on cover image
 
   v-container(fluid)
     v-layout(wrap)
       emp-profile-billboard
-      v-flex
-        v-card
-        v-tabs(
-          v-model="active"
-        )
-          v-tab About Me
-          v-tab Job Listings
-          v-tab-item
-            v-card
-              | About Me
-          v-tab-item
-            v-card
-              | Job Listings
-      v-flex
-        v-card
-          | Blogs
+      // -- tab container
+      v-layout(wrap align-content-start)
+        // -- about & job listings
+        v-flex(xs12 sm12 md7)
+          v-card
+            v-tabs(v-model="activetab" grow)
+              v-tab About Us
+              v-tab Job Listings
+              v-tab-item
+                v-card.pa-3.body-1
+                  | About Me
+              v-tab-item
+                v-card(v-for="i in 3" :key="i")
+                  job-desc-card-min 
+                  v-divider
+        // -- articles
+        v-flex(xs12 sm12 md5)
+          v-card
+            v-card-title Blogs & Articles
+            v-card-text Testing
 
 </template>
 
 
+// TODO create adaptive padding
 <style lang="stylus" scoped>
-// TODO generalize
-_pad-3 = 16px
-_pad-4 = (16 * 1.5)px
-_pad-5 = (16 * 3)px
-_profile_pic_width = 168px
-_img_jumbotron_height = 400px
+@import '../assets/styles/_vars.styl'
 
 _name_container_height = 100px
-_name_container_left = _pad-3 + _pad-5 + _profile_pic_width
-_name_container_top = _img_jumbotron_height - _name_container_height
+_name_container_left = t-spacer1 + t-spacer5 + t-avatar-lg
+_name_container_top = t-img-jumbo-lg-h - _name_container_height
 
-// padding of container + padding of billboard + profilepicwidth/2 + nameconainterheight/2
-_billboard_translate = -(_pad-3 + _pad-5 + _profile_pic_width/2 + _name_container_height/2)px
+_billboard_translate = -(t-spacer3 + t-spacer5 + t-avatar-lg/2 + _name_container_height/2)px
 
-.container
-  padding _pad-3
-.img-jumbotron
-  width 100%
-  height _img_jumbotron_height
 .name-container
   position absolute
-  height _name_container_height
-  background-color rgba(0, 0, 0, 0.4)
+  background-color t-bg-translucent
   color white
   font-size 4rem
   font-weight lighter
   line-height _name_container_height
   padding 0 _name_container_height
   border-radius 50px
-  top _name_container_top 
+  bottom 0
   left _name_container_left
+  transition all 2s
+  text-align center
+
 .profile-board
   transform translateY(_billboard_translate)
-@media all and (max-width: 500px)
+  transition all 1s
+
+@media $display-breakpoints.xs-only
+  // TODO move full width to profile-board
   .profile-board 
     min-width 100% !important
     width 100% !important
+    transform translateY(-10px)
   .name-container
-    top _pad-4
-    left _pad-4
-    right _pad-4
+    left t-spacer4 
+    right t-spacer4 
 </style>
 

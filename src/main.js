@@ -7,8 +7,6 @@ import { VueMasonryPlugin } from 'vue-masonry'
 import KsVueScrollmagic from 'ks-vue-scrollmagic'
 import LoremIpsum from 'vue-lorem-ipsum'
 
-import './assets/styles/main.styl'
-
 import {
   Vuetify,
   VApp,
@@ -38,7 +36,9 @@ import {
   VSubheader,
   transitions
 } from 'vuetify'
-import '../node_modules/vuetify/src/stylus/app.styl'
+// this import should be only after all style imports
+// also import other style files inside this file
+import './assets/styles/main.styl'
 
 Vue.use(KsVueScrollmagic)
 Vue.use(LoremIpsum)

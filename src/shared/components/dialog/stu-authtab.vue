@@ -129,9 +129,9 @@ mixin loginTabItem
 v-dialog(lazy :value="value" @input="$emit('input', $event)")
   v-card
     // -- tabs container for LogIn and Sign Up
-    v-tabs(v-model="activeTab" grow centered)
+    v-tabs(v-model="activeTab" grow)
       // TODO tabs do not change when 'activeTab' is set, see issue #3699 of vuetify
-      v-tab Log In {{ activeTab }}
+      v-tab Log In
       v-tab Sign Up
 
       v-tab-item 

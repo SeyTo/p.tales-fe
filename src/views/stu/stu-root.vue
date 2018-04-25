@@ -8,9 +8,7 @@ import StuLoggedinNavdraw from '@/shared/components/navdrawers/stu-loggedin-navd
 export default {
   name: 'stu-root',
 
-  data () {
-    return { }
-  },
+  data: () => ({ }),
 
   components: {
     'stu-loggedin-navbar': StuLoggedinNavbar,

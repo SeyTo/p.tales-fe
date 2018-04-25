@@ -1,5 +1,21 @@
+// override vuetify variables here
+
+@import '~vuetify/src/stylus/app.styl'
+@import './_vars.styl'
+
+// use vuetify variables here
+
+// --------------------------------- //
+
 .app-flow-text
   font-weight 300 !important;
+
+// v-jumbotron image fix
+.jumbotron
+  height t-img-jumbo-lg-h !important
+.jumbotron__image
+  width 100% !important
+  height auto !important
 
 .fill-vh
   // compensates navbar height
@@ -10,10 +26,13 @@
   @extend .fill-vh
   @extend .fill-vw
 
+.test
+  padding $tester
 
 // Dialog overrides for all v-dialog
 .dialog
   max-width 500px !important
+
 
 
 @media only screen and (min-width: 360px)
