@@ -7,7 +7,18 @@ export default {
 
   data () {
     return {
-      authDialogToggle: false
+      authDialogToggle: false,
+      activeTabIndex: 0
+    }
+  },
+
+  computed: {
+  },
+
+  methods: {
+    openDialog (tabIndex) {
+      this.authDialogToggle = !this.authDialogToggle
+      this.activeTabIndex = tabIndex
     }
   },
 
@@ -25,14 +36,17 @@ div
     div
       v-btn(depressed) FOR EMPLOYERS
       v-btn(depressed) Blogs
-      v-btn(depressed @click.native.stop="authDialogToggle = !authDialogToggle") Log In
       v-btn(
-          depressed 
-          color="primary" 
-          @click.native.stop="authDialogToggle = !authDialogToggle"
-        ) Sign Up
+        depressed 
+        @click.native.stop="openDialog(0)"
+      ) Log In
+      v-btn(
+        depressed 
+        color="primary" 
+        @click.native.stop="openDialog(1)"
+      ) Sign Up
   // -- dialogs
-  stu-auth-tab(v-model="authDialogToggle")
+  stu-auth-tab(v-model="authDialogToggle" :activeTab="activeTabIndex")
 
 </template>
 

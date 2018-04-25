@@ -99,7 +99,7 @@ mixin loginTabItem
       // TODO create natural facebook button
       v-btn() Log In With facebook
       // TODO create google button
-    v-form(v-model="isLoginFormValid") 
+    v-form(v-model="isLoginFormValid")
       v-text-field(
           label="E-mail" 
           v-model="formEmail.text" 
@@ -124,8 +124,7 @@ mixin loginTabItem
     v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Log In
 
 
-// TODO get mixin max-width 
-v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
+v-dialog(lazy :value="value" @input="$emit('input', $event)")
   v-card
     // -- tabs container for LogIn and Sign Up
     v-tabs(v-model="activeTab" grow)

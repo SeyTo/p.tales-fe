@@ -8,12 +8,14 @@ export default {
 
   props: {
     // primary dialog state (visible/invisible)
-    'value': Boolean
+    'value': Boolean,
+    'activeTab': {
+      default: 0
+    }
   },
 
   data () {
     return {
-      activeTab: null,
       isLoginFormValid: false,
       isSignupFormValid: false,
       formEmail: {
@@ -124,12 +126,12 @@ mixin loginTabItem
 
 
 // TODO get mixin max-width 
-v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
+v-dialog(lazy :value="value" @input="$emit('input', $event)")
   v-card
     // -- tabs container for LogIn and Sign Up
-    v-tabs(v-model="activeTab" grow)
-      v-tabs-slider(color="yellow")
-      v-tab Log In
+    v-tabs(v-model="activeTab" grow centered)
+      // TODO tabs do not change when 'activeTab' is set, see issue #3699 of vuetify
+      v-tab Log In {{ activeTab }}
       v-tab Sign Up
 
       v-tab-item 
@@ -140,6 +142,9 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)" max-width="500px")
 </template>
 
 <style lang="stylus" scoped>
+// .dialog-max-width
+  // max-width 500px
+  // width 500px
 // TODO: remove
 .centered 
   display flex
