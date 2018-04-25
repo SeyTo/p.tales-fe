@@ -45,7 +45,7 @@ mixin links
     li: h3 Misc
     li: router-link(:to="{ name: 'CompanyDirectory' }") Company Directory
 
-v-container(fluid column).filler
+v-container(fluid column)
   stu-loggedout-navbar
   stu-loggedout-navdrawer
 
@@ -64,13 +64,13 @@ v-container(fluid column).filler
 
   // TODO replace with vertical pagination
   div
-    v-layout(align-center justify-center).filll.neg
+    v-layout(align-center justify-center green).fill-va
       div.display-4
         | 1 
-    v-layout(align-center justify-center).filll.neg
+    v-layout(align-center justify-center).fill-va
       div.display-4
         | 2
-    v-layout(align-center justify-center).filll.neg
+    v-layout(align-center justify-center blue).fill-va
       div.display-4
         | 3
 </template>
@@ -79,16 +79,4 @@ v-container(fluid column).filler
 <style lang="stylus" scoped>
 .container
   padding 0
-.filler
-  position absolute
-  top 0
-  bottom 0
-  display flex
-  align-items center
-  overflow scroll
-.filll
-  height 100vh
-  width 100vw
-.neg
-  transform translateY(100%)
 </style>

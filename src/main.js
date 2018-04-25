@@ -4,6 +4,7 @@ import router from './router'
 import store from './stores/index.js'
 
 import { VueMasonryPlugin } from 'vue-masonry'
+import KsVueScrollmagic from 'ks-vue-scrollmagic'
 import LoremIpsum from 'vue-lorem-ipsum'
 
 import './assets/styles/main.styl'
@@ -39,6 +40,7 @@ import {
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 
+Vue.use(KsVueScrollmagic)
 Vue.use(LoremIpsum)
 Vue.use(VueMasonryPlugin)
 Vue.use(Vuetify, {

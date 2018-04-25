@@ -1,6 +1,16 @@
 .app-flow-text
   font-weight 300 !important;
 
+.fill-vh
+  // compensates navbar height
+  height 96vh
+.fill-vw
+  width 100vw 
+.fill-va
+  @extend .fill-vh
+  @extend .fill-vw
+
+
 // Dialog overrides for all v-dialog
 .dialog
   max-width 500px !important
