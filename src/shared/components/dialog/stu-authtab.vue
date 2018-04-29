@@ -18,6 +18,7 @@ export default {
     return {
       isLoginFormValid: false,
       isSignupFormValid: false,
+      activeTabIndex: this.activeTab,
       formEmail: {
         text: '',
         rules: [
@@ -129,8 +130,9 @@ mixin loginTabItem
 v-dialog(lazy :value="value" @input="$emit('input', $event)")
   v-card
     // -- tabs container for LogIn and Sign Up
-    v-tabs(v-model="activeTab" grow)
+    v-tabs(v-model="activeTabIndex" grow)
       // TODO tabs do not change when 'activeTab' is set, see issue #3699 of vuetify
+      // maybe, simulate a click instead
       v-tab Log In
       v-tab Sign Up
 
