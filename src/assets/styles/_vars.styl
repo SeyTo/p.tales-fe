@@ -16,6 +16,7 @@ t-img-jumbo-lg-h = 300px
 // translucency
 t-bg-translucent = rgba(0, 0, 0, 0.4)
 
+
 // copied from vuetify/_vars.styl. Only needed these variables.
 // Grid
 // ============================================================
@@ -42,3 +43,26 @@ $display-breakpoints := {
   lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
   xl-only: "only screen and (min-width: %s)" % $grid-breakpoints.xl
 }
+
+// Student Profile Page
+// ============================================================
+t-infocard-w = 384px
+
+// TODO simplify
+@media $display-breakpoints.xs-only
+  .xs-flex-row
+    flex-direction row !important
+  .xs-flex-col
+    flex-direction column !important
+  .xs-full
+    min-width 100% !important
+    max-width 100% !important
+
+@media $display-breakpoints.sm-only
+  .sm-flex-row
+    flex-direction row !important
+  .sm-flex-col
+    flex-direction column !important
+  .sm-full
+    min-width 100% !important
+    max-width 100% !important
