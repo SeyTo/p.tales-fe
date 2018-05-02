@@ -84,48 +84,42 @@ export default {
 
 
 <template lang="pug">
-mixin resultFilter
-  v-layout(ref="resultFilter" v-if="resultFilterShow" wrap)#result-filter.ml-3.px-3
-    v-flex
-      v-checkbox(hide-details :label="'Hide Names'" v-model="selectiveFilter.hideNameFilter")
-      v-checkbox(hide-details :label="'Hide About Me'" v-model="selectiveFilter.hideAboutMeFilter")
-    v-flex
-      v-checkbox(hide-details :label="'Hide Profile Pic'" v-model="selectiveFilter.hideProfilePicFilter")
-      v-checkbox(hide-details :label="'Hide Grades'" v-model="selectiveFilter.hideGradeFilter")
-    v-flex
-      v-checkbox(hide-details :label="'Hide University'" v-model="selectiveFilter.hideUniversityFilter")
-      v-checkbox(hide-details :label="'Hide Degree'" v-model="selectiveFilter.hideDegreeFilter")
-    v-flex
-      v-select(:items="selectiveFilter.sortByNameItems" v-model="selectiveFilter.sortByName" single-line hide-details).pt-0.short
-      v-select(:items="selectiveFilter.sortByRelevantItems" v-model="selectiveFilter.sortByRelevant" single-line hide-details).pt-0.short
-    v-flex
-      v-select(:items="selectiveFilter.showAsListItems" v-model="selectiveFilter.showAsList" single-line hide-details).pt-0.short
-      v-select(:items="selectiveFilter.showOnlyXFilterItems" v-model="selectiveFilter.showOnlyXFilter" single-line hide-details).pt-0.short
+v-container(fluid).pa-0
+  v-layout
+    // -- filter nav drawer
+    v-navigation-drawer
+      v-toolbar(flat)
+        v-list
+          v-list-tile
+            v-list-tile-title(class="title")
+              | Filter
+      v-divider
+      | Test
 
-v-container(fluid)
-  .display-1.text-xs-center Search students
-
-  v-layout(justify-center).search-container
-    v-text-field(solo label="Search").t-search-tf
-    v-btn(large color="primary").search-btn Search 
-
-  // -- main container
-  v-layout.body-container.pt-3
-    // -- master filter (pre-filter)
-    div
-      v-card(ref="filter" v-if="filterShow")#filter.t-sidebar-w.pa-3
-        .display-2 Master Filter
-
-    // -- result container + result filter
     v-flex
-      // -- post-filter for results
-      +resultFilter
-      // -- contains a list of results 
-      v-layout(wrap).result-container
-        template(v-for="i in 5")
-          stu-desc-card.ml-3.mt-3
+      v-container(fluid)
+        v-layout(column)
+          v-layout(justify-center).search-container
+            v-text-field(solo label="Search").t-search-tf
+            v-btn(large color="primary").search-btn Search 
+    // .display-1.text-xs-center Search students faster.
 
-  // -- fab
+
+  // // -- main container
+  // v-layout.body-container.pt-3
+  //   // -- master filter (pre-filter)
+  //   div
+  //     v-card(ref="filter" v-if="filterShow")#filter.t-sidebar-w.pa-3
+  //       .display-2 Master Filter
+
+  //   // -- result container + result filter
+  //   v-flex
+  //     // -- contains a list of results 
+  //     v-layout(wrap).result-container
+  //       template(v-for="i in 5")
+  //         stu-desc-card.ml-3.mt-3
+
+  // // -- fab
   v-fab-transition
     v-btn(
         :key="'filterDialogFab'"
@@ -138,13 +132,13 @@ v-container(fluid)
       )
       img(src="@/assets/svg/filter.svg").t-fab-svg.round
 
-  // -- filter dialog
-  v-dialog(fullscreen transition="dialog-bottom-transition" :overlay="false" v-model="filterDialog").filter-dialog
-    v-card
-      v-card-title Testing
-      v-card-text
-        | All filters here
-        v-btn(@click="filterDialog = false") Close
+  // // -- filter dialog
+  // v-dialog(fullscreen transition="dialog-bottom-transition" :overlay="false" v-model="filterDialog").filter-dialog
+  //   v-card
+  //     v-card-title Testing
+  //     v-card-text
+  //       | All filters here
+  //       v-btn(@click="filterDialog = false") Close
 
 </template>
 
