@@ -6,6 +6,7 @@ export default {
 
   data () {
     return {
+      filterDrawer: true,
       filterShow: true,
       resultFilterShow: true,
       filterDialog: false,
@@ -84,42 +85,163 @@ export default {
 
 
 <template lang="pug">
-v-container(fluid).pa-0
-  v-layout
-    // -- filter nav drawer
-    v-navigation-drawer
-      v-toolbar(flat)
-        v-list
-          v-list-tile
-            v-list-tile-title(class="title")
-              | Filter
-      v-divider
-      | Test
+mixin filter
+  v-list#filter
+    v-list-tile
+      v-text-field(label="filter this filter" hide-details)
+    v-list-tile
+      v-list-tile-content
+        v-btn(label="filter this filter" flat block) Prioritize my filters
+    v-list-tile
+      v-checkbox(label="Is available for quick hire" hide-details)
 
+    v-divider
+      
+    v-subheader.primary--text Job Time
+    v-list-tile
+      v-checkbox(label="Part Time" hide-details)
+      v-checkbox(label="Full Time" hide-details)
+
+    v-divider
+
+    v-subheader.primary--text Degree
+    v-list(dense)
+      v-list-tile
+        v-checkbox(label="Any" hide-details)
+        v-checkbox(label="M.D" hide-details)
+      v-list-tile
+        v-checkbox(label="SLC" hide-details)
+        v-checkbox(label="Secondary" hide-details)
+      v-list-tile
+        v-checkbox(label="Bachelor's" hide-details)
+        v-checkbox(label="Ph.D" hide-details)
+      v-list-tile
+        v-checkbox(label="Masters" hide-details)
+        v-checkbox(label="Other" hide-details)
+
+    v-divider
+
+    v-subheader.primary--text Major
+    v-text-field(hint="Type multiple majors with commas")
+
+    v-divider
+
+    v-subheader.primary--text Lives near
+    v-text-field(hint="Type multiple locations using commas")
+
+    v-divider
+
+    v-subheader.primary--text Certifications
+    v-list-tile
+      v-text-field(hint="Type multiple certifications using commas")
+    v-subheader.primary--text Colleges and Universities
+    v-list(dense)
+      v-list-tile
+        v-checkbox(label="All colleges" hide-details)
+      v-list-tile
+        v-checkbox(label="Colleges near me" hide-details)
+      v-list-tile
+        v-text-field(single-line label="College or University name" hint="Type multiple colleges using commas")
+
+    v-divider
+
+    v-subheader.primary--text Graduation Year
+    v-list(dense)
+      v-list-tile
+        v-text-field(label="from" single-line hide-details).pr-2
+        v-text-field(label="to" single-line hide-details) 
+      v-list-tile
+        // TODO range slider will be added with vuetify 1.1 Q1, 2018
+
+    v-divider
+
+    v-subheader.primary--text GPA
+    v-list(dense)
+      v-list-tile
+        v-text-field(label="from" single-line hide-details).pr-2
+        v-text-field(label="to" single-line hide-details) 
+      v-list-tile
+        // TODO range slider will be added with vuetify 1.1 Q1, 2018
+
+    v-divider
+
+    v-subheader.primary--text Languages
+    v-text-field(hint="Type multiple languages using commas" single-line)
+
+    v-divider
+
+    v-subheader.primary--text Skills or Technical Skills 
+    v-text-field(hint="Type multiple skills using commas" single-line)
+
+    v-divider
+    v-subheader.primary--text Work History
+    v-list(dense)
+      v-list-tile
+        v-text-field(label="Years of experience" hint="Leave blank for any").pr-2
+      v-list-tile
+        // TODO range slider will be added with vuetify 1.1 Q1, 2018
+      v-list-tile
+        v-text-field(label="Has experience in fields" hide-details).pr-2
+      v-list-tile
+        // TODO range slider will be added with vuetify 1.1 Q1, 2018
+
+    v-divider
+    v-subheader.primary--text Gigs & Freelances
+    v-list-tile 
+      v-text-field(label="Has freelancing experience in" hint="Use commas to list multiple experiences").pr-2
+    
+    v-divider
+    v-subheader.primary--text Leadership
+    v-list-tile 
+      v-text-field(label="Has leadership experience in" hint="Use commas to list multiple experiences").pr-2
+
+    v-divider
+    v-subheader.primary--text Social Media
+
+    v-divider
+    v-subheader.primary--text Volunteers
+
+    v-divider
+    v-subheader.primary--text Gender
+
+    v-divider
+    v-subheader.primary--text Age
+
+    v-divider
+    v-subheader.primary--text Field of interests
+
+        
+
+div
+  v-navigation-drawer(app v-model="filterDrawer").nava
+    v-toolbar(flat)
+      .title.pa-3 Filter
+      v-spacer
+      v-btn(icon @click="filterDrawer = false") 
+        v-icon close
+
+    v-divider
+    +filter 
+
+  v-container(fluid).pa-0
+    // -- filter nav drawer
     v-flex
-      v-container(fluid)
+      v-container(fluid).pl-0.pr-0
         v-layout(column)
+          .display-1.text-xs-center Search students faster.
           v-layout(justify-center).search-container
             v-text-field(solo label="Search").t-search-tf
             v-btn(large color="primary").search-btn Search 
-    // .display-1.text-xs-center Search students faster.
+          
+          // -- contains a list of results 
+          v-layout(justify-center).result-wrapper
+            v-layout(wrap).result-container
+              template(v-for="i in 5")
+                stu-desc-card.ml-3.mt-3
 
 
-  // // -- main container
-  // v-layout.body-container.pt-3
-  //   // -- master filter (pre-filter)
-  //   div
-  //     v-card(ref="filter" v-if="filterShow")#filter.t-sidebar-w.pa-3
-  //       .display-2 Master Filter
 
-  //   // -- result container + result filter
-  //   v-flex
-  //     // -- contains a list of results 
-  //     v-layout(wrap).result-container
-  //       template(v-for="i in 5")
-  //         stu-desc-card.ml-3.mt-3
-
-  // // -- fab
+  // -- fab
   v-fab-transition
     v-btn(
         :key="'filterDialogFab'"
@@ -127,8 +249,8 @@ v-container(fluid).pa-0
         fab 
         fixed bottom right 
         hover 
-        @click="filterDialog = true"
-        v-if="filterFabVisibility"
+        @click="filterDrawer = true"
+        v-if="filterDrawer === false"
       )
       img(src="@/assets/svg/filter.svg").t-fab-svg.round
 
@@ -144,26 +266,37 @@ v-container(fluid).pa-0
 
 <style lang="stylus">
 @import '../../assets/styles/_vars.styl'
-
+.test
+  float left
+.nava
+  height 800px !important
 .search-btn
   height 46px
   margin 0 !important
-.body-container
-  // background-color green
-.result-container
-  // background-color #fbc
+.result-wrapper
   display flex
-  justify-content flex-start
+  justify-content center 
+.result-container
+  max-width t-triple-col-w + (16px * 2)
 .search-container
   margin t-spacer
 .short
   max-width 200px
-@media $display-breakpoints.sm-and-down
+#filter
+  // .checkboxddk
+  .input-group
+    // padding-top 0 !important
+@media $display-breakpoints.sm-only
   .result-container
-    justify-content center !important
+    max-width t-double-col-w + (16px * 2)
+@media $display-breakpoints.xs-only
+  .result-container
+    max-width t-single-col-w + (16px * 2)
+  .result-container
+    // justify-content center !important
   .search-container
     margin t-spacer 0 !important
-@media screen and (max-width: 450px)
+@media sm-and-down
   .card
     // TODO remove
     // max-width 100% !important

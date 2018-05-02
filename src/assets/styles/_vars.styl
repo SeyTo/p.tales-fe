@@ -8,7 +8,7 @@ t-spacer5 = t-spacer * 3
 // avatar sizes
 t-avatar-lg = 168px
 t-avatar-md = 168px
-t-avatar-sm = 168px
+t-avatar-sm = 93px
 .t-fab-svg
   height 60%
   width 60%
@@ -22,12 +22,12 @@ t-bg-translucent = rgba(0, 0, 0, 0.4)
 
 // side bars, cards etc
 t-sidebar-w = t-avatar-lg + (t-spacer5 * 2) 
-t-basic-card-w = 360px
+t-basic-card-w = 294px
 
-// column count change with screen
-t-single-col-w = t-sidebar-w
-t-double-col-w = (1 * t-spacer) + (2 * t-sidebar-w)
-t-triple-col-w = (2 * t-spacer) + (3 * t-sidebar-w)
+// column count change with screen, variables to work with
+t-single-col-w = t-basic-card-w
+t-double-col-w = (1 * t-spacer) + (2 * t-basic-card-w)
+t-triple-col-w = (2 * t-spacer) + (3 * t-basic-card-w)
 
 @media screen and (max-width: t-triple-col-w + t-spacer)
   .t-dyna-cols
