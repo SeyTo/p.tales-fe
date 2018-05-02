@@ -9,6 +9,10 @@ t-spacer5 = t-spacer * 3
 t-avatar-lg = 168px
 t-avatar-md = 168px
 t-avatar-sm = 168px
+.t-fab-svg
+  height 60%
+  width 60%
+  border-radius 50%
 
 // image sizes
 t-img-jumbo-lg-h = 300px 
@@ -16,6 +20,24 @@ t-img-jumbo-lg-h = 300px
 // translucency
 t-bg-translucent = rgba(0, 0, 0, 0.4)
 
+// side bars, cards etc
+t-sidebar-w = t-avatar-lg + (t-spacer5 * 2) 
+t-basic-card-w = 360px
+
+// column count change with screen
+t-single-col-w = t-sidebar-w
+t-double-col-w = (1 * t-spacer) + (2 * t-sidebar-w)
+t-triple-col-w = (2 * t-spacer) + (3 * t-sidebar-w)
+
+@media screen and (max-width: t-triple-col-w + t-spacer)
+  .t-dyna-cols
+    min-width t-triple-col-w
+    max-width t-triple-col-w
+
+@media screen and (max-width: t-double-col-w + t-spacer)
+  .t-dyna-cols
+    min-width t-double-col-w
+    max-width t-double-col-w
 
 // copied from vuetify/_vars.styl. Only needed these variables.
 // Grid
@@ -47,6 +69,15 @@ $display-breakpoints := {
 // Student Profile Page
 // ============================================================
 t-infocard-w = 384px
+
+// Employer Profile Page & Company Directory
+// ============================================================
+t-name-container-h = 100px
+  
+// Employer Search Page
+// ============================================================
+.t-search-tf
+  max-width 600px
 
 // TODO simplify
 @media $display-breakpoints.xs-only

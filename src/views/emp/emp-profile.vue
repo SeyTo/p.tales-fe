@@ -13,6 +13,11 @@ export default {
   components: {
     'emp-profile-billboard': EmpProfileBillBoard,
     'job-desc-card-min': JobDescCardMin
+  },
+
+  created () {
+    // TODO get from interceptor/http/store/service
+    this.name = 'Github'
   }
 }
 </script>

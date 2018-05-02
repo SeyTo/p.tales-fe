@@ -54,9 +54,12 @@ v-card(hover)
 
 
 <style lang="stylus" scoped>
+@import '../../assets/styles/_vars.styl'
+
 _avatar_size = 96px
 .card
-  min-width 360px !important
+  min-width t-basic-card-w !important
+  max-width t-basic-card-w !important
 .part-1
   display flex
 .part-2

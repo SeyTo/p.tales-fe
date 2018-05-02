@@ -6,9 +6,26 @@ export default {
 
   data () {
     return {
-      filterShow: false,
-      resultFilterShow: false,
-      filterDialog: false
+      filterShow: true,
+      resultFilterShow: true,
+      filterDialog: false,
+      filterFab: true,
+      selectiveFilter: {
+        hideNameFilter: false,
+        hideAboutMeFilter: false,
+        hideProfilePicFilter: false,
+        hideGradeFilter: false,
+        hideUniversityFilter: false,
+        hideDegreeFilter: false,
+        sortByName: 'Sort In Ascending',
+        sortByNameItems: [ 'Sort In Ascending', 'Sort In Descending' ],
+        sortByRelevant: 'Sort By Relevant First',
+        sortByRelevantItems: [ 'Sort By Relevant First', 'Sort By Filter' ],
+        showAsList: 'Show as Card',
+        showAsListItems: [ 'Show as List', 'Show as Card' ],
+        showOnlyXFilter: 'Show only top 3 filters',
+        showOnlyXFilterItems: [ 'Show only top 3 filters', 'Show all fitlers' ]
+      }
     }
   },
 
@@ -19,12 +36,28 @@ export default {
   computed: {
     onSmall () {
       if (this.$vuetify.breakpoint.smAndDown) {
-        console.log('lgAndDown')
+        console.log('isSmall')
+        this.filterShow = false
+        this.resultFilterShow = false
+        this.filterFab = true
+        console.log(this.filterFab)
+        return true
+      } else if (this.$vuetify.breakpoint.mdAndUp) {
+        console.log('isLarge')
+        this.filterShow = true
+        this.resultFilterShow = true
+        this.filterFab = false
+        return false
+      }
+    },
+    filterFabVisibility () {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        console.log('xs')
         this.filterShow = false
         this.resultFilterShow = false
         return true
       } else if (this.$vuetify.breakpoint.smAndUp) {
-        console.log('lgAndUp')
+        console.log('!xs')
         this.filterShow = true
         this.resultFilterShow = true
         return false
@@ -51,103 +84,100 @@ export default {
 
 
 <template lang="pug">
+mixin resultFilter
+  v-layout(ref="resultFilter" v-if="resultFilterShow" wrap)#result-filter.ml-3.px-3
+    v-flex
+      v-checkbox(hide-details :label="'Hide Names'" v-model="selectiveFilter.hideNameFilter")
+      v-checkbox(hide-details :label="'Hide About Me'" v-model="selectiveFilter.hideAboutMeFilter")
+    v-flex
+      v-checkbox(hide-details :label="'Hide Profile Pic'" v-model="selectiveFilter.hideProfilePicFilter")
+      v-checkbox(hide-details :label="'Hide Grades'" v-model="selectiveFilter.hideGradeFilter")
+    v-flex
+      v-checkbox(hide-details :label="'Hide University'" v-model="selectiveFilter.hideUniversityFilter")
+      v-checkbox(hide-details :label="'Hide Degree'" v-model="selectiveFilter.hideDegreeFilter")
+    v-flex
+      v-select(:items="selectiveFilter.sortByNameItems" v-model="selectiveFilter.sortByName" single-line hide-details).pt-0.short
+      v-select(:items="selectiveFilter.sortByRelevantItems" v-model="selectiveFilter.sortByRelevant" single-line hide-details).pt-0.short
+    v-flex
+      v-select(:items="selectiveFilter.showAsListItems" v-model="selectiveFilter.showAsList" single-line hide-details).pt-0.short
+      v-select(:items="selectiveFilter.showOnlyXFilterItems" v-model="selectiveFilter.showOnlyXFilter" single-line hide-details).pt-0.short
 
 v-container(fluid)
-  .search-container
-    v-text-field(solo label="Search").search-bar
+  .display-1.text-xs-center Search students
+
+  v-layout(justify-center).search-container
+    v-text-field(solo label="Search").t-search-tf
+    v-btn(large color="primary").search-btn Search 
 
   // -- main container
-  .body-container
+  v-layout.body-container.pt-3
     // -- master filter (pre-filter)
-    v-card(ref="filter" v-if="filterShow")#filter.ml-3.mt-3
-      | master filter
+    div
+      v-card(ref="filter" v-if="filterShow")#filter.t-sidebar-w.pa-3
+        .display-2 Master Filter
 
     // -- result container + result filter
-    div.search-body
+    v-flex
       // -- post-filter for results
-      v-layout(ref="resultFilter" v-if="resultFilterShow" wrap)#result-filter.ml-3.mt-3.mr-3
-        template(v-for="i in 10")
-          v-checkbox(:label="'filter' + i")
-
+      +resultFilter
       // -- contains a list of results 
-      v-layout(wrap).result-container.ml-3.mt-3.mr-3
+      v-layout(wrap).result-container
         template(v-for="i in 5")
           stu-desc-card.ml-3.mt-3
 
   // -- fab
-  v-menu(left top v-if="onSmall")#master-fab
-    v-btn(slot="activator" fab hover @click="filterDialog = true")
-      img(src="@/assets/svg/filter.svg").round
+  v-fab-transition
+    v-btn(
+        :key="'filterDialogFab'"
+        slot="activator" 
+        fab 
+        fixed bottom right 
+        hover 
+        @click="filterDialog = true"
+        v-if="filterFabVisibility"
+      )
+      img(src="@/assets/svg/filter.svg").t-fab-svg.round
 
   // -- filter dialog
   v-dialog(fullscreen transition="dialog-bottom-transition" :overlay="false" v-model="filterDialog").filter-dialog
     v-card
       v-card-title Testing
       v-card-text
-        | more testing
+        | All filters here
         v-btn(@click="filterDialog = false") Close
 
 </template>
 
 <style lang="stylus">
-.search-container
-  width 100%
-  .search-bar
-    margin auto 
-    max-width 800px
-    background-color blue
-.body-container
-  display flex
-  background-color green
-  #filter
-    flex 0 0 auto
-    background-color aqua
-    min-height 500px
-    max-height 500px
-    max-width 200px
-    min-width 200px
-  .search-body
-    flex 1 1 auto
-    background-color purple
-    #result-filter 
-      background-color yellow
-      min-height 40px
-      .checkbox
-        min-width 100px  
-        flex-grow 0
+@import '../../assets/styles/_vars.styl'
 
-    .result-container
-      background-color #fbc
-      min-height 100px
-      min-width 100px
-      justify-content start
-      .card
-        max-width 304px
-        min-width 304px 
-        min-height 200px
-#master-fab
-  position fixed !important
-  right 34px
-  bottom 64px
-// @media screen and (min-width: 601px)
-//   .menu
-//     display none !important
-    
-@media screen and (max-width: 600px) and (min-width: 451px)
+.search-btn
+  height 46px
+  margin 0 !important
+.body-container
+  // background-color green
+.result-container
+  // background-color #fbc
+  display flex
+  justify-content flex-start
+.search-container
+  margin t-spacer
+.short
+  max-width 200px
+@media $display-breakpoints.sm-and-down
   .result-container
     justify-content center !important
+  .search-container
+    margin t-spacer 0 !important
 @media screen and (max-width: 450px)
-  .container
-    // padding-left 0px !important
-    // padding-right 0px !important
   .card
     // TODO remove
-    max-width 100% !important
-    min-width 100% !important
-    width 100% !important
+    // max-width 100% !important
+    // min-width 100% !important
+    // width 100% !important
     margin-left 0 !important
     margin-right 0 !important
-  .result-container
+  .result-wrapper
     margin-left 0 !important
     margin-right 0 !important
 

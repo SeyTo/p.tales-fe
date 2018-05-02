@@ -168,9 +168,8 @@ v-container
 <style lang="stylus">
 @import '../../assets/styles/_vars.styl'
 
-_profile-board-max-width    = t-avatar-lg + (t-spacer5 * 2)
 // helps calculate when to wrap
-_full-width                 = _profile-board-max-width + (2 * t-infocard-w) + 20px + (t-spacer4 * 4)
+_full-width = t-sidebar-w + (2 * t-infocard-w) + 20px + (t-spacer4 * 4)
 _card-container-full-width  = 2 * (t-infocard-w) + (t-spacer4 * 2)
 
 .info-card-container
