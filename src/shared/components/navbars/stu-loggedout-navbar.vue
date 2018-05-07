@@ -22,6 +22,25 @@ export default {
       // FIXME: tab index is supposed to open set select tab by index, there is a bug
       // in vuetify. Hope they will fix it by release. else we will have to simulate
       // a click for now.
+    },
+    validateForm (value) {
+      this.authDialogToggle = false
+      console.log(value);
+
+
+      if (value === 'login') {
+        this.$router.push(
+            { name: 'StudentProfile' },
+            () => { this.$store.commit('setUserLoggedIn', { loggedIn: true }) },
+            function () { console.log('aborted'); }
+          )
+      } else if (value === 'signup') {
+        this.$router.push(
+            { name: 'StuPostSignupQuery' }
+          )
+      } else {
+        console.log('unknown value: ' + value);
+      }
     }
   },
 
@@ -49,7 +68,7 @@ div
         @click.native.stop="openDialog(1)"
       ) Sign Up
   // -- dialogs
-  stu-auth-tab(v-model="authDialogToggle" :activeTab="activeTabIndex")
+  stu-auth-tab(v-model="authDialogToggle" :activeTab="activeTabIndex" @validate="validateForm")
 
 </template>
 

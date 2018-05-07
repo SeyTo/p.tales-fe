@@ -49,6 +49,17 @@ export default {
         ]
       }
     }
+  },
+
+  methods: {
+    validate (type) {
+      if (type === 'login') {
+        this.$emit('validate', 'login')
+      }
+      else if (type === 'signup') {
+        this.$emit('validate', 'signup')
+      }
+    }
   }
 }
 </script>
@@ -57,43 +68,43 @@ export default {
 <template lang="pug">
 mixin signupTabItem
   v-container
-    v-form(v-model="isSignupFormValid") 
+    v-form(v-model="isSignupFormValid")
       v-text-field(
-          label="First Name" 
-          v-model="formFirstName.text" 
-          :rules="formFirstName.rules" 
+          label="First Name"
+          v-model="formFirstName.text"
+          :rules="formFirstName.rules"
           required
           :type="'text'"
         )/
       v-text-field(
-          label="Last Name" 
-          v-model="formLastName.text" 
-          :rules="formLastName.rules" 
+          label="Last Name"
+          v-model="formLastName.text"
+          :rules="formLastName.rules"
           required
           :type="'text'"
         )/
       v-text-field(
-          label="E-mail" 
-          v-model="formEmail.text" 
-          :rules="formEmail.rules" 
+          label="E-mail"
+          v-model="formEmail.text"
+          :rules="formEmail.rules"
           required
           :type="'email'"
         )/
       v-text-field(
-          label="Password" 
-          v-model="formPassword.text" 
-          :rules="formPassword.rules" 
+          label="Password"
+          v-model="formPassword.text"
+          :rules="formPassword.rules"
           required
           :type="formPassword.visibility? 'text':'password'"
           :append-icon="formPassword.visibility ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (formPassword.visibility = !formPassword.visibility)"
           min="8"
         )/
-  
+
   // -- signup buttons
   v-card-actions
     v-spacer
-    v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Sign up 
+    v-btn(color="green darken-1" flat="flat" @click.native="validate('signup')") Sign up
 
 mixin loginTabItem
   v-container
@@ -101,18 +112,18 @@ mixin loginTabItem
       // TODO create natural facebook button
       v-btn() Log In With facebook
       // TODO create google button
-    v-form(v-model="isLoginFormValid") 
+    v-form(v-model="isLoginFormValid")
       v-text-field(
-          label="E-mail" 
-          v-model="formEmail.text" 
-          :rules="formEmail.rules" 
+          label="E-mail"
+          v-model="formEmail.text"
+          :rules="formEmail.rules"
           required
           :type="'email'"
         )/
       v-text-field(
-          label="Password" 
-          v-model="formPassword.text" 
-          :rules="formPassword.rules" 
+          label="Password"
+          v-model="formPassword.text"
+          :rules="formPassword.rules"
           required
           :type="formPassword.visibility? 'text':'password'"
           :append-icon="formPassword.visibility ? 'visibility' : 'visibility_off'"
@@ -123,10 +134,10 @@ mixin loginTabItem
   // -- login buttons
   v-card-actions
     v-spacer
-    v-btn(color="green darken-1" flat="flat" @click.native="dialogToggle = false") Log In
+    v-btn(color="green darken-1" flat="flat" @click.native="validate('login')") Log In
 
 
-// TODO get mixin max-width 
+// TODO get mixin max-width
 v-dialog(lazy :value="value" @input="$emit('input', $event)")
   v-card
     // -- tabs container for LogIn and Sign Up
@@ -136,9 +147,9 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)")
       v-tab Log In
       v-tab Sign Up
 
-      v-tab-item 
+      v-tab-item
         +loginTabItem
-      v-tab-item 
+      v-tab-item
         +signupTabItem
 
 </template>
@@ -148,7 +159,7 @@ v-dialog(lazy :value="value" @input="$emit('input', $event)")
   // max-width 500px
   // width 500px
 // TODO: remove
-.centered 
+.centered
   display flex
   justify-content center
 </style>
