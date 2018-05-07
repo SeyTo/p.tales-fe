@@ -126,7 +126,8 @@ export default {
 
 <template lang="pug">
 // -- main content
-v-container
+v-container(fluid).pa-0
+  v-jumbotron(src="/static/doc-images/mountain.jpg")
   v-layout(justify-center align-start).xs-flex-col
     
     // -- profile bill board
@@ -171,6 +172,8 @@ v-container
 // helps calculate when to wrap
 _full-width = t-sidebar-w + (2 * t-infocard-w) + 20px + (t-spacer4 * 4)
 _card-container-full-width  = 2 * (t-infocard-w) + (t-spacer4 * 2)
+_name_container_height = 100px
+_billboard_translate = -(t-spacer3 + t-spacer5 + t-avatar-lg/2 + _name_container_height/2)px
 
 .info-card-container
   max-width _card-container-full-width
@@ -178,6 +181,10 @@ _card-container-full-width  = 2 * (t-infocard-w) + (t-spacer4 * 2)
 .info-card
   max-width t-infocard-w
   min-width t-infocard-w
+
+.profile-board
+  transform translateY(_billboard_translate)
+  transition all 1s
 
 @media $display-breakpoints.xs-only
   .container
@@ -191,4 +198,6 @@ _card-container-full-width  = 2 * (t-infocard-w) + (t-spacer4 * 2)
   .info-card-container
     max-width t-infocard-w
     min-width t-infocard-w
+  .profile-board
+    transform translateY(-10px)
 </style>
