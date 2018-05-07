@@ -19,6 +19,9 @@ export default {
     openDialog (tabIndex) {
       this.authDialogToggle = !this.authDialogToggle
       this.activeTabIndex = tabIndex
+      // FIXME: tab index is supposed to open set select tab by index, there is a bug
+      // in vuetify. Hope they will fix it by release. else we will have to simulate
+      // a click for now.
     }
   },
 
@@ -34,15 +37,15 @@ export default {
 div
   tales-navbar
     div
-      v-btn(depressed) FOR EMPLOYERS
-      v-btn(depressed) Blogs
+      v-btn(depressed :to="{ name: 'EmployerLanding' }") FOR EMPLOYERS
+      v-btn(depressed :to="{ name: 'BlogsLanding' }") Blogs
       v-btn(
-        depressed 
+        depressed
         @click.native.stop="openDialog(0)"
       ) Log In
       v-btn(
-        depressed 
-        color="primary" 
+        depressed
+        color="primary"
         @click.native.stop="openDialog(1)"
       ) Sign Up
   // -- dialogs

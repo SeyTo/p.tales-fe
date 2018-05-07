@@ -11,7 +11,7 @@ export default {
     // -- content start
     v-content
       router-view/
-    // v-footer(app) 
+    // v-footer(app)
       span &copy; 2018
 
 </template>

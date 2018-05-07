@@ -26,6 +26,9 @@ import StuPrefs from '@/views/stu/stu-prefs'
 import StuProfile from '@/views/stu/stu-profile'
 import StuRoot from '@/views/stu/stu-root'
 
+// blogs
+import BlogsLanding from '@/views/blogs/blog-landing'
+
 import CompanyDirectory from '@/views/company-directory'
 
 Vue.use(Router)
@@ -149,6 +152,11 @@ export default new Router({
           component: StuMessages
         }
       ]
+    },
+    {
+      path: '/blogs',
+      name: 'BlogsLanding',
+      component: BlogsLanding
     }
   ]
 })

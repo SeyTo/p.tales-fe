@@ -24,17 +24,17 @@ export default {
 tales-navdrawer.navdrawer
   template
     img(src="../../../assets/svg/favicon.svg" height="64").ma-4
-    v-btn(flat large) FOR EMPLOYERS
-    v-btn(flat large) Blogs
+    v-btn(flat large :to="{ name: 'EmployerLanding' }") FOR EMPLOYERS
+    v-btn(flat large :to="{ name: 'BlogsLanding' }") Blogs
     v-btn(
-        flat 
-        large 
+        flat
+        large
         @click.native.stop="authDialogToggle = !authDialogToggle"
       ) Log In
     v-btn(
-        depressed 
-        large 
-        color="primary" 
+        depressed
+        large
+        color="primary"
         @click.native.stop="authDialogToggle = !authDialogToggle"
       ) Sign Up
 

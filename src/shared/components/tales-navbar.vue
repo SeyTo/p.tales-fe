@@ -65,16 +65,15 @@ export default {
 </script>
 
 
-<template lang="pug"> 
+<template lang="pug">
 div
   // -- master navtoolbar
   v-toolbar(
-    app 
+    app
     :clipped-left="false"
   )
-    v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot") 
-    // v-toolbar-title 
-    img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo  
+    // v-toolbar-title
+    img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo
 
     v-spacer
 
@@ -85,13 +84,14 @@ div
       slot(name="notif" v-if="showNotif")
     div
       slot(name="avatar" v-if="showAvatar")
+    v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot")
+      img(src="../../assets/svg/drawerlogo.svg")
 
-
-</template> 
+</template>
 
 
 <style lang="stylus" scoped>
 .logo
-  height 80% 
+  height 80%
 </style>
 
