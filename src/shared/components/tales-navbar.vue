@@ -71,6 +71,7 @@ div
   v-toolbar(
     app
     :clipped-left="false"
+    flat
   )
     // v-toolbar-title
     img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo
