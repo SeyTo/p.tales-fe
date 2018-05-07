@@ -2,6 +2,7 @@
 import StuInfocardBase from './stu-prof-infocards/stu-infocard-base.vue'
 import StuInfocardContentIcontext from './stu-prof-infocards/stu-infocard-content-icontext'
 import StuProfileBoard from '@/shared/components/stu-profile-billboard'
+import StuInfocardContentChips from './stu-prof-infocards/stu-infocard-content-chips'
 
 export default {
   name: 'student-profile',
@@ -81,7 +82,13 @@ export default {
       },
       'workhistory': {
         'name': 'Work History',
-        'nullText': 'List here the places you have worked before.'
+        'nullText': 'List here the places you have worked before.',
+        contents: [
+          {
+            component: StuInfocardContentIcontext,
+            args: { title: 'Starbucks', date: '2017-9-9', level: 'Manager', subject: 'Did literally nothing.' }
+          }
+        ]
       },
       'gigsfreelances': {
         'name': 'Gigs and Freelances',
@@ -89,7 +96,21 @@ export default {
       },
       'skills': {
         'name': 'Skills',
-        'nullText': 'List out some of your education, courses you took and certifications'
+        'nullText': 'List out some of your education, courses you took and certifications',
+        contents: [
+          {
+            component: StuInfocardContentChips,
+            args: { title: 'Technical Skills', data: [ 'Java', 'Acting', 'Mushroom' ], color: 'blue' }
+          },
+          {
+            component: StuInfocardContentChips,
+            args: { title: 'Skills', data: [ 'Mushroom' ], color: 'green' }
+          },
+          {
+            component: StuInfocardContentChips,
+            args: { title: 'Languages', data: [ 'Cow', 'Catcalling' ], color: 'pink' }
+          }
+        ]
       },
       'volunteers': {
         'name': 'Volunteers',
@@ -117,7 +138,8 @@ export default {
   components: {
     'stu-infocard-base': StuInfocardBase,
     'stu-infocard-content-icontext': StuInfocardContentIcontext,
-    'stu-profile-billboard': StuProfileBoard
+    'stu-profile-billboard': StuProfileBoard,
+    'stu-infocard-content-chips': StuInfocardContentChips
   }
 
 }

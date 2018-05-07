@@ -34,6 +34,7 @@ import {
   VDatePicker,
   VRadioGroup,
   VSubheader,
+  VChip,
   transitions
 } from 'vuetify'
 // this import should be only after all style imports
@@ -70,6 +71,7 @@ Vue.use(Vuetify, {
     VDatePicker,
     VRadioGroup,
     VSubheader,
+    VChip,
     transitions
   },
   theme: {
