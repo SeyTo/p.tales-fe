@@ -18,9 +18,9 @@ export default {
 
 
 <template lang="pug">
-// TEMP content, 
+// TEMP content,
 mixin links
-  ul 
+  ul
     li: h3 Employer Pages
     li: router-link(:to="{ name: 'EmployerPostSignupQuery' }") Post Signup Query Page
     li: router-link(:to="{ name: 'EmployerLanding' }") Landing Page
@@ -34,18 +34,18 @@ mixin links
     li: router-link(:to="{ name: 'EmployerPrefs' }") Prefs
 
     li: h3 Student Pages
-    li: router-link(:to="{ name: 'StuPostSignupQuery' }") Post Sign Up Query Page 
+    li: router-link(:to="{ name: 'StuPostSignupQuery' }") Post Sign Up Query Page
     li: router-link(:to="{ name: 'StudentProfile' }") Profile
     li: router-link(:to="{ name: 'StudentJobsSearch' }") Job Search
     li: router-link(:to="{ name: 'StudentJobsApplications' }") Applications
-    li: router-link(:to="{ name: 'StudentJobsBookmarks' }") Job > Bookmarks 
-    li: router-link(:to="{ name: 'StudentUserPrefs' }") Prefs 
+    li: router-link(:to="{ name: 'StudentJobsBookmarks' }") Job > Bookmarks
+    li: router-link(:to="{ name: 'StudentUserPrefs' }") Prefs
     li: router-link(:to="{ name: 'StudentMessages' }") Messages
 
     li: h3 Misc
     li: router-link(:to="{ name: 'CompanyDirectory' }") Company Directory
 
-v-container(fluid column)
+v-container(fluid column).pa-0
   stu-loggedout-navbar
   stu-loggedout-navdrawer
 
@@ -66,7 +66,7 @@ v-container(fluid column)
   div
     v-layout(align-center justify-center green).fill-va
       div.display-4
-        | 1 
+        | 1
     v-layout(align-center justify-center).fill-va
       div.display-4
         | 2
@@ -77,6 +77,4 @@ v-container(fluid column)
 
 
 <style lang="stylus" scoped>
-.container
-  padding 0
 </style>

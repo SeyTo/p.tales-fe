@@ -77,15 +77,16 @@ div
 
     v-spacer
 
+    div(v-if="!this.$store.isNavBarEmpty")
     // placing slot inside div forces slots to render in correct order (maybe, idk really)
-    div
-      slot(v-if="!isSmall && !noSlot")
-    div
-      slot(name="notif" v-if="showNotif")
-    div
-      slot(name="avatar" v-if="showAvatar")
-    v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot")
-      img(src="../../assets/svg/drawerlogo.svg")
+      div
+        slot(v-if="!isSmall && !noSlot")
+      div
+        slot(name="notif" v-if="showNotif")
+      div
+        slot(name="avatar" v-if="showAvatar")
+      v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot")
+        img(src="../../assets/svg/drawerlogo.svg")
 
 </template>
 

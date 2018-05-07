@@ -1,6 +1,6 @@
 <script>
 import TalesNavbar from '@/shared/components/tales-navbar'
-import StuAuthTab from '@/shared/components/dialog/stu-authtab.vue'
+import EmpAuthTab from '@/shared/components/dialog/emp-authtab.vue'
 
 export default {
   name: 'emp-loggedout-navbar',
@@ -13,8 +13,38 @@ export default {
 
   components: {
     // TODO replace
-    'stu-auth-tab': StuAuthTab,
+    'emp-auth-tab': EmpAuthTab,
     'tales-navbar': TalesNavbar
+  },
+
+  methods: {
+    validateForm (value) {
+      this.authDialogToggle = false
+      const that = this
+      function onCompleteLogin () {
+        that.$store.commit('setUserLoggedIn', { loggedIn: true })
+      }
+
+      function onCompleteSignup () {
+        that.$store.commit('setUserLoggedIn', { loggedIn: true })
+      }
+
+      if (value === 'login') {
+        this.$router.push(
+            { name: 'EmployerProfile' },
+            () => { this.$store.commit('setUserLoggedIn', { loggedIn: true }) },
+            function () { console.log('aborted'); }
+          )
+      } else if (value === 'signup') {
+        this.$router.push(
+            { name: 'EmployerPostSignupQuery' },
+            () => { this.$store.commit('setNavBarEmpty', { empty: true }) },
+            function () { console.log('aborted'); }
+          )
+      } else {
+        console.log(value);
+      }
+    }
   }
 }
 </script>
@@ -22,26 +52,23 @@ export default {
 
 <template lang="pug">
 tales-navbar
-  div 
+  div
     v-btn(
-        flat 
-        large
-        @click=""
+        flat
+        :to="{ name: 'Landing' }"
       ) FOR STUDENTS
     v-btn(
-        flat 
-        large
+        flat
         @click.native.stop="authDialogToggle = !authDialogToggle"
       ) Log In
     v-btn(
-        depressed 
-        large 
-        color="primary" 
+        depressed
+        color="primary"
         @click.native.stop="authDialogToggle = !authDialogToggle"
         ) SIGN UP
 
   // -- dialogs
-  stu-auth-tab(v-model="authDialogToggle")
+  emp-auth-tab(v-model="authDialogToggle" @validate="validateForm")
 
 </template>
 
