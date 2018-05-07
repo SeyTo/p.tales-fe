@@ -20,14 +20,6 @@ export default {
   methods: {
     validateForm (value) {
       this.authDialogToggle = false
-      const that = this
-      function onCompleteLogin () {
-        that.$store.commit('setUserLoggedIn', { loggedIn: true })
-      }
-
-      function onCompleteSignup () {
-        that.$store.commit('setUserLoggedIn', { loggedIn: true })
-      }
 
       if (value === 'login') {
         this.$router.push(
@@ -37,12 +29,10 @@ export default {
           )
       } else if (value === 'signup') {
         this.$router.push(
-            { name: 'EmployerPostSignupQuery' },
-            () => { this.$store.commit('setNavBarEmpty', { empty: true }) },
-            function () { console.log('aborted'); }
+            { name: 'EmployerPostSignupQuery' }
           )
       } else {
-        console.log(value);
+        console.log('unknown value: ' + value);
       }
     }
   }

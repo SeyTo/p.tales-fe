@@ -18,7 +18,11 @@ export default {
 
   components: {
     'tales-navbar': TalesNavBar
-  }
+  },
+
+  mounted () { },
+
+  destroyed () { }
 
 }
 </script>
@@ -39,10 +43,10 @@ mixin basic-info
     v-subheader(v-text="'Industry Type *'")
   v-flex(xs12 sm7).header
     v-select(
-        v-model="itype" 
-        :items="industries" 
+        v-model="itype"
+        :items="industries"
         dense
-        multiple 
+        multiple
         required
       )
   v-flex(xs12 sm5).header
@@ -50,7 +54,7 @@ mixin basic-info
   v-flex(xs12 sm7).header
     v-select(
         hint="location of headquarters"
-        v-model="location" 
+        v-model="location"
         dense
         required
       )
@@ -104,16 +108,16 @@ mixin misc-info
       v-btn No
   v-flex(xs12)
     v-subheader
-      | Anything you would like to know. 
+      | Anything you would like to know.
       a Contact Us.
-      
-    
+
+
 div
   tales-navbar(containerSize="true" noSlot="true")
   v-form(v-model="valid")
     v-container
       v-layout(row wrap)
-        +basic-info  
+        +basic-info
       v-layout(row wrap)
         +contact-info
       v-layout(row wrap)
@@ -126,7 +130,7 @@ div
 <style lang="stylus" scoped>
 .container
   width 50%
-.subheader 
+.subheader
   height 64px
 .display-1
   margin 16px 0px

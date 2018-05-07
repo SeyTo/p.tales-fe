@@ -7,7 +7,9 @@ export default {
     return { }
   },
 
-  components: { }
+  components: { },
+
+  mounted () { }
 }
 </script>
 
