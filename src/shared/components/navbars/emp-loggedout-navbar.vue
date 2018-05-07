@@ -25,14 +25,14 @@ export default {
         this.$router.push(
             { name: 'EmployerProfile' },
             () => { this.$store.commit('setUserLoggedIn', { loggedIn: true }) },
-            function () { console.log('aborted'); }
+            function () { console.log('aborted') }
           )
       } else if (value === 'signup') {
         this.$router.push(
             { name: 'EmployerPostSignupQuery' }
           )
       } else {
-        console.log('unknown value: ' + value);
+        console.log('unknown value: ' + value)
       }
     }
   }

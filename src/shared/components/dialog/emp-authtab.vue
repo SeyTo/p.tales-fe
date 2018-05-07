@@ -47,11 +47,10 @@ export default {
 
   methods: {
     validate (type) {
-      console.log(type);
+      console.log(type)
       if (type === 'login') {
         this.$emit('validate', 'login')
-      }
-      else if (type === 'signup') {
+      } else if (type === 'signup') {
         this.$emit('validate', 'signup')
       }
     }

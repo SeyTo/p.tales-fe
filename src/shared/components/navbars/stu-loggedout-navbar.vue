@@ -25,21 +25,20 @@ export default {
     },
     validateForm (value) {
       this.authDialogToggle = false
-      console.log(value);
-
+      console.log(value)
 
       if (value === 'login') {
         this.$router.push(
             { name: 'StudentProfile' },
             () => { this.$store.commit('setUserLoggedIn', { loggedIn: true }) },
-            function () { console.log('aborted'); }
+            function () { console.log('aborted') }
           )
       } else if (value === 'signup') {
         this.$router.push(
             { name: 'StuPostSignupQuery' }
           )
       } else {
-        console.log('unknown value: ' + value);
+        console.log('unknown value: ' + value)
       }
     }
   },

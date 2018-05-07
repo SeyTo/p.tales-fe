@@ -2,7 +2,7 @@
 export default {
   name: 'blog-landing',
 
-  data: () => ({  }),
+  data: () => ({ }),
 
   computed: { },
 
