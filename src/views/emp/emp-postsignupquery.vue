@@ -13,7 +13,26 @@ export default {
     industries: [
       'Marijuana', 'Hair Cut', 'Job Finder', 'Prisoner'
     ],
-    onDemand: 0
+    onDemand: 0,
+    formOrgName: {
+      text: '',
+      rules: [
+        v => !!v || 'Organization name is required',
+        v => v.length < 30 || 'Name too long'
+      ]
+    },
+    formWebsite: {
+      text: '',
+      rules: [
+        v => !!v || 'A website is required'
+      ]
+    },
+    formOrgType: {
+      text: '',
+      rules: [
+        v => !!v || 'Organization type is required'
+      ]
+    }
   }),
 
   components: {
@@ -34,16 +53,17 @@ mixin basic-info
   v-flex(xs12 sm5).header
     v-subheader(v-text="'Official Website *'")
   v-flex(xs12 sm7).header
-    v-text-field(single-line v-model="website" required)
+    v-text-field(single-line v-model="formWebsite.text" :rules="formWebsite.rules" required)
   v-flex(xs12 sm5).header
     v-subheader(v-text="'Organization Name *'")
   v-flex(xs12 sm7).header
-    v-text-field(single-line v-model="name" :counter="30" required)
+    v-text-field(single-line v-model="formOrgName.name" :rules="formOrgName.rules" :counter="30" required)
   v-flex(xs12 sm5).header
     v-subheader(v-text="'Industry Type *'")
   v-flex(xs12 sm7).header
     v-select(
-        v-model="itype"
+        v-model="formOrgType.text"
+        :rules="formOrgType.rules"
         :items="industries"
         dense
         multiple
@@ -122,7 +142,8 @@ div
         +contact-info
       v-layout(row wrap)
         +misc-info
-      v-btn(xs12 block color="primary") Finish
+      v-layout(row justify-center)
+        v-btn(large color="primary") Finish
 
 </template>
 
