@@ -8,8 +8,8 @@ export default {
     return {
       // TODO use universal import
       'profileOptions': [
-        { text: 'Profile', route: '' },
-        { text: 'User Preferences', route: '' },
+        { text: 'Profile', route: 'EmployerProfile' },
+        { text: 'User Preferences', route: 'EmployerPrefs' },
         { text: 'Terms & Conditions', route: '' },
         { text: 'Log Out', route: '' }
       ]
@@ -26,17 +26,18 @@ export default {
 <template lang="pug">
 tales-navbar(:lockNotif="true")
   div 
-    v-btn(flat) Post a Job
-    v-btn(flat) Search
-    v-btn(flat) Listings
-  v-btn(fab icon flat small slot="notif") 
+    v-btn(flat :to="{ name: 'EmployerCreateNew' }") Post a Job
+    v-btn(flat :to="{ name: 'EmployerSearch' }") Search
+    v-btn(flat :to="{ name: 'EmployerListingsApplications' }") Listings
+  v-btn(fab icon flat small slot="notif" :to="{ name: 'EmployerMessages' }") 
     img(src="@/assets/svg/notification.svg").h70
-  v-menu(slot="avatar" bottom left) 
+  v-menu(slot="avatar" bottom left)
     v-btn(slot="activator" fab small)
       img(src="@/assets/svg/github-logo.svg").round
     v-list
-      v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
-        v-list-tile-title {{ item.text }}
+      template(v-for="(item, i) in profileOptions")
+        v-list-tile(:to="{ name: item.route }") 
+          v-list-tile-title {{ item.text }}
 
 </template>
 
