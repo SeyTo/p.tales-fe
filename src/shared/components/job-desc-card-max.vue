@@ -2,13 +2,15 @@
 export default {
   name: 'job-desc-card-max',
 
-  props: [
-    'job'
-  ],
-
-  data () {
-    return { }
+  props: {
+    'job': { type: Object },
+    'hasApplied': {
+      default: false,
+      type: Boolean
+    }
   },
+
+  data: () => ({ }),
 
   computed: { },
 
@@ -18,32 +20,44 @@ export default {
 
 
 <template lang="pug">
-v-card(hover)
-  v-card-title.card-title {{ job.role }}
+mixin buttonsBar
+  v-layout(v-show="!hasApplied").buttons-bar.mt-2
+    div
+      v-btn(depressed icon) 
+        v-icon favorite
+    v-flex.apply-btn-contain
+      v-btn(depressed block color="primary") Apply
+    div
+      v-btn(depressed icon)
+        v-icon star
+
+  v-layout(v-show="hasApplied").buttons-bar.mt-2
+    v-btn(depressed small) Got An Interview
+    v-btn(depressed small).ml-1 Got Hired
+    v-btn(depressed small).ml-1 Haven't heard
+    div
+      v-btn(depressed icon small).ml-1
+        v-icon more_vert
+
+v-card(v-if="job")
+  v-card-title.card-title.headline.bold {{ job.role }}
   v-btn(block flat) Learn more about that stuff here
   v-container(fluid)
     v-layout(column)
       v-flex
         v-layout(row)
-          div 
-            v-avatar
-              img(src="@/assets/svg/twitter.svg")
+          v-avatar.mr-3
+            img(src="@/assets/svg/twitter.svg")
           v-flex
-            div {{ job.emp.name }}
-            div {{ job.emp.address }}
-      v-flex.about.mt-2.mb-2
+            .subheading {{ job.emp.name }}
+            .body-1 {{ job.emp.address }}
+      v-flex.about.mt-3.mb-3
         | {{ job.about }}
       v-flex.italics
         | Deadline: {{ job.deadline }}
-      v-layout.buttons-bar
-        div
-          v-btn(flat icon) 
-            v-icon favorite
-        v-flex.apply-btn-contain
-          v-btn(flat block color="primary") Apply
-        div
-          v-btn(flat icon)
-            v-icon star
+
+      // buttons bar
+      +buttonsBar
 
 </template>
 
@@ -51,4 +65,8 @@ v-card(hover)
 <style lang="stylus" scoped>
 .card
   max-width 500px
+.bold
+  font-weight bold
+.italics
+  font-style italic
 </style>

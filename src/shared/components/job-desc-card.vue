@@ -10,9 +10,7 @@ export default {
     }
   },
 
-  data () {
-    return { }
-  },
+  data: () => ({ }),
 
   computed: { },
 
@@ -41,7 +39,7 @@ mixin buttonsBar
       v-btn(depressed icon small).ml-1
         v-icon more_vert
       
-v-card(hover)
+v-card(hover v-if="job")
   v-card-title.card-title.headline.bold {{ job.role }}
   v-divider
   v-container(fluid)
@@ -60,9 +58,6 @@ v-card(hover)
 
       // buttons bar
       +buttonsBar
-
-
-
 
 </template>
 
