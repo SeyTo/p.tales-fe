@@ -19,33 +19,30 @@ export default {
 <template lang="pug">
 mixin jobprefs
   v-flex(xs12).display-1 Job Preferences
-  v-flex(xs12).header
+  v-flex(xs12).header.text-xs-left
     | Select jobs you want to hear most about
   v-flex(xs12).job-pref-selector
-    v-layout
+    v-layout(wrap).pa-3
       v-flex
-        v-flex
-          v-checkbox(hide-details :label="'Creative'")
-        v-flex
-          v-checkbox(hide-details :label="'Office & Operations'")
-        v-flex
-          v-checkbox(hide-details :label="'Outdoor & Physical'")
-        v-flex
-          v-checkbox(hide-details :label="'Sales & Marketing'")
-        v-flex
-          v-checkbox(hide-details :label="'Product Engineering'")
+        v-checkbox(hide-details :label="'Creative'")
+      v-flex
+        v-checkbox(hide-details :label="'Office & Operations'")
+      v-flex
+        v-checkbox(hide-details :label="'Outdoor & Physical'")
+      v-flex
+        v-checkbox(hide-details :label="'Sales & Marketing'")
+      v-flex
+        v-checkbox(hide-details :label="'Product Engineering'")
       
-    
-  div.header
+  div.header.mt-3
     v-layout
-      v-subheader(v-text="'I want to receive personlized job notifications every '")
+      div(v-text="'I want to receive personlized job notifications every '").line-height-match
       v-select(
         dense 
         v-model="jobPrefs.jobNotifDays" 
         :items="jobPrefs.jobNotifDaysItems"
         hide-details
-        solo
-      ).small-width
+      ).small-width.pa-0.ml-2
 
 mixin privacy
   v-flex(xs12).display-1 Privacy
@@ -80,7 +77,9 @@ div
         +other
       v-layout(row wrap)
         +accounts
-      v-btn(xs12 block color="primary") Finish
+      v-layout
+        v-spacer
+        v-btn(large color="primary") Finish
 
 </template>
 
@@ -93,10 +92,17 @@ div
 .display-1
   margin 16px 0px
 .small-width
-  width 150px
+  width 130px
+.small-height
+  height 30px
+.line-height-match
+  line-height 30px
 .job-pref-selector
   border 1px solid #000
   border-radius 2px
+  * > .flex
+    min-width 50%
+    flex-basis 50% !important
 @media screen and (max-width: 800px)
   .container
     width 90% !important
