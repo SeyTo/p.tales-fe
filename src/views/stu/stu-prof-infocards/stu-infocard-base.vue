@@ -28,7 +28,9 @@ export default {
 v-card
   div.header
     .title {{ title }}
-    v-btn(flat fab small).abs-right
+    v-btn(
+      depressed fab small 
+      @click.native.stop="$emit('onAddClicked')").abs-right
       v-icon add
   hr
   .subheading.null-text(v-if="nullText !== null && slotActive === false").pa-4
