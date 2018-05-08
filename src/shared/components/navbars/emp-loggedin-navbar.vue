@@ -8,10 +8,10 @@ export default {
     return {
       // TODO use universal import
       'profileOptions': [
-        { text: 'Profile' },
-        { text: 'User Preferences' },
-        { text: 'Terms & Conditions' },
-        { text: 'Log Out' }
+        { text: 'Profile', route: ''},
+        { text: 'User Preferences', route: '' },
+        { text: 'Terms & Conditions', route: '' },
+        { text: 'Log Out', route: '' }
       ]
     }
   },
@@ -30,10 +30,10 @@ tales-navbar(:lockNotif="true")
     v-btn(flat) Search
     v-btn(flat) Listings
   v-btn(fab icon flat small slot="notif") 
-    img(src="@/assets/svg/notification.svg")
+    img(src="@/assets/svg/notification.svg").h70
   v-menu(slot="avatar" bottom left) 
     v-btn(slot="activator" fab small)
-      img(src="@/assets/svg/avatar.svg").round
+      img(src="@/assets/svg/github-logo.svg").round
     v-list
       v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
         v-list-tile-title {{ item.text }}
@@ -42,4 +42,8 @@ tales-navbar(:lockNotif="true")
 
 
 <style lang="stylus" scoped>
+.h70
+  height 70%
+.round
+  border-radius 50%
 </style>
