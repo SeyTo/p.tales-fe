@@ -6,16 +6,16 @@ export default {
   data () {
     return {
       'jobsOptions': [
-        { text: 'Search' },
-        { text: 'Your Applications' },
-        { text: 'Saved Jobs' },
-        { text: 'Invitations' }
+        { text: 'Search', route: 'StudentJobsSearch' },
+        { text: 'Your Applications', route: 'StudentJobsApplications' },
+        { text: 'Saved Jobs', route: 'StudentJobsBookmarks' },
+        { text: 'Invitations', route: '' }
       ],
       'profileOptions': [
-        { text: 'Profile' },
-        { text: 'User Preferences' },
-        { text: 'Terms & Conditions' },
-        { text: 'Log Out' }
+        { text: 'Profile', route: 'StudentProfile' },
+        { text: 'User Preferences', route: 'StudentUserPrefs' },
+        { text: 'Terms & Conditions', route: '' },
+        { text: 'Log Out', route: '' }
       ]
     }
   },
@@ -39,7 +39,7 @@ tales-navbar(:lockNotif="true")
       v-list-tile(
           v-for="(item, i) in jobsOptions" 
           :key="i" 
-          @click=""
+          :to="{ name: item.route }"
           ) 
           v-list-tile-title {{ item.text }}
 
@@ -47,18 +47,25 @@ tales-navbar(:lockNotif="true")
 
   // -- notification 
   v-btn(slot="notif" flat fab small)
-    img(src="../../../assets/svg/notification.svg")
+    img(src="@/assets/svg/notification.svg").h80
 
   // -- profile menu
   v-menu(slot="avatar" bottom left) 
     v-btn(slot="activator" fab small)
       img(src="@/assets/svg/avatar.svg").round
     v-list
-      v-list-tile(v-for="(item, i) in profileOptions" :key="i" @click="") 
+      v-list-tile(
+        v-for="(item, i) in profileOptions" 
+        :key="i" 
+        :to="{ name: item.route }") 
         v-list-tile-title {{ item.text }}
 
 </template>
 
 
 <style lang="stylus" scoped>
+.h80
+  height 70%
+.round
+  border-radius 50%
 </style>
