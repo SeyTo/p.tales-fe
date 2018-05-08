@@ -8,7 +8,7 @@ export default {
     return {
       // TODO use universal import
       'profileOptions': [
-        { text: 'Profile', route: ''},
+        { text: 'Profile', route: '' },
         { text: 'User Preferences', route: '' },
         { text: 'Terms & Conditions', route: '' },
         { text: 'Log Out', route: '' }

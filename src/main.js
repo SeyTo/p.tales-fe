@@ -5,7 +5,6 @@ import store from './stores/index.js'
 
 import { VueMasonryPlugin } from 'vue-masonry'
 import KsVueScrollmagic from 'ks-vue-scrollmagic'
-import LoremIpsum from 'vue-lorem-ipsum'
 
 import {
   Vuetify,
@@ -42,7 +41,6 @@ import {
 import './assets/styles/main.styl'
 
 Vue.use(KsVueScrollmagic)
-Vue.use(LoremIpsum)
 Vue.use(VueMasonryPlugin)
 Vue.use(Vuetify, {
   components: {

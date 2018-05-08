@@ -16,7 +16,6 @@
   "dependencies": {
     "ks-vue-scrollmagic": "^1.0.2",
     "vue": "^2.5.2",
-    "vue-lorem-ipsum": "0.0.1",
     "vue-masonry": "^0.10.5",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.0",
