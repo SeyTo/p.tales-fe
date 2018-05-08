@@ -264,7 +264,7 @@ div
 
 </template>
 
-<style lang="stylus">
+<style lang="stylus" scoped">
 @import '../../assets/styles/_vars.styl'
 .test
   float left

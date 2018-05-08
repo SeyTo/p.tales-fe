@@ -49,6 +49,6 @@ v-navigation-drawer(
 </template>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 </style>
 

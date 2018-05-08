@@ -72,5 +72,5 @@ div
 </template>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 </style>

@@ -153,6 +153,7 @@ div
   width 50%
 .subheader
   height 64px
+  padding-top 0 !important
 .display-1
   margin 16px 0px
 @media screen and (max-width: 800px)

@@ -40,7 +40,7 @@ v-card
 </template>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 header-height = 56px
 padding = 16px 8px
 .header

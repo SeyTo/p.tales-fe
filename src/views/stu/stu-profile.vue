@@ -247,7 +247,7 @@ v-container(fluid).pa-0
 </template>
 
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 @import '../../assets/styles/_vars.styl'
 
 // helps calculate when to wrap
