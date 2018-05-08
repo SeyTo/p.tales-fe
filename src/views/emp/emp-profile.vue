@@ -39,88 +39,105 @@ export default {
 
 
 <template lang="pug">
+mixin aboutUs
+  v-card#about-us
+    v-card-title.headline About Us
+    v-divider
+    v-card-text
+      | {{ aboutUs }}
+
+mixin jobListings
+  v-card#job-listing.mt-3
+    v-card-title.headline Job Listings
+    v-divider
+    v-card-text
+      div(v-for="i in jobslist").test-card
+        | Something
+      div(v-show="jobslist.length === 0")
+        .subheading.text-xs-center.bold No new jobs
+        div.text-xs-center 
+          v-btn(small depressed) Follow
+          | {{ profile.name }} to get notified about new job posts.
+
+mixin articlesListings
+  v-card#articles
+    v-card-title.headline Articles By {{ profile.name }}
+    v-divider
+    v-list(three-line)
+      template(v-for="i in articleslist")
+        v-list-tile(avatar ripple)
+          v-list-tile-avatar
+            img(src="@/assets/svg/blogger.svg")
+          v-list-tile-content
+            v-list-tile-title This is a loong header
+            v-list-tile-sub-title.subtitle This is an articlees content. I dont really know what to write
+        v-divider
+
+      // if nothing to show then
+      div(v-show="articleslist.length === 0")
+        .subheading.text-xs-center.bold No new jobs
+        div.text-xs-center 
+          v-btn(small depressed) Follow
+          | {{ profile.name }} to get notified about events and news.
+
+mixin eventListings
+  v-card#events.mt-3
+    v-card-title.headline Events & News
+    v-divider
+    v-list(three-line)
+      template(v-for="i in eventslist")
+        v-list-tile(avatar ripple)
+          v-list-tile-avatar
+            img(src="../../assets/svg/education.svg")
+          v-list-tile-content
+            v-list-tile-title Header
+            v-list-tile-content Content            
+        v-divider
+
+      // if nothing to show then
+      div(v-show="eventslist.length === 0")
+        .subheading.text-xs-center.bold No new jobs
+        div.text-xs-center 
+          v-btn(small depressed) Follow
+          | {{ profile.name }} to get notified about events and news.
+
+// start
 v-container(fluid).pa-0
   // -- background image
   v-jumbotron(src="/static/doc-images/mountain.jpg")
     v-container(fill-height)
       v-layout(align-center)
         // -- name container
-        .name-container Github
+        //-.name-container Github
         v-flex(text-xs-center)
           // text overlay on cover image
 
-  v-layout(wrap justify-center align-start)
+  v-layout(justify-center fluid)
     emp-profile-billboard(:editable="true")
-    // -- tab container
-    v-flex(lg4 sm5)
-      v-card#about-us
-        v-card-title.headline About Us
-        v-divider
-        v-card-text
-          | {{ aboutUs }}
-      v-card#job-listing
-        v-card-title.headline Job Listings
-        v-divider
-        v-card-text
-          div(v-for="i in jobslist").test-card
-            | Something
-          div(v-show="jobslist.length === 0")
-            .subheading.text-xs-center.bold No new jobs
-            div.text-xs-center 
-              v-btn(small depressed) Follow
-              | {{ profile.name }} to get notified about new job posts.
-      v-card#events
-        v-card-title.headline Events & News
-        v-divider
-        v-card-text
-          div(v-for="i in eventslist").test-card
-            | Something
-          div(v-show="eventslist.length === 0")
-            .subheading.text-xs-center.bold No new jobs
-            div.text-xs-center 
-              v-btn(small depressed) Follow
-              | {{ profile.name }} to get notified about events and news.
+      // -- tab container
+    v-layout(wrap).ml-3.mt-3.translate.m-adjust-sm
+      div(column).mid-list
+        +aboutUs
+        +jobListings
+        +eventListings
 
-    v-flex(sm3)
-      v-card#articles
-        v-card-title.headline Articles By {{ profile.name }}
-        v-divider
-        v-card-text
-          div(v-for="i in articleslist").test-card
-            | Something
-          div(v-show="articleslist.length === 0")
-            .subheading.text-xs-center.bold No new jobs
-            div.text-xs-center 
-              v-btn(small depressed) Follow
-              | {{ profile.name }} to get notified about events and news.
-       
-      
-    //-v-layout(wrap align-content-start)
-      // -- about & job listings
-      
-      v-flex(xs12 sm12 md7)
-        v-card
-          v-tabs(v-model="activetab" grow)
-            v-tab About Us
-            v-tab Job Listings
-            v-tab-item
-              v-card.pa-3.body-1
-                | test
-            v-tab-item
-              v-card(v-for="i in 3" :key="i")
-                job-desc-card-min
-                v-divider
-      // -- articles
-      //- v-flex(xs12 sm12 md5)
-        v-card
-          v-card-title Blogs & Articles
-          v-card-text Testing
+      div(sm5).ml-3.mt-3.m-adjust-sm.translate.right-list
+        +articlesListings
 
 </template>
 
 <style lang="stylus" scoped>
 @import '../../assets/styles/_vars.styl'
 
+.mid-list
+  max-width 500px
+.right-list
+  max-width 400px
+
+@media $display-breakpoints.md-and-down
+  .right-list
+    min-width 500px
+    margin-left 0 !important
 _name_container_height = 100px
 _name_container_left = t-spacer1 + t-spacer5 + t-avatar-lg
 _name_container_top = t-img-jumbo-lg-h - _name_container_height
@@ -145,27 +162,39 @@ _billboard_translate = -(t-spacer3 + t-spacer5 + t-avatar-lg/2 + _name_container
   transform translateY(_billboard_translate)
   transition all 1s
 
+  
 @media $display-breakpoints.xs-only
   // TODO move full width to profile-board
   .profile-board 
-    min-width 100% !important
-    width 100% !important
-    transform translateY(-10px)
-  .name-container
-    left t-spacer4 
-    right t-spacer4 
+    width 100%
+    margin 16px
+    transform translateY(_billboard_translate + 100px)
+  .translate
+    transform translateY(_billboard_translate + 100px)
+  .m-adjust-sm
+    margin-left 0 !important
+
+  // .name-container
+  //   left t-spacer4 
+  //   right t-spacer4 
 
 .bold
   font-weight bold
 
 .test-card
   min-height 50px
-  border-bottom solid 2px
+  border-top solid 1px
+.art-avatar
+  width 80px 
 #about-us
   .card__text
     max-height 50%
-#job-listing
-  //
-#events
-  //
+// #job-listing
+//   //
+// #events
+//   //
+#articles
+  max-width 500px
+  .article
+    height 100px
 </style>
