@@ -1,5 +1,5 @@
 <script>
-import TalesNavBar from '@/shared/components/tales-navbar'
+import BaseNavBar from '@/shared/components/navbars/base-navbar'
 import FormDuallist from '@/shared/components/dialog/form-duallist'
 import FormProfilePic from '@/shared/components/dialog/form-profile-pic'
 
@@ -79,7 +79,7 @@ export default {
   mounted () { },
 
   components: {
-    'tales-navbar': TalesNavBar,
+    'base-navbar': BaseNavBar,
     'form-duallist': FormDuallist,
     'form-profile-pic': FormProfilePic
   }
@@ -89,7 +89,7 @@ export default {
 
 <template lang="pug">
 div
-  tales-navbar(containerSize="true" noSlot="true")
+  base-navbar(containerSize="true" noSlot="true")
   v-container
 
     // page0 content

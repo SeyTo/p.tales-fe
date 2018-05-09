@@ -35,6 +35,7 @@ export default {
 
   computed: { },
 
+  // TODO import compoennt for base navbar
   components: { }
 }
 </script>
@@ -126,7 +127,7 @@ mixin misc-info
 
 
 div
-  tales-navbar(containerSize="true" noSlot="true")
+  base-navbar(containerSize="true" noSlot="true")
   v-form(v-model="valid")
     v-container
       v-layout(row wrap)

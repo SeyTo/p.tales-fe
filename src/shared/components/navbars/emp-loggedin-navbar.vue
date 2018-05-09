@@ -1,5 +1,5 @@
 <script>
-import TalesNavbar from '../tales-navbar.vue'
+import BaseNavbar from './base-navbar.vue'
 
 export default {
   name: 'emp-loggedin-navbar',
@@ -17,14 +17,14 @@ export default {
   },
 
   components: {
-    'tales-navbar': TalesNavbar
+    'base-navbar': BaseNavbar
   }
 }
 </script>
 
 
 <template lang="pug">
-tales-navbar(:lockNotif="true")
+base-navbar(:lockNotif="true")
   div 
     v-btn(flat :to="{ name: 'EmployerCreateNew' }") Post a Job
     v-btn(flat :to="{ name: 'EmployerSearch' }") Search

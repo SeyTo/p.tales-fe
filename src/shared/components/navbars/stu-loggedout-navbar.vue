@@ -1,5 +1,5 @@
 <script>
-import TalesNavBar from '../tales-navbar'
+import BaseNavbar from './base-navbar'
 import StuAuthTab from '@/shared/components/dialog/stu-authtab'
 
 export default {
@@ -44,7 +44,7 @@ export default {
   },
 
   components: {
-    'tales-navbar': TalesNavBar,
+    'base-navbar': BaseNavbar,
     'stu-auth-tab': StuAuthTab
   }
 }
@@ -53,7 +53,7 @@ export default {
 
 <template lang="pug">
 div
-  tales-navbar
+  base-navbar
     div
       v-btn(depressed :to="{ name: 'EmployerLanding' }") FOR EMPLOYERS
       v-btn(depressed :to="{ name: 'BlogsLanding' }") Blogs

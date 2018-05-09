@@ -1,5 +1,5 @@
 <script>
-import TalesNavBar from '@/shared/components/tales-navbar'
+import BaseNavBar from '@/shared/components/navbars/base-navbar'
 
 export default {
   name: 'emp-postsignupquery',
@@ -36,7 +36,7 @@ export default {
   }),
 
   components: {
-    'tales-navbar': TalesNavBar
+    'base-navbar': BaseNavBar
   },
 
   mounted () { },
@@ -133,7 +133,7 @@ mixin misc-info
 
 
 div
-  tales-navbar(containerSize="true" noSlot="true")
+  base-navbar(containerSize="true" noSlot="true")
   v-form(v-model="valid")
     v-container
       v-layout(row wrap)

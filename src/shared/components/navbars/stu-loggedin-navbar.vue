@@ -1,5 +1,5 @@
 <script>
-import TalesNavbar from '../tales-navbar.vue'
+import BaseNavbar from './base-navbar.vue'
 
 export default {
   name: 'stu-loggedin-navbar',
@@ -21,14 +21,14 @@ export default {
   },
 
   components: {
-    'tales-navbar': TalesNavbar
+    'base-navbar': BaseNavbar
   }
 }
 </script>
 
 
 <template lang="pug">
-tales-navbar(:lockNotif="true")
+base-navbar(:lockNotif="true")
   // -- jobs & interns menu
   v-menu(
       bottom 

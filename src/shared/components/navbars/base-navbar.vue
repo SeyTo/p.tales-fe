@@ -8,7 +8,7 @@ export default {
   // TODO: set sticky attribute
   // TODO: set visible attribute
   // TODO implement container sizing
-  name: 'tales-navbar',
+  name: 'base-navbar',
 
   props: {
     type: {
@@ -86,7 +86,7 @@ div
     div
       slot(name="avatar" v-if="showAvatar")
     v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot")
-      img(src="../../assets/svg/drawerlogo.svg")
+      img(src="@/assets/svg/drawerlogo.svg")
 
 </template>
 

@@ -1,5 +1,5 @@
 <script>
-import TalesNavbar from '@/shared/components/tales-navbar'
+import BaseNavbar from './base-navbar'
 import EmpAuthTab from '@/shared/components/dialog/emp-authtab.vue'
 
 export default {
@@ -14,7 +14,7 @@ export default {
   components: {
     // TODO replace
     'emp-auth-tab': EmpAuthTab,
-    'tales-navbar': TalesNavbar
+    'base-navbar': BaseNavbar
   },
 
   methods: {
@@ -41,7 +41,7 @@ export default {
 
 
 <template lang="pug">
-tales-navbar
+base-navbar
   div
     v-btn(
         flat
