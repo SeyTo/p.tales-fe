@@ -23,8 +23,6 @@ export default {
 
   methods: {
     openJobDialog () {
-      console.log('testing')
-      console.log(this.jobDialog.model)
       this.jobDialog.selectedJob = this.testjob
       this.jobDialog.model = true
     }
@@ -43,7 +41,7 @@ export default {
 v-container
   v-layout(column)
     v-flex
-      .display-1.text-xs-center.mb-3 Your Applications
+      .display-1.text-xs-center.mb-3 Job Invitations
     v-layout(justify-center)
       v-layout(wrap justify-start grid-list-lg)
         template(v-for="i in 10")

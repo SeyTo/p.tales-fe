@@ -3,7 +3,7 @@ import JobDescCard from '@/shared/components/job-desc-card'
 import JobDescCardMax from '@/shared/components/job-desc-card-max'
 
 export default {
-  name: 'stu-jobs-bookmarks',
+  name: 'stu-jobs-invitations',
 
   data: () => ({
     testjob: {
@@ -41,15 +41,15 @@ export default {
 v-container
   v-layout(column)
     v-flex
-      .display-1.text-xs-center.mb-3 Bookmarked Jobs
+      .display-1.text-xs-center.mb-3 Job Invitations
     v-layout(justify-center)
       v-layout(wrap justify-start grid-list-lg)
-        template(v-for="i in 2")
+        template(v-for="i in 3")
           v-flex(md4 sm6 xs12).pa-2
-            job-desc-card(:job="testjob" :hasApplied="false" @click.native.stop="openJobDialog")
+            job-desc-card(:job="testjob" :hasApplied="true" @click.native.stop="openJobDialog")
 
   v-dialog(v-model="jobDialog.model")
-    job-desc-card-max(:job="jobDialog.selectedJob" :hasApplied="false")
+    job-desc-card-max(:job="jobDialog.selectedJob" :hasApplied="true")
     
 </template>
 

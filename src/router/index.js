@@ -19,6 +19,7 @@ import EmpSearch from '@/views/emp/emp-search'
 // student pages
 import StuJobsApplications from '@/views/stu/stu-jobs-applications'
 import StuJobsBookmarks from '@/views/stu/stu-jobs-bookmarks'
+import StuJobsInvitations from '@/views/stu/stu-jobs-invitations'
 import StuJobsSearch from '@/views/stu/stu-jobs-search'
 import StuMessages from '@/views/stu/stu-messages'
 import StuPostsignupQuery from '@/views/stu/stu-postsignup-query'
@@ -140,6 +141,11 @@ export default new Router({
           path: 'jobs/bookmarks',
           name: 'StudentJobsBookmarks',
           component: StuJobsBookmarks
+        },
+        {
+          path: 'jobs/invites',
+          name: 'StudentJobsInvitations',
+          component: StuJobsInvitations
         },
         {
           path: 'prefs',

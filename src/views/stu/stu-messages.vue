@@ -49,7 +49,7 @@ v-content
         v-checkbox(:label="'Mod Mails'" v-model="showModMails")
         v-checkbox(:label="'Employer Mails'" v-model="showEmployerMails")
         v-checkbox(:label="'Blogs Mails'" v-model="showBlogsMails")
-    v-flex(lg4 md6 sm7 xs12).messages-contain
+    v-flex(lg5 md6 sm7 xs12).messages-contain
       div.messages
         // TODO replace with render
         div(v-for="(i, index) in msgs" :key="i.title")

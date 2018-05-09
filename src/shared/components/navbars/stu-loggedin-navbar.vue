@@ -9,7 +9,7 @@ export default {
         { text: 'Search', route: 'StudentJobsSearch' },
         { text: 'Your Applications', route: 'StudentJobsApplications' },
         { text: 'Saved Jobs', route: 'StudentJobsBookmarks' },
-        { text: 'Invitations', route: '' }
+        { text: 'Invitations', route: 'StudentJobsInvitations' }
       ],
       'profileOptions': [
         { text: 'Profile', route: 'StudentProfile' },
@@ -46,7 +46,7 @@ tales-navbar(:lockNotif="true")
   v-btn(flat) Blogs
 
   // -- notification 
-  v-btn(slot="notif" flat fab small)
+  v-btn(slot="notif" flat fab small :to="{ name: 'StudentMessages' }")
     img(src="@/assets/svg/notification.svg").h80
 
   // -- profile menu

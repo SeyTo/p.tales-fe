@@ -66,18 +66,19 @@ export default {
 <template lang="pug">
 v-card(hover)
   .highlight(v-bind:style="{ 'background-color': highlightColor }")
-  v-layout 
+  v-layout.pa-3
     .avatar
       img(:src="avatar")
-    v-layout(column).messages
+    v-layout(column).messages.ml-3
       .title
         | {{ title }}
       .content
         | {{ content }}
     div.icons
-      img(src="@/assets/svg/favicon.svg")
-      img(src="@/assets/svg/favicon.svg")
-      img(src="@/assets/svg/favicon.svg")
+      v-btn(icon small fab).ma-0
+        v-icon close
+      v-btn(icon small fab).ma-0
+        img(src="../../assets/svg/archive.svg").smaller
       
   
 </template>
@@ -89,8 +90,10 @@ v-card(hover)
 .avatar
   height 80px
 .icons
-  width 24px
-  img
-    float left 
-    height 24px
+  width 40px
+  .smaller
+    height 50%
+  // img
+  //   float left 
+  //   height 24px
 </style>
