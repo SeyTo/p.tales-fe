@@ -59,7 +59,7 @@ v-container(fluid column).pa-0
     )
       v-icon close
   v-dialog(v-model="linkDialogs" max-width="500")
-    v-card()
+    v-card.pa-5
       +links
 
   // TODO replace with vertical pagination

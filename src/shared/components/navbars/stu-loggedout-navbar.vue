@@ -8,6 +8,9 @@ export default {
   data () {
     return {
       authDialogToggle: false,
+      authDialog: {
+        model: false
+      },
       activeTabIndex: 0
     }
   },
@@ -17,7 +20,7 @@ export default {
 
   methods: {
     openDialog (tabIndex) {
-      this.authDialogToggle = !this.authDialogToggle
+      this.authDialog.model = true
       this.activeTabIndex = tabIndex
       // FIXME: tab index is supposed to open set select tab by index, there is a bug
       // in vuetify. Hope they will fix it by release. else we will have to simulate
@@ -25,7 +28,7 @@ export default {
     },
     validateForm (value) {
       // TODO move validator to core.
-      this.authDialogToggle = false
+      this.authDialog.model = false
       console.log(value)
 
       if (value === 'login') {
@@ -56,19 +59,27 @@ export default {
 div
   base-navbar
     div
-      v-btn(depressed :to="{ name: 'EmployerLanding' }") FOR EMPLOYERS
-      v-btn(depressed :to="{ name: 'BlogsLanding' }") Blogs
       v-btn(
-        depressed
+        depressed 
+        color="primary--text"
+        :to="{ name: 'EmployerLanding' }").transparent FOR EMPLOYERS
+      v-btn(
+        depressed 
+        color="primary--text"
+        :to="{ name: 'BlogsLanding' }").transparent Blogs
+      v-btn(
+        outline
         @click.native.stop="openDialog(0)"
-      ) Log In
+      ).primary--text Log In
       v-btn(
         depressed
         color="primary"
         @click.native.stop="openDialog(1)"
-      ) Sign Up
+      ).bold Sign Up
+      //
   // -- dialogs
-  stu-auth-tab(v-model="authDialogToggle" :activeTab="activeTabIndex" @validate="validateForm")
+  v-dialog(lazy v-model="authDialog.model")
+    stu-auth-tab(:activeTab="activeTabIndex" @validate="validateForm")
 
 </template>
 

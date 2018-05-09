@@ -72,6 +72,7 @@ div
     app
     :clipped-left="false"
     flat
+    color="white"
   )
     // v-toolbar-title
     img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo

@@ -4,7 +4,7 @@
  * Login auths are not handled here. Log in states are handled in stores.
  */
 export default {
-  'name': 'student-auth-tab',
+  'name': 'stu-auth-tab',
 
   props: {
     // primary dialog state (visible/invisible)
@@ -18,7 +18,9 @@ export default {
     return {
       isLoginFormValid: false,
       isSignupFormValid: false,
-      activeTabIndex: this.activeTab,
+      // FIX ME: vuetify bug, activeTabIndex cannot be > 1 else no tab is initially shown
+      // TODO: manually click on tab bars
+      activeTabIndex: 0,
       formEmail: {
         text: '',
         rules: [
@@ -65,30 +67,46 @@ export default {
 
 
 <template lang="pug">
+mixin or-line
+  v-layout(justify-center).ma-3
+    v-flex.or-line.accent
+    .subheading.bold OR
+    v-flex.or-line.accent
+
+mixin buttons-bar(type)
+  v-layout(column)
+    v-flex.text-sm-center.subheading
+      = type 
+      | using
+    v-layout
+      v-flex.ma-2
+        v-btn(block) 
+          img(src="@/assets/svg/facebook_plain.svg" height="26")
+          v-flex Facebook
+      v-flex.ma-2
+        v-btn(block)
+          img(src="@/assets/svg/google.svg" height="26")
+          v-flex Google
+
 mixin signupTabItem
-  v-container
+  v-layout(column).pa-3
+    +buttons-bar('Sign up ')
+    +or-line
     v-form(v-model="isSignupFormValid")
       v-text-field(
-          label="First Name"
+          label="Full Name"
           v-model="formFirstName.text"
           :rules="formFirstName.rules"
           required
           :type="'text'"
-        )/
-      v-text-field(
-          label="Last Name"
-          v-model="formLastName.text"
-          :rules="formLastName.rules"
-          required
-          :type="'text'"
-        )/
+        )
       v-text-field(
           label="E-mail"
           v-model="formEmail.text"
           :rules="formEmail.rules"
           required
           :type="'email'"
-        )/
+        )
       v-text-field(
           label="Password"
           v-model="formPassword.text"
@@ -98,19 +116,18 @@ mixin signupTabItem
           :append-icon="formPassword.visibility ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (formPassword.visibility = !formPassword.visibility)"
           min="8"
-        )/
+        )
 
   // -- signup buttons
   v-card-actions
     v-spacer
     v-btn(color="green darken-1" flat="flat" @click.native="validate('signup')") Sign up
 
-mixin loginTabItem
-  v-container
-    div.centered
-      // TODO create natural facebook button
-      v-btn() Log In With facebook
-      // TODO create google button
+
+mixin login-tab-item
+  v-layout(column).pa-3
+    +buttons-bar('Log in ') 
+    +or-line
     v-form(v-model="isLoginFormValid")
       v-text-field(
           label="E-mail"
@@ -135,30 +152,30 @@ mixin loginTabItem
     v-spacer
     v-btn(color="green darken-1" flat="flat" @click.native="validate('login')") Log In
 
+// -- start here
+v-card.fix-height
+  v-tabs(v-model="activeTabIndex" grow)
+    // TODO tabs do not change when 'activeTab' is set, see issue #3699 of vuetify
+    v-tab Log In
+    v-tab Sign Up
 
-// TODO get mixin max-width
-v-dialog(lazy :value="value" @input="$emit('input', $event)")
-  v-card
-    // -- tabs container for LogIn and Sign Up
-    v-tabs(v-model="activeTabIndex" grow)
-      // TODO tabs do not change when 'activeTab' is set, see issue #3699 of vuetify
-      // maybe, simulate a click instead
-      v-tab Log In
-      v-tab Sign Up
-
-      v-tab-item
-        +loginTabItem
-      v-tab-item
-        +signupTabItem
+    v-tab-item
+      +login-tab-item
+    v-tab-item
+      +signupTabItem
 
 </template>
 
+
 <style lang="stylus" scoped>
-// .dialog-max-width
-  // max-width 500px
-  // width 500px
-// TODO: remove
+@import '../../../assets/styles/_vars.styl'
+.fix-height
+  min-height 500px
 .centered
   display flex
   justify-content center
+.or-line
+  height 2px
+  align-self center
+  margin 0 t-spacer3
 </style>
