@@ -26,14 +26,15 @@ export default {
 
 <template lang="pug">
 v-card
-  div.header
-    .title {{ title }}
+  v-layout(align-center)
+    .title.pl-3.thin {{ title }}
+    v-spacer
     v-btn(
       depressed fab small 
       @click.native.stop="$emit('onAddClicked')").abs-right
       v-icon add
-  hr
-  .subheading.null-text(v-if="nullText !== null && slotActive === false").pa-4
+  v-divider
+  div(@click="$emit('onAddClicked')").subheading.grey--text.null-text(v-if="nullText !== null && slotActive === false").pa-4
     | {{ nullText }}
   slot(v-if="slotActive")
      
@@ -41,11 +42,20 @@ v-card
 
 
 <style lang="stylus" scoped>
+@import '../../../assets/styles/_vars.styl'
+@import '../../../../node_modules/vuetify/src/stylus/settings/_elevations.styl'
+
 header-height = 56px
 padding = 16px 8px
+    
+.card
+  transition: all .4s cubic-bezier(.25, .8, .25, 1)
+  &:hover
+    transition-property: box-shadow
+    elevation(8)
+    
 .header
   position relative
-  text-align center
   padding padding
   .abs-right
     position absolute

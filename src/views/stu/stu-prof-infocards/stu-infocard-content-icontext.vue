@@ -12,9 +12,9 @@ export default {
 
 
 <template lang="pug">
-  v-layout
+  v-layout.clickable
     v-flex
-      v-avatar(:tile="true" :size="56").mr-3.h-100
+      v-avatar(:tile="true" :size="56").mx-3.h-100
         img(src="@/assets/svg/archive.svg")
       v-flex(column)
         h4 {{ args.title }}

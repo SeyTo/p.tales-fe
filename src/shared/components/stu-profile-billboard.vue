@@ -108,7 +108,6 @@ _min_width            = (_padding-5 * 2) + _profile_pic_width
     flex-direction column
     .profile-pic
       width _profile_pic_width
-      // TODO generalize
       border-radius 50%
       align-self center
     .name
