@@ -18,14 +18,27 @@ export default {
     menu: false,
     modal: false,
     menu2: false,
+    basicData: {
+      title: '',
+      expiryDate: '',
+      paid: true,
+      fullTime: false,
+      expectedSalary: {
+        enabled: true,
+        value: ''
+      },
+      jobDesc: '',
+      noOfVacancies: '1'
+    },
     targeting: {
       schoolGroupModel: 'all',
       options: {
-        'all': 'All X post-secondary school in Nepal',
+        'all': 'All 1000 post-secondary school in Nepal',
         'manual': 'Manually Select Schools'
       },
-      schools: [],
-      selectedSchools: []
+      schools: [ 'School A', 'School B', 'School C' ],
+      selectedSchools: [],
+      studentsWhoEnjoy: []
     }
   }),
 
@@ -97,21 +110,21 @@ mixin custom-section
 
 v-container
   // -- select a job type  
-  h1 Create New Job Post
+  .display-1.text-xs-center.mb-3 Create New Job Post
   v-layout(justify-center)
     v-flex(sm6 xs12 v-show="!selectedJobType").job-type-selector
-      | Select a job type
+      .title.ma-3 Select a job type
       v-card(hover @click.native.stop="selectJobType('entry')")
-        v-card-title Entry
+        v-card-title.headline Entry
         v-card-text Full time jobs for students and graduates.
       v-card(hover @click.native.stop="selectJobType('parttime')")
-        v-card-title Part Time
+        v-card-title.headline Part Time
         v-card-text Jobs under 30hrs/week.
       v-card(hover @click.native.stop="selectJobType('intern')")
-        v-card-title Internships
+        v-card-title.headline Internships
         v-card-text Full or part time internship
       v-card(hover @click.native.stop="selectJobType('otg')")
-        v-card-title One Time Gigs
+        v-card-title.headline One Time Gigs
         v-card-text One time programs for 24-48 hrs.
     v-flex(sm7 xs12 v-show="selectedJobType")
       v-tabs(
