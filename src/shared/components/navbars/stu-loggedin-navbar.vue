@@ -30,10 +30,9 @@ export default {
 <template lang="pug">
 base-navbar(:lockNotif="true")
   // -- jobs & interns menu
-  v-menu(
-      bottom 
-      left
-    ) 
+  v-btn(flat :to="{ name: 'StudentFeeds' }") Feeds
+
+  v-menu(bottom left) 
     v-btn(slot="activator" flat) Jobs & Interns
     v-list
       v-list-tile(
@@ -43,7 +42,7 @@ base-navbar(:lockNotif="true")
           ) 
           v-list-tile-title {{ item.text }}
 
-  v-btn(flat) Blogs
+  v-btn(flat :to="{ name: 'Blogs' }") Blogs
 
   // -- notification 
   v-btn(slot="notif" flat fab small :to="{ name: 'StudentMessages' }")

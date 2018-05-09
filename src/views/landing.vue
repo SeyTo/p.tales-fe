@@ -1,6 +1,7 @@
 <script>
-import StuLoggedoutNavBar from '../shared/components/navbars/stu-loggedout-navbar'
-import StuLoggedoutNavDrawer from '../shared/components/navdrawers/stu-loggedout-navdraw'
+import StuLoggedoutNavBar from '@/shared/components/navbars/stu-loggedout-navbar'
+import StuLoggedoutNavDrawer from '@/shared/components/navdrawers/stu-loggedout-navdraw'
+import StuAuthTab from '@/shared/components/dialog/stu-authtab'
 
 export default {
   name: 'landing',
@@ -11,7 +12,8 @@ export default {
 
   components: {
     'stu-loggedout-navbar': StuLoggedoutNavBar,
-    'stu-loggedout-navdrawer': StuLoggedoutNavDrawer
+    'stu-loggedout-navdrawer': StuLoggedoutNavDrawer,
+    'stu-auth-tab': StuAuthTab
   }
 }
 </script>

@@ -31,30 +31,37 @@ v-card.profile-board
   div.this(v-bind:style="{ 'background-color': favcolor }")
   div.picture-container.mt-5.mx-5.mb-4
     img(src="../../assets/svg/avatar.svg").profile-pic.pb-4
-    .headline.name {{ name }}
+    .headline.name.thin {{ name }}
+    v-layout(justify-center)
+      .color-line(:style="{ backgroundColor: favcolor, width: (name.length * 14) + 'px' }").mt-2
+  .user-info
+    div.body-2 About Me
+    div.body-1.thin {{ aboutme }}
+  .user-info
+    div.body-2 Email
+    div.body-1.thin {{ email }}
+  .user-info
+    div.body-2 Phone Number
+    div.body-1.thin {{ phonenumber }}
+  .user-info
+    div.body-2 Date of Birth
+    div.body-1.thin {{ dob }}
+  .user-info
+    div.body-2 Address
+    div.body-1.thin {{ address }}
   v-divider.mb-4
-  .user-info
-    div.subheading About Me
-    div.body-2 {{ aboutme }}
-  .user-info
-    div.subheading Email
-    div.body-2 {{ email }}
-  .user-info
-    div.subheading Phone Number
-    div.body-2 {{ phonenumber }}
-  .user-info
-    div.subheading Date of Birth
-    div.body-2 {{ dob }}
-  .user-info
-    div.subheading Address
-    div.body-2 {{ address }}
-  v-divider.mb-4
-  v-layout(column).social-container
-    v-flex.self-center
-      v-btn(icon fab flat)
+  v-layout(column).social-container.mx-5
+    v-layout(wrap justify-center)
+      v-btn(icon fab flat small)
         img(src="@/assets/svg/facebook.svg") 
-      v-btn(icon fab flat)
+      v-btn(icon fab flat small)
         img(src="@/assets/svg/twitter.svg") 
+      v-btn(icon fab flat small)
+        img(src="@/assets/svg/google.svg") 
+      v-btn(icon fab flat small)
+        img(src="@/assets/svg/github-logo.svg") 
+      v-btn(icon fab flat small)
+        img(src="@/assets/svg/linkedin.svg") 
   div.mb-3.mx-4.text-xs-right
     a EDIT
 
@@ -110,11 +117,15 @@ _min_width            = (_padding-5 * 2) + _profile_pic_width
     padding 0 _padding-5 _padding _padding-5
   .social-container
     // padding-bottom _padding-4
-// TODO generalize
-.self-center
-  align-self center
 
 @media screen and (max-width: _sm_size)
   .profile-board   
     width 100%
+
+
+.thin
+  font-weight 300
+.color-line
+  height 4px
+  border-radius 25%
 </style>
