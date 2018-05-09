@@ -1,5 +1,5 @@
 <script>
-import TalesNavdrawer from '@/shared/components/tales-navdrawer'
+import BaseNavdrawer from './base-navdrawer'
 
 export default {
   name: '',
@@ -22,14 +22,14 @@ export default {
   },
 
   components: {
-    'tales-navdraw': TalesNavdrawer
+    'base-navdrawer': BaseNavdrawer
   }
 }
 </script>
 
 
 <template lang="pug">
-tales-navdraw
+base-navdrawer
   v-expansion-panel(inset)
     v-expansion-panel-content
       div(slot="header") Jobs & Interns

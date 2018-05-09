@@ -1,5 +1,5 @@
 <script>
-import TalesNavdrawer from '@/shared/components/tales-navdrawer'
+import BaseNavdrawer from './base-navdrawer'
 // TODO remove to universal dialog
 import StuAuthTab from '@/shared/components/dialog/stu-authtab'
 
@@ -13,7 +13,7 @@ export default {
   },
 
   components: {
-    'tales-navdrawer': TalesNavdrawer,
+    'base-navdrawer': BaseNavdrawer,
     'stu-auth-tab': StuAuthTab
   }
 }
@@ -21,7 +21,7 @@ export default {
 
 
 <template lang="pug">
-tales-navdrawer.navdrawer
+base-navdrawer.navdrawer
   template
     img(src="../../../assets/svg/favicon.svg" height="64").ma-4
     v-btn(flat large :to="{ name: 'EmployerLanding' }") FOR EMPLOYERS

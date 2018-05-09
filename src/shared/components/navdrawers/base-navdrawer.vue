@@ -4,7 +4,7 @@
  * The Global Navdrawer.
  */
 export default {
-  name: 'tales-navdrawer',
+  name: 'base-navdrawer',
 
   data () {
     return {

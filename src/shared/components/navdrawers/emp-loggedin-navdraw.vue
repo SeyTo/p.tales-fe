@@ -1,5 +1,5 @@
 <script>
-import TalesNavdraw from '../tales-navdrawer'
+import BaseNavdrawer from './base-navdrawer'
 
 export default {
   name: 'emp-navbar-navdraw',
@@ -16,7 +16,7 @@ export default {
   },
 
   components: {
-    'tales-navdraw': TalesNavdraw
+    'base-navdrawer': BaseNavdrawer
   }
 
 }
@@ -24,7 +24,7 @@ export default {
 
 
 <template lang="pug">
-tales-navdraw
+base-navdrawer
   v-btn(flat) Post a Job
   v-btn(flat) Search
   v-btn(flat) Listings

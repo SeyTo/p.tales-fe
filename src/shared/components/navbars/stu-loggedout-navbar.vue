@@ -24,6 +24,7 @@ export default {
       // a click for now.
     },
     validateForm (value) {
+      // TODO move validator to core.
       this.authDialogToggle = false
       console.log(value)
 
