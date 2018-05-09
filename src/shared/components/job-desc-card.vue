@@ -4,6 +4,10 @@ export default {
 
   props: {
     'job': Object,
+    /**
+     * If student has applied for the job then the buttons bar changes to
+     * show a different buttons bar.
+     */
     'hasApplied': {
       default: false,
       type: Boolean

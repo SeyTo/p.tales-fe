@@ -34,7 +34,13 @@ export default {
       ],
       isPaid: false,
       dialog: false,
-      selectedJobIndex: 0
+      selectedJobIndex: 0,
+      filterDrawer: {
+        model: true
+      },
+      infoDialog: {
+        model: false
+      }
     }
   },
 
@@ -46,7 +52,7 @@ export default {
   methods: {
     openJobDialog (i) {
       this.selectedJobIndex = i
-      this.dialog = true
+      this.infoDialog.model = true
     }
   }
 }
@@ -54,41 +60,93 @@ export default {
 
 
 <template lang="pug">
-// TODO increase container width
-v-container(fluid)
+mixin generalFilters
+  v-list#filter
+    v-list-tile
+      v-btn(depressed block).ma-0 Reset Filter List
+    v-list-tile
+      v-checkbox(label="Quick hire jobs" hide-details)
+
+    v-divider
+      
+    v-subheader.primary--text Job Time
+    v-list-tile
+      v-checkbox(label="Part Time" hide-details)
+      v-checkbox(label="Full Time" hide-details) 
+
+    v-divider
+
+    v-subheader.primary--text Jobs By Categories
+
+    v-divider
+
+    v-subheader.primary--text Jobs By Industries
+
+    v-divider
+
+    v-subheader.primary--text Jobs By Type
+    v-list-tile
+      v-checkbox(label="Paid Only?" hide-details)
+
+    v-divider
+
+    v-subheader.primary--text Jobs By Location
+    v-list-tile
+      v-checkbox(label="Jobs near me only" hide-details)
+    v-list-tile
+      v-checkbox(label="I'd like to travel" hide-details)
+
+    v-divider
+
+    v-subheader.primary--text Jobs By Industries
+
+    
+// -- start here
+v-container
   v-layout(column)
+    v-flex
+      .display-1.text-xs-center.mb-3 Search Jobs
     // -- main search bar
-    .search-container
+    v-layout(justify-center).search-container.mb-4
       v-text-field(solo label="Search").search-bar
+      v-btn(large color="primary").search-btn.ma-0 Search 
 
-    // -- master filter
-    v-container(grid-list-md v-if="!this.$vuetify.breakpoint.smAndDown")#filter
-      // v-card.pt-3.pl-3.pr-3.pb-2
-      v-layout
-        v-flex
-          v-select(label="Jobs By Categories"  hide-details dense single-line)
-        v-flex
-          v-select(label="Jobs By Industries"  hide-details dense single-line)
-        v-flex
-          v-select(label="Jobs By Types"  hide-details dense single-line)
-        v-flex
-          v-select(label="Jobs By Location"  hide-details dense single-line)
-        v-flex
-          v-select(label="Relevant Jobs First"  hide-details dense single-line)
-      v-layout(justify-space-between).mt-1.mb-1
-        v-flex
-          v-checkbox(label="Paid Only" hide-details v-model="isPaid")
-        div
-          v-btn(flat).ma-0 Reset
+    // -- filter drawer
+    v-navigation-drawer(app v-model="filterDrawer.model").nava
+      v-toolbar(flat)
+        .title.pa-3 Filter
+        v-spacer
+        v-btn(icon @click="filterDrawer.model = false") 
+          v-icon close
 
-    // -- result container
-    div.result-wrapper
-      div.result-container
-        div(v-for="(i, index) in jobs")
-          job-desc-card(:job="i" @click.native.stop="openJobDialog(index)")
+      +generalFilters
 
-  v-dialog(v-model="dialog" max-width="500px")
-    job-desc-card-max(:job="jobs[selectedJobIndex]")
+
+    v-layout(justify-center)
+      v-layout(wrap justify-start grid-list-lg)
+        template(v-for="(i, index) in jobs")
+          v-flex(md4 sm6 xs12).pa-2
+            job-desc-card(:job="i" :hasApplied="false" @click.native.stop="openJobDialog(index)")
+
+
+  // -- fab
+  v-fab-transition
+    v-btn(
+        :key="'filterDialogFab'"
+        slot="activator" 
+        fab 
+        fixed bottom right 
+        hover 
+        @click="filterDrawer.model = true"
+        v-if="filterDrawer.model === false"
+      )
+      img(src="@/assets/svg/filter.svg").t-fab-svg.round
+
+  // -- info dialog
+  // TODO remove universal dialog width
+  v-dialog(v-model="infoDialog.model" max-width="500px")
+    job-desc-card-max(:job="jobs[selectedJobIndex]" :hasApplied="false")
+
 </template>
 
 
@@ -100,6 +158,12 @@ _card_container_width_double = (2 * _card_width) + (3 * _card_pad)
 _card_container_width_single = (1 * _card_width) + (2 * _card_pad)
 .search-container
   width 100%
+  .search-bar
+    max-width 600px
+.search-btn
+  height 46px
+.nava
+  height 800px !important
 #filter
   // end
 .result-wrapper
