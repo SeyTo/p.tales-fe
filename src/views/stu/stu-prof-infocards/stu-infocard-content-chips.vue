@@ -25,5 +25,5 @@ v-layout
 
 <style lang="stylus" scoped>
 .chip
-  height 26px
+  // height 26px
 </style>

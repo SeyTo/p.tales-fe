@@ -3,6 +3,7 @@ import StuInfocardBase from './stu-prof-infocards/stu-infocard-base.vue'
 import StuInfocardContentIcontext from './stu-prof-infocards/stu-infocard-content-icontext'
 import StuProfileBoard from '@/shared/components/stu-profile-billboard'
 import StuInfocardContentChips from './stu-prof-infocards/stu-infocard-content-chips'
+import Vue from 'vue'
 
 // dialogs
 import StuProfEditSkills from '@/shared/components/dialog/stu-prof-edit-skills'
@@ -23,7 +24,9 @@ export default {
     dob: '',
     phonenumber: '',
     editDialog: {
+      index: 0,
       model: false,
+      name: null,
       component: null,
       preData: false,
       data: null
@@ -32,35 +35,44 @@ export default {
     dialogModel: false,
     infoCards: {
       'education': {
-        'name': 'Education',
-        'nullText': 'List out some of your education, courses you took and certifications'
+        name: 'education',
+        id: 'Education',
+        nullText: 'List out some of your education, courses you took and certifications',
+        dialogComponent: StuProfEditEdu
       },
       'workhistory': {
-        'name': 'Work History',
+        'name': 'workhistory',
+        'id': 'Work History',
         'nullText': 'List here the places you have worked before.'
       },
       'gigsfreelances': {
-        'name': 'Gigs and Freelances',
+        'name': 'gigsfreelances',
+        'id': 'Gigs & Freelances',
         'nullText': 'List out some of your Gigs'
       },
       'skills': {
-        'name': 'Skills',
+        'name': 'skills',
+        'id': 'Skills',
         'nullText': 'List out some of your education, courses you took and certifications'
       },
       'volunteers': {
-        'name': 'Volunteers',
+        'name': 'volunteers',
+        'id': 'Volunteers',
         'nullText': 'List out some of your education, courses you took and certifications'
       },
       'leadership': {
-        'name': 'Leadership',
+        'name': 'leadership',
+        'id': 'Leadership',
         'nullText': 'List out some of your education, courses you took and certifications'
       },
       'videos': {
-        'name': 'Videos',
+        'name': 'videos',
+        'id': 'Videos',
         'nullText': 'List out some of your education, courses you took and certifications'
       },
       'newmodule': {
-        'name': 'Add New Module',
+        'name': 'newmodule',
+        'id': 'Add New Module',
         'nullText': 'List out some of your education, courses you took and certifications'
       }
     }
@@ -77,93 +89,122 @@ export default {
     this.address = 'Normandy, SSR4'
     this.dob = '2017, 14th May'
     this.phonenumber = '+200 9158248424'
-    this.infoCards = {
-      'education': {
-        name: 'Education',
-        nullText: 'List out some of your education, courses you took and certifications',
-        addClicked: () => {
-          this.editDialog.component = StuProfEditEdu
-          this.editDialog.model = true
-        },
-        contents: [
-          {
-            component: StuInfocardContentIcontext,
-            args: { title: 'Kathmandu University', date: '2017-8-19', level: 'Bachelors', subject: 'Business Arts' },
-            onClick: () => {
-              this.editDialog.component = StuProfEditEdu
-              this.editDialog.preData = false
-              this.editDialog.model = true
-            }
-          },
-          {
-            component: StuInfocardContentIcontext,
-            args: { title: 'Tribhuwan University', date: '2017-8-19', level: 'Masters', subject: 'Physics' }
-          }
-        ]
-      },
-      'workhistory': {
-        'name': 'Work History',
-        'nullText': 'List here the places you have worked before.',
-        addClicked: () => { },
-        contents: [
-          {
-            component: StuInfocardContentIcontext,
-            args: { title: 'Starbucks', date: '2017-9-9', level: 'Manager', subject: 'Did literally nothing.' }
-          }
-        ]
-      },
-      'gigsfreelances': {
-        'name': 'Gigs and Freelances',
-        'nullText': 'List out some of your education, courses you took and certifications',
-        addClicked: () => { }
-      },
-      'skills': {
-        'name': 'Skills',
-        'nullText': 'List out some of your education, courses you took and certifications',
-        addClicked: () => { },
-        contents: [
-          {
-            component: StuInfocardContentChips,
-            args: { title: 'Technical Skills', data: [ 'Java', 'Acting', 'Mushroom' ], color: 'blue' },
-            onClick: (args) => {
-              this.editDialog.component = StuProfEditSkills
-              this.editDialog.preData = true
-              console.log('data: ' + args)
-              this.editDialog.data = args
-              this.editDialog.model = true
-            }
-          },
-          {
-            component: StuInfocardContentChips,
-            args: { title: 'Skills', data: [ 'Mushroom' ], color: 'green' }
-          },
-          {
-            component: StuInfocardContentChips,
-            args: { title: 'Languages', data: [ 'Cow', 'Catcalling' ], color: 'pink' }
-          }
-        ]
-      },
-      'volunteers': {
-        'name': 'Volunteers',
-        'nullText': 'List out some of your education, courses you took and certifications',
-        addClicked: () => { }
-      },
-      'leadership': {
-        'name': 'Leadership',
-        'nullText': 'List out some of your education, courses you took and certifications',
-        addClicked: () => { }
-      },
-      'videos': {
-        'name': 'Videos',
-        'nullText': 'List out some of your education, courses you took and certifications',
-        addClicked: () => { }
-      },
-      'newmodule': {
-        'name': 'Add New Module',
-        'nullText': 'List out some of your education, courses you took and certifications',
-        addClicked: () => { }
+
+    const cards = [
+      { name: 'education', component: StuProfEditEdu },
+      { name: 'workhistory', component: StuProfEditEdu },
+      { name: 'gigsfreelances', component: StuProfEditEdu },
+      { name: 'skills', component: StuProfEditEdu },
+      { name: 'volunteers', component: StuProfEditEdu },
+      { name: 'leadership', component: StuProfEditEdu },
+      { name: 'videos', component: StuProfEditEdu },
+      { name: 'newmodule', component: StuProfEditEdu }
+    ]
+    for (const i of cards) {
+      this.infoCards[i.name].addClicked = () => {
+        this.editDialog.name = i.name
+        this.editDialog.component = i.component
+        this.editDialog.model = true
       }
     }
+
+    // Test purposes
+    this.infoCards['education'].contents = [
+      {
+        component: StuInfocardContentIcontext,
+        args: { title: 'Kathmandu University', date: '2014-8', level: 'Bachelors', subject: 'Business Arts' }
+      },
+      {
+        component: StuInfocardContentIcontext,
+        args: { title: 'Tribhuwan University', date: '2017-8', level: 'Masters', subject: 'Physics' }
+      }
+    ]
+
+    //this.infoCards.education
+    //this.infoCards = {
+    //  'education': {
+    //    name: 'education',
+    //    nullText: 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => {
+    //      this.editDialog.name = 'education'
+    //      this.editDialog.component = StuProfEditEdu
+    //      this.editDialog.model = true
+    //    },
+    //    dialogComponent: StuProfEditEdu,
+    //    contents: [
+    //      {
+    //        component: StuInfocardContentIcontext,
+    //        args: { title: 'Kathmandu University', date: '2014-8', level: 'Bachelors', subject: 'Business Arts' }
+    //      },
+    //      {
+    //        component: StuInfocardContentIcontext,
+    //        args: { title: 'Tribhuwan University', date: '2017-8', level: 'Masters', subject: 'Physics' }
+    //      }
+    //    ]
+    //  },
+    //  'workhistory': {
+    //    'name': 'Work History',
+    //    'nullText': 'List here the places you have worked before.',
+    //    addClicked: () => { },
+    //    contents: [
+    //      {
+    //        component: StuInfocardContentIcontext,
+    //        args: { title: 'Starbucks', date: '2017-9-9', level: 'Manager', subject: 'Did literally nothing.' }
+    //      }
+    //    ]
+    //  },
+    //  'gigsfreelances': {
+    //    'name': 'Gigs and Freelances',
+    //    'nullText': 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => { }
+    //  },
+    //  'skills': {
+    //    'name': 'Skills',
+    //    'nullText': 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => { },
+    //    contents: [
+    //      {
+    //        component: StuInfocardContentChips,
+    //        args: { title: 'Technical Skills', data: [ 'Java', 'Acting', 'Mushroom', 'Assembly x86', 'R-lang', 'Documentation' ], color: 'blue' },
+    //        onClick: (args) => {
+    //          this.editDialog.component = StuProfEditSkills
+    //          this.editDialog.preData = true
+    //          console.log('data: ' + args)
+    //          this.editDialog.data = args
+    //          this.editDialog.model = true
+    //        }
+    //      },
+    //      {
+    //        component: StuInfocardContentChips,
+    //        args: { title: 'Skills', data: [ 'Mushroom', 'Management' ], color: 'green' }
+    //      },
+    //      {
+    //        component: StuInfocardContentChips,
+    //        args: { title: 'Languages', data: [ 'Cow', 'Catcalling', 'German' ], color: 'pink' }
+    //      }
+    //    ]
+    //  },
+    //  'volunteers': {
+    //    'name': 'Volunteers',
+    //    'nullText': 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => { }
+    //  },
+    //  'leadership': {
+    //    'name': 'Leadership',
+    //    'nullText': 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => { }
+    //  },
+    //  'videos': {
+    //    'name': 'Videos',
+    //    'nullText': 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => { }
+    //  },
+    //  'newmodule': {
+    //    'name': 'Add New Module',
+    //    'nullText': 'List out some of your education, courses you took and certifications',
+    //    addClicked: () => { }
+    //  }
+    //}
   },
 
   beforeDestroy () { },
@@ -174,11 +215,55 @@ export default {
         this.editDialog.component = null
       }
     },
+    closeEditDialog () {
+      console.log('closing')
+      this.editDialog.model = false
+    },
+    onClickInfoCardItem (index, name, component, preData, data) {
+      this.editDialog.index = index
+      this.editDialog.name = name
+      this.editDialog.component = component
+      this.editDialog.preData = preData
+      this.editDialog.data = data
+      this.editDialog.model = true
+    },
     /**
      * Preserves data for the dialog to use.
      */
     persist (data) {
       this.editDialog.data = data
+    },
+    addToInfoCard (name) {
+      console.log(name)
+      console.log(this.editDialog.name)
+      // close dialog
+      this.editDialog.model = false
+      const obj =
+        {
+          component: StuInfocardContentIcontext,
+          args: { title: 'Kathmandu University', date: '2017-8-19', level: 'Bachelors', subject: 'Business Arts' },
+          onClick: () => {
+            this.editDialog.name = 'education'
+            this.editDialog.component = StuProfEditEdu
+            this.editDialog.preData = false
+            this.editDialog.model = true
+          }
+        }
+      this.infoCards.education.contents.push(obj)
+    },
+    editInfoCard (event) {
+      console.log('editing')
+      console.log(this.editDialog.name)
+      console.log(this.editDialog.index)
+      console.log(event)
+
+      Vue.set(this.infoCards[this.editDialog.name].contents[this.editDialog.index], 'args', event)
+      console.log('changed')
+      // this.infoCards[this.editDialog.name].contents.splice(this.editDialog.index, 0)
+      // this.infoCards[this.editDialog.name].contents[this.editDialog.index] = {
+      //   component: StuInfocardContentIcontext,
+      //   args: { title: event.school, date: event.date, level: event.subject, subject: event.subject }
+      // }
     }
   },
 
@@ -214,35 +299,39 @@ v-container(fluid).pa-0
 
     // -- info cards
     .info-card-container.xs-full.ml-3.mt-3
+      // v-masonry 
       div(
-          v-masonry 
           transition-duration="0.3s" 
           item-selector=".item"
         )
         div(v-for="(i, index) in infoCards" :key="i.name")
+          // v-masonry-tile 
           stu-infocard-base(
-              v-masonry-tile 
               class="item" 
-              :title="i.name" 
+              :title="i.id" 
               :nullText="i.nullText" 
               :slotActive="i.contents"
               @onAddClicked="i.addClicked"
             ).info-card.mb-3.mr-3.pb-3.xs-full
             template(v-show="i.contents")
-              template(v-for="part in i.contents")
+              template(v-for="(part, index) in i.contents")
                 component(
                     :is="part.component" 
                     :args="part.args"
-                    @click.native.stop="part.onClick(part.args.data)"
+                    @click.native.stop="onClickInfoCardItem(index, i.name, i.dialogComponent, true, part.args)"
                   ).mt-3.mx-3
   //- dialog component for all editing options
-  component(
-    :is="editDialog.component"
-    v-model="editDialog.model" 
-    @input="dialogEvent"
-    :preData="editDialog.preData"
-    :data="editDialog.data"
-  )
+  v-dialog(v-model="editDialog.model")
+    component(
+      :is="editDialog.component"
+      :alive="editDialog.model"
+      @input="dialogEvent"
+      :prof-data="editDialog.data"
+      @close="editDialog.model = false"
+      @add="addToInfoCard($event)"
+      @edit="editInfoCard($event)"
+      @remove=""
+    )
 
 </template>
 
