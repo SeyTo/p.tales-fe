@@ -120,8 +120,8 @@ export default {
       }
     ]
 
-    //this.infoCards.education
-    //this.infoCards = {
+    // this.infoCards.education
+    // this.infoCards = {
     //  'education': {
     //    name: 'education',
     //    nullText: 'List out some of your education, courses you took and certifications',
@@ -204,7 +204,7 @@ export default {
     //    'nullText': 'List out some of your education, courses you took and certifications',
     //    addClicked: () => { }
     //  }
-    //}
+    // }
   },
 
   beforeDestroy () { },

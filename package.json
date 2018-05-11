@@ -1,12 +1,16 @@
 {
-  "name": "tales",
-  "version": "1.0.0",
-  "description": "A webportal project",
+  "name": "job-dart",
+  "version": "0.1.0",
+  "description": "JobDart",
   "author": "rj <rajibbajracharya@gmail.com>",
+  "respository": {
+    "type": "git",
+    "url": "https://gitlab.com/project-tales/p.tales-fe-vuejs.git"
+  },
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "webpack --config ./build/webpack.prod.conf.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
