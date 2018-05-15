@@ -2,12 +2,14 @@
 import BaseNavBar from '@/shared/components/navbars/base-navbar'
 import FormDuallist from '@/shared/components/dialog/form-duallist'
 import FormProfilePic from '@/shared/components/dialog/form-profile-pic'
+import BreadVert from '@/shared/components/bread-vert.vue'
 
 export default {
   name: 'student-post-loginquery',
 
   data () {
     return {
+      move: 0,
       currentPage: 0,
       favcolor: 'blue',
       page0: {
@@ -15,7 +17,7 @@ export default {
         lastName: '',
         location: '',
         selectedGender: null,
-        genders: [ 'male', 'female' ],
+        genders: [ 'Male', 'Female' ],
         degree: '',
         major: '',
         university: '',
@@ -82,7 +84,8 @@ export default {
   components: {
     'base-navbar': BaseNavBar,
     'form-duallist': FormDuallist,
-    'form-profile-pic': FormProfilePic
+    'form-profile-pic': FormProfilePic,
+    'bread-vert': BreadVert
   }
 }
 </script>
@@ -92,19 +95,13 @@ export default {
 
 mixin profile-avatar-div
   div
-    v-card.profile-avatar-div.pa-4
-      div.this(v-bind:style="{ 'background-color': favcolor }")
+    .profile-avatar-div
       v-layout(column justify-center align-center)
         img(src="@/assets/svg/avatar.svg").avatar.mb-3
         v-btn(v-bind:style="{ 'background-color': favcolor }").ma-0
 
-mixin breadcrumb-div
-  div.breadcrumb-div
-    div.ball
-    div.path
-
 mixin basic-info
-  v-layout(column)
+  v-layout(column).ml-4
     v-text-field(
       type="text"
       label="First Name"
@@ -120,8 +117,15 @@ mixin basic-info
     v-select(
       :items="page0.genders"
       v-model="page0.gender"
+      required
       label="Gender"
     )
+    v-text-field(
+      type="text"
+      label="Address"
+      v-model="page0.location"
+    )
+
 mixin work-info
   | Work info
         
@@ -130,17 +134,25 @@ mixin misc-info
 
 div
   base-navbar(containerSize="true" noSlot="true")
-  v-container
-    v-layout
-      +profile-avatar-div
+  v-layout(column justify-center align-center).main-layout
+    .headline
+      | hello, please fill out blah, blah,. All information are private blah blah
+    v-card.pa-4.mt-4.main-card
+      div.this(v-bind:style="{ 'background-color': favcolor }")
       v-layout
-        div(v-show="currentPage == 0") 
-          +basic-info
-        div(v-show="currentPage == 1") 
-          +work-info
-        div(v-show="currentPage == 2") 
-          +misc-info
-        +breadcrumb-div
+        +profile-avatar-div
+        v-layout
+          v-flex(xs7 v-show="currentPage == 0") 
+            +basic-info
+          div(v-show="currentPage == 1") 
+            +work-info
+          div(v-show="currentPage == 2") 
+            +misc-info
+          v-flex
+      v-layout(justify-center)
+        v-btn(fab depressed disabled color="primary") 
+          v-icon check
+          
 
     // v-layout(column align-content-start v-show="currentPage == 0").app-flow-text
       v-flex(d-flex row).line
@@ -350,6 +362,7 @@ div
             v-flex.text-xs-center.py-2
               | OR
             v-layout(justify-center).py-2
+
               v-btn Verify Using Facebook
 
   form-duallist(
@@ -369,24 +382,26 @@ div
 <style lang="stylus" scoped>
 @import '../../assets/styles/_text.styl'
 @import '../../assets/styles/_vars.styl'
-.breadcrumb-div
-  _height:= 500px
-  height _height
+  
+.main-layout
+  height 70vh
+.main-card
   position relative
   overflow hidden
-
-.ball
-  height 16px
-  width 16px
-  background-color yellow
+  width 700px
+  max-height 500px
+.headline
+  max-width 700px
+  text-align center
+.this
   position absolute
-  border-radius 50%
+  height 300px * 1.5 
+  width 200px 
+  top -225px
+  left -36px
+  z-index 1 
+  transform rotate(45deg) 
 
-.path
-  height _height
-  width 20px
-  
-  
 .profile-avatar-div
   overflow hidden
   position relative
@@ -395,14 +410,6 @@ div
     background-color white
     z-index 5
     width t-avatar-lg
-  .this
-    position absolute
-    height 200px * 1.5 
-    width 166px 
-    top -145px
-    left -36px
-    z-index 1 
-    transform rotate(45deg) 
 
 inline-padding-left=6px
 
