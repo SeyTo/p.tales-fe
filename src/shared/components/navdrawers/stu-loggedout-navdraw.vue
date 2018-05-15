@@ -1,6 +1,5 @@
 <script>
 import BaseNavdrawer from './base-navdrawer'
-// TODO remove to universal dialog
 import StuAuthTab from '@/shared/components/dialog/stu-authtab'
 
 export default {
@@ -8,13 +7,42 @@ export default {
 
   data () {
     return {
-      authDialogToggle: false
+      authDialog: {
+        model: false
+      },
+      activeTabIndex: 0
     }
   },
 
   components: {
     'base-navdrawer': BaseNavdrawer,
     'stu-auth-tab': StuAuthTab
+  },
+
+  methods: {
+    openDialog (tabIndex) {
+      this.authDialog.model = true
+      this.activeTabIndex = tabIndex
+    },
+    validateForm (value) {
+      // TODO move validator to core.
+      this.authDialog.model = false
+      this.$store.commit('setDrawerOpen', { open: false })
+
+      if (value === 'login') {
+        this.$router.push(
+            { name: 'StudentProfile' },
+            () => { this.$store.commit('setUserLoggedIn', { loggedIn: true }) },
+            function () { console.log('aborted') }
+          )
+      } else if (value === 'signup') {
+        this.$router.push(
+            { name: 'StuPostSignupQuery' }
+          )
+      } else {
+        console.log('unknown value: ' + value)
+      }
+    }
   }
 }
 </script>
@@ -24,22 +52,30 @@ export default {
 base-navdrawer.navdrawer
   template
     img(src="../../../assets/svg/favicon.svg" height="64").ma-4
-    v-btn(flat large :to="{ name: 'EmployerLanding' }") FOR EMPLOYERS
-    v-btn(flat large :to="{ name: 'BlogsLanding' }") Blogs
     v-btn(
-        flat
+      depressed 
+      large 
+      :to="{ name: 'EmployerLanding' }").transparent.ma-0 FOR EMPLOYERS
+    v-btn(
+      depressed
+      large 
+      :to="{ name: 'BlogsLanding' }").transparent.ma-0 Blogs
+    v-btn(
+        depressed
         large
-        @click.native.stop="authDialogToggle = !authDialogToggle"
-      ) Log In
+        color="accent--text"
+        @click.native.stop="openDialog(0)"
+      ).transparent.bold.ma-0 Log In
     v-btn(
         depressed
         large
         color="primary"
-        @click.native.stop="authDialogToggle = !authDialogToggle"
-      ) Sign Up
+        @click.native.stop="openDialog(1)"
+      ).bold.ma-0 Sign Up
 
   // -- dialogs
-  stu-auth-tab(v-model="authDialogToggle")
+  v-dialog(lazy v-model="authDialog.model")
+    stu-auth-tab(:activeTab="activeTabIndex" @validate="validateForm")
 
 </template>
 

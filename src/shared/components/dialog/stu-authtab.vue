@@ -147,10 +147,11 @@ mixin login-tab-item
           min="8"
         )/
 
-  // -- login buttons
-  v-card-actions
-    v-spacer
-    v-btn(color="green darken-1" flat="flat" @click.native="validate('login')") Log In
+    // TODO not working
+    v-flex
+    v-card-actions
+      v-spacer
+      v-btn(color="accent darken-1" flat="flat" @click.native="validate('login')").ma-0 Log In
 
 // -- start here
 v-card.fix-height

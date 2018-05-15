@@ -7,7 +7,7 @@ export default {
   name: 'landing',
 
   data: () => ({
-    linkDialogs: true
+    linkDialogs: false
   }),
 
   components: {

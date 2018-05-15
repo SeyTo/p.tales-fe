@@ -28,28 +28,31 @@ export default {
 
 
 <template lang="pug">
-base-navbar(:lockNotif="true")
+base-navbar(:lockNotif="true" :fluid="false")
   // -- jobs & interns menu
-  v-btn(flat :to="{ name: 'StudentFeeds' }") Feeds
+  v-btn(
+    flat 
+    :to="{ name: 'StudentFeeds' }"
+  ).fill-height.ma-0 Feeds
 
-  v-menu(bottom left) 
-    v-btn(slot="activator" flat) Jobs & Interns
+  v-menu(offset-y bottom left).fill-height.ma-0 
+    v-btn(slot="activator" flat).fill-height.ma-0 Jobs & Interns
     v-list
       v-list-tile(
           v-for="(item, i) in jobsOptions" 
           :key="i" 
           :to="{ name: item.route }"
-          ) 
+          )
           v-list-tile-title {{ item.text }}
 
-  v-btn(flat :to="{ name: 'Blogs' }") Blogs
+  v-btn(flat :to="{ name: 'Explore' }").fill-height.ma-0 Explore Companies
 
   // -- notification 
   v-btn(slot="notif" flat fab small :to="{ name: 'StudentMessages' }")
     img(src="@/assets/svg/notification.svg").h80
 
   // -- profile menu
-  v-menu(slot="avatar" bottom left) 
+  v-menu(slot="avatar" offset-y bottom left) 
     v-btn(slot="activator" fab small)
       img(src="@/assets/svg/avatar.svg").round
     v-list
@@ -64,7 +67,8 @@ base-navbar(:lockNotif="true")
 
 <style lang="stylus" scoped>
 .h80
-  height 70%
+  height 80%
 .round
   border-radius 50%
 </style>
+

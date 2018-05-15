@@ -25,11 +25,10 @@ export default {
 
 <template lang="pug">
 base-navbar(:lockNotif="true")
-  div 
-    v-btn(flat :to="{ name: 'EmployerCreateNew' }") Post a Job
-    v-btn(flat :to="{ name: 'EmployerSearch' }") Search
-    v-btn(flat :to="{ name: 'EmployerListingsApplications' }") Listings
-  v-btn(fab icon flat small slot="notif" :to="{ name: 'EmployerMessages' }") 
+  v-btn(flat :to="{ name: 'EmployerCreateNew' }").fill-height.ma-0 Post a Job
+  v-btn(flat :to="{ name: 'EmployerSearch' }").fill-height.ma-0 Search
+  v-btn(flat :to="{ name: 'EmployerListingsApplications' }").fill-height.ma-0 Listings
+  v-btn(fab icon flat small slot="notif" :to="{ name: 'EmployerMessages' }")
     img(src="@/assets/svg/notification.svg").h70
   v-menu(slot="avatar" bottom left)
     v-btn(slot="activator" fab small)

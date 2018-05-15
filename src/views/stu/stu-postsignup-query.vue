@@ -9,6 +9,7 @@ export default {
   data () {
     return {
       currentPage: 0,
+      favcolor: 'blue',
       page0: {
         firstName: '',
         lastName: '',
@@ -88,28 +89,75 @@ export default {
 
 
 <template lang="pug">
+
+mixin profile-avatar-div
+  div
+    v-card.profile-avatar-div.pa-4
+      div.this(v-bind:style="{ 'background-color': favcolor }")
+      v-layout(column justify-center align-center)
+        img(src="@/assets/svg/avatar.svg").avatar.mb-3
+        v-btn(v-bind:style="{ 'background-color': favcolor }").ma-0
+
+mixin breadcrumb-div
+  div.breadcrumb-div
+    div.ball
+    div.path
+
+mixin basic-info
+  v-layout(column)
+    v-text-field(
+      type="text"
+      label="First Name"
+      required
+      v-model="page0.firstName"
+    )
+    v-text-field(
+      type="text"
+      label="Last Name"
+      required
+      v-model="page0.lastName"
+    )
+    v-select(
+      :items="page0.genders"
+      v-model="page0.gender"
+      label="Gender"
+    )
+mixin work-info
+  | Work info
+        
+mixin misc-info
+  | Misc
+
 div
   base-navbar(containerSize="true" noSlot="true")
   v-container
+    v-layout
+      +profile-avatar-div
+      v-layout
+        div(v-show="currentPage == 0") 
+          +basic-info
+        div(v-show="currentPage == 1") 
+          +work-info
+        div(v-show="currentPage == 2") 
+          +misc-info
+        +breadcrumb-div
 
-    // page0 content
-    v-layout(column align-content-start v-show="currentPage == 0").app-flow-text
+    // v-layout(column align-content-start v-show="currentPage == 0").app-flow-text
       v-flex(d-flex row).line
         .inline My name is
 
         v-flex(d-flex row)
-          input(
-            type="text"
-            placeholder="first name"
-            required
-            v-model="page0.firstName"
-            :size="page0.firstName.length - 2").med
-          input(
-            type="text"
-            placeholder="last name"
-            required
-            v-model="page0.lastName"
-            :size="page0.lastName.length - 2").med
+          v-menu(offset-y)
+            input(
+              slot="activator"
+              type="text"
+              placeholder="last name"
+              required
+              v-model="page0.lastName"
+              :size="page0.lastName.length - 2").med
+            v-list
+              v-list-tile
+                v-list-title Test
           .inline .
 
       v-flex(d-flex row).line
@@ -321,8 +369,43 @@ div
 <style lang="stylus" scoped>
 @import '../../assets/styles/_text.styl'
 @import '../../assets/styles/_vars.styl'
+.breadcrumb-div
+  _height:= 500px
+  height _height
+  position relative
+  overflow hidden
+
+.ball
+  height 16px
+  width 16px
+  background-color yellow
+  position absolute
+  border-radius 50%
+
+.path
+  height _height
+  width 20px
+  
+  
+.profile-avatar-div
+  overflow hidden
+  position relative
+  .avatar
+    border-radius 50%
+    background-color white
+    z-index 5
+    width t-avatar-lg
+  .this
+    position absolute
+    height 200px * 1.5 
+    width 166px 
+    top -145px
+    left -36px
+    z-index 1 
+    transform rotate(45deg) 
 
 inline-padding-left=6px
+
 .med
   max-width 200px
 .short

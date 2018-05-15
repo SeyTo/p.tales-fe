@@ -42,20 +42,20 @@ export default {
 
 <template lang="pug">
 base-navbar
-  div
-    v-btn(
-        flat
-        :to="{ name: 'Landing' }"
-      ) FOR STUDENTS
-    v-btn(
-        flat
-        @click.native.stop="authDialogToggle = !authDialogToggle"
-      ) Log In
-    v-btn(
-        depressed
-        color="primary"
-        @click.native.stop="authDialogToggle = !authDialogToggle"
-        ) SIGN UP
+  v-btn(
+      depressed
+      :to="{ name: 'Landing' }"
+    ).transparent.fill-height.ma-0 FOR STUDENTS
+  v-btn(
+      depressed
+      color="accent--text"
+      @click.native.stop="authDialogToggle = !authDialogToggle"
+    ).transparent.fill-height.ma-0 Log In
+  v-btn(
+      depressed
+      color="primary"
+      @click.native.stop="authDialogToggle = !authDialogToggle"
+      ).fill-height.ma-0 SIGN UP
 
   // -- dialogs
   emp-auth-tab(v-model="authDialogToggle" @validate="validateForm")

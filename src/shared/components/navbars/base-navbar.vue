@@ -1,3 +1,7 @@
+// TODO container view
+// TODO: set sticky attribute
+// TODO: set visible attribute
+// TODO implement container sizing
 <script>
 
 /**
@@ -5,9 +9,6 @@
  * should be controlled from a store.
  */
 export default {
-  // TODO: set sticky attribute
-  // TODO: set visible attribute
-  // TODO implement container sizing
   name: 'base-navbar',
 
   props: {
@@ -31,6 +32,9 @@ export default {
     /** Avatar slot does not hide even on small size */
     lockAvatar: {
       default: false
+    },
+    fluid: {
+      default: true
     }
   },
 
@@ -74,26 +78,28 @@ div
     flat
     color="white"
   )
-    // v-toolbar-title
-    img(src="@/assets/svg/favicon.svg" alt="Tales logo").logo
+    v-container(:fluid="fluid").pa-0.fill-height
+      v-layout(align-center).fill-height.px-3
+        // v-toolbar-title
+        img(src="@/assets/svg/favicon.svg" alt="Tales logo").h80
 
-    v-spacer
+        v-spacer
 
-    // placing slot inside div forces slots to render in correct order (maybe, idk really)
-    div
-      slot(v-if="!isSmall && !noSlot")
-    div
-      slot(name="notif" v-if="showNotif")
-    div
-      slot(name="avatar" v-if="showAvatar")
-    v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot")
-      img(src="@/assets/svg/drawerlogo.svg")
+        // placing slot inside div forces slots to render in correct order (maybe, idk really)
+        div.fill-height
+          slot(v-if="!isSmall && !noSlot")
+        div
+          slot(name="notif" v-if="showNotif")
+        div
+          slot(name="avatar" v-if="showAvatar")
+        v-toolbar-side-icon(@click.stop="drawerModel = true" v-if="isSmall && !noSlot")
+          img(src="@/assets/svg/drawerlogo.svg").h80
 
 </template>
 
 
 <style lang="stylus" scoped>
-.logo
+.h80
   height 80%
 </style>
 

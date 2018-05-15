@@ -56,26 +56,27 @@ export default {
 
 
 <template lang="pug">
+
 div
   base-navbar
-    div
-      v-btn(
-        depressed 
-        color="primary--text"
-        :to="{ name: 'EmployerLanding' }").transparent FOR EMPLOYERS
-      v-btn(
-        depressed 
-        color="primary--text"
-        :to="{ name: 'BlogsLanding' }").transparent Blogs
-      v-btn(
-        outline
-        @click.native.stop="openDialog(0)"
-      ).primary--text Log In
-      v-btn(
-        depressed
-        color="primary"
-        @click.native.stop="openDialog(1)"
-      ).bold Sign Up
+    v-btn(
+      depressed 
+      color="primary--text"
+      :to="{ name: 'EmployerLanding' }").transparent.fill-height.ma-0 FOR EMPLOYERS
+    v-btn(
+      depressed 
+      color="primary--text"
+      :to="{ name: 'BlogsLanding' }").transparent.fill-height.ma-0 Blogs
+    v-btn(
+      depressed
+      color="accent--text"
+      @click.native.stop="openDialog(0)"
+    ).transparent.bold.fill-height.ma-0 Login
+    v-btn(
+      depressed
+      color="primary"
+      @click.native.stop="openDialog(1)"
+    ).bold.fill-height.ma-0 Sign Up
       //
   // -- dialogs
   v-dialog(lazy v-model="authDialog.model")
@@ -85,4 +86,7 @@ div
 
 
 <style lang="stylus" scoped>
+.color
+  height 20px
+  width 20px
 </style>
