@@ -22,6 +22,7 @@ export default {
       default: false
     },
     /** Sets the navbar in container size */
+    // TODO:  <16-05-18, yourname> remove this //
     containerSize: {
       default: false
     },

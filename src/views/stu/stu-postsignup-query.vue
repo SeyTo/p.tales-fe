@@ -1,3 +1,5 @@
+// TODO install use vue-swatches
+//
 <script>
 import BaseNavBar from '@/shared/components/navbars/base-navbar'
 import FormDuallist from '@/shared/components/dialog/form-duallist'
@@ -76,6 +78,12 @@ export default {
     },
     openProfilePicSelector () {
       this.profilePicSelector.visible = true
+    },
+    next () {
+      this.currentPage += 1
+    },
+    previous () {
+      this.currentPage -= 1
     }
   },
 
@@ -99,6 +107,10 @@ mixin profile-avatar-div
       v-layout(column justify-center align-center)
         img(src="@/assets/svg/avatar.svg").avatar.mb-3
         v-btn(v-bind:style="{ 'background-color': favcolor }").ma-0
+        v-btn(
+          block 
+          color="primary"
+        ) Upload Resume
 
 mixin basic-info
   v-layout(column).ml-4
@@ -126,229 +138,107 @@ mixin basic-info
       v-model="page0.location"
     )
 
+mixin study-info
+  v-layout(column).ml-4
+    v-text-field(
+      label="Latest Study Degree"
+    )
+    v-select(
+      :items="['student', 'post-grad' ]"
+      label="I am a"
+    )
+    v-layout
+      v-text-field(
+        label="Enroll Year"
+        hint="or when you expect to enroll"
+      )
+      v-text-field(
+        label="Enroll Month"
+        hint="or when you expect to enroll"
+      )
+    v-layout
+      v-text-field(
+        label="Graduate Year"
+        hint="or when you expect to graduate"
+      )
+      v-text-field(
+        label="Graduate Month"
+        hint="or when you expect to graduate"
+      )
+
 mixin work-info
-  | Work info
-        
+  v-layout(column).ml-4
+    v-text-field(
+      label="Recent Work Experience at"
+      hint="Organization name or 'Freelancing' for freelancing."
+    )
+    v-layout
+      v-text-field(
+        label="Start Year & Month"
+      )
+      v-text-field(
+        label="End Year & Month"
+      )
+    v-text-field(
+      label="Recent Volunteer Experience at"
+      hint="Organization name"
+    )
+    v-layout
+      v-text-field(
+        label="Start Year & Month"
+      )
+      v-text-field(
+        label="End Year & Month"
+      )
+
 mixin misc-info
-  | Misc
+  v-layout(column).ml-4
+    v-text-field(
+      label="A fun fact about you"
+      hint="Have you tried a startup? or maybe lead a team."
+    )
+    v-text-field(
+      label="Your hobbies"
+    )
+    v-text-field(
+      label="Some of your technical and non-technical skills"
+    )
+    v-text-field(
+      label="Languages you speak"
+    )
+
+mixin fill-o-meter
+  v-layout.ml-4
+    | Fill o meter
 
 div
-  base-navbar(containerSize="true" noSlot="true")
-  v-layout(column justify-center align-center).main-layout
-    .headline
-      | hello, please fill out blah, blah,. All information are private blah blah
-    v-card.pa-4.mt-4.main-card
-      div.this(v-bind:style="{ 'background-color': favcolor }")
-      v-layout
-        +profile-avatar-div
-        v-layout
-          v-flex(xs7 v-show="currentPage == 0") 
-            +basic-info
-          div(v-show="currentPage == 1") 
-            +work-info
-          div(v-show="currentPage == 2") 
-            +misc-info
-          v-flex
-      v-layout(justify-center)
-        v-btn(fab depressed disabled color="primary") 
-          v-icon check
-          
-
-    // v-layout(column align-content-start v-show="currentPage == 0").app-flow-text
-      v-flex(d-flex row).line
-        .inline My name is
-
-        v-flex(d-flex row)
-          v-menu(offset-y)
-            input(
-              slot="activator"
-              type="text"
-              placeholder="last name"
-              required
-              v-model="page0.lastName"
-              :size="page0.lastName.length - 2").med
-            v-list
-              v-list-tile
-                v-list-title Test
-          .inline .
-
-      v-flex(d-flex row).line
-        .inline-select I am a
-        select
-          option(value="gender" disabled selected) gender
-          option(value="female") female
-          option(value="male") male
-        .inline-select .
-
-      v-flex(d-flex row).line
-        .inline I currently live in
-        input(
-          type="text"
-          placeholder="location"
-          required
-          v-model="page0.location"
-          @click="openFormDuallist('location')"
-          :size="this.page0.location.length - 2"
-          )
-        .inline .
-
-      v-flex(d-flex row align-center).line
-        .inline My resume
-        v-btn(color="info" @click.native.stop="").my-0 Upload Resume
-        .inline .
-
-      v-flex(d-flex row align-center).line
-        .inline My profile photo
-        v-btn(color="info" @click.native.stop="openProfilePicSelector").my-0 Upload Profile Photo
-        .inline .
-
-      v-flex(d-flex row).line
-        .inline I completed
-        input(
-          type="text"
-          placeholder="degree"
-          v-model="page0.degree"
-          :size="this.page0.degree.length - 2"
-          ).med
-        .inline in
-        input(
-          type="text"
-          placeholder="major"
-          v-model="page0.major"
-          :size="this.page0.major.length"
-          ).med
-        .inline from
-        input(
-          type="text"
-          placeholder="university"
-          v-model="page0.university"
-          :size="this.page0.university.length"
-          ).med
-        .inline .
-
-      v-flex(d-flex row).line
-        .inline I enrolled in
-        input(
-          type="text"
-          placeholder="month"
-          v-model="page0.enroll.month"
-          :size="this.page0.enroll.month.length"
-          ).short
-        input(
-          type="text"
-          placeholder="year"
-          v-model="page0.enroll.year"
-          :size="this.page0.enroll.year.length"
-          ).short
-        .inline and graduated in
-        input(
-          type="text"
-          placeholder="month"
-          v-model="page0.graduate.month"
-          :size="this.page0.graduate.month.length"
-          ).short
-        input(
-          type="text"
-          placeholder="year"
-          v-model="page0.graduate.year"
-          :size="this.page0.graduate.year.length"
-          ).short
-        .inline .
-
-      v-layout(row)
-        v-spacer
-        v-btn(color="primary" @click.stop = "currentPage = 1") Next
-
-    // page 1
-    v-layout(column align-content-start v-show="currentPage == 1").app-flow-text
-
-      v-flex(d-flex row).line
-        .inline My recent work work experience was at
-        input(
-          type="text"
-          placeholder="Organization Name"
-          v-model="page1.workplaceName"
-          :size="this.page1.workplace.name.length - 2"
-          ).med
-        .inline at location
-        input(
-          type="text"
-          placeholder="Location"
-          v-model="page1.location"
-          :size="this.page1.workplace.location.length - 2"
-          ).med
-        .inline from
-        input(
-          type="text"
-          placeholder="Year"
-          v-model="page1.workplace.startyear"
-          :size="this.page1.workplace.startyear.length - 2"
-          ).short
-        input(
-          type="text"
-          placeholder="Month"
-          v-model="page1.workplace.startmonth"
-          :size="this.page1.workplace.startmonth.length - 2"
-          ).short
-        .inline to
-        input(
-          type="text"
-          placeholder="Year"
-          v-model="page1.workplace.endyear"
-          :size="this.page1.workplace.endyear.length - 2"
-          ).short
-        input(
-          type="text"
-          placeholder="Month"
-          v-model="page1.workplace.endmonth"
-          :size="this.page1.workplace.endmonth.length - 2"
-          ).short
-        .inline .
-
-      v-flex(d-flex row).line
-        .inline I have volunteered in
-        input(
-          type="text"
-          placeholder="Organization Name"
-          v-model="page1.volunteer.name"
-          :size="this.page1.volunteer.name.length - 2"
-          ).med
-        .inline .
-
-      v-flex(d-flex row).line
-        .inline Fun fact about me is that
-        input(
-          type="text"
-          placeholder="Organization Name"
-          v-model="page1.volunteer.name"
-          :size="this.page1.volunteer.name.length - 2"
-          ).med
-        .inline .
-
-      v-flex(d-flex row).line
-        .inline Im skilled in
-        input(
-          type="text"
-          placeholder="Skills"
-          v-model="page1.skills"
-          ).med
-
-      v-flex(d-flex row).line
-        .inline I speak language such as
-        input(
-          type="text"
-          placeholder="Languages"
-          v-model="page1.languages"
-          :size="this.page1.languages.length"
-          ).med
-
-      v-layout
-        v-spacer
-        v-btn(color="primary" @click.stop = "currentPage = 2") Next
-
-    //- final page
-    v-layout(row justify-center v-show="currentPage == 2").app-flow-text
-      v-card.validation-card
+  base-navbar(:fluid="false" noSlot="true")
+  v-container
+    v-layout(column align-center).main-layout
+      div(v-show="currentPage < 4").headline
+        | hello, please fill out blah, blah,. All information are private blah blah
+      v-card(v-show="currentPage < 4").pa-4.mt-4.main-card
+        div.this(v-bind:style="{ 'background-color': favcolor }")
+        v-layout.content-container
+          +profile-avatar-div
+          v-flex(xs7).form-container
+            v-flex(v-show="currentPage == 0") 
+              +basic-info
+            v-flex(v-show="currentPage == 1") 
+              +study-info
+            v-flex(v-show="currentPage == 2") 
+              +work-info
+            v-flex(v-show="currentPage == 3") 
+              +misc-info
+          v-flex(xs3).fill-o-meter
+            +fill-o-meter
+        v-layout(justify-center)
+          v-btn(fab depressed color="secondary" @click="previous" v-if="currentPage != 0") 
+            v-icon arrow_back
+          v-btn(fab depressed color="primary" @click="next") 
+            v-icon check
+            
+      v-card.validation-card(v-show="currentPage == 4").app-flow-text
         v-container(fluid)
           v-layout(column)
             .display-2.text-xs-center.py-2 Almost There
@@ -365,31 +255,27 @@ div
 
               v-btn Verify Using Facebook
 
-  form-duallist(
-    v-model="dualList.visible"
-    :title="dualList.title"
-    :list="dualList.list"
-    :type="dualList.type"
-    @onSelected="selectedFromList"
-    )
-
-  form-profile-pic(
-    v-model="profilePicSelector.visible"
-    )
 </template>
 
 
 <style lang="stylus" scoped>
 @import '../../assets/styles/_text.styl'
 @import '../../assets/styles/_vars.styl'
-  
+
+.content-container
+  height 80%
 .main-layout
-  height 70vh
+  min-height 428px
+  width 100%
 .main-card
   position relative
   overflow hidden
-  width 700px
-  max-height 500px
+  height 100%
+  width 100%
+  max-width 724px
+  .form-container
+    max-height 320px
+    overflow auto
 .headline
   max-width 700px
   text-align center
