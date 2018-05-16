@@ -34,6 +34,7 @@ v-card
       @click.native.stop="$emit('onAddClicked')").abs-right
       v-icon add
   v-divider
+  // TODO is not reactive when all items are removed
   div(@click="$emit('onAddClicked')").subheading.grey--text.null-text(v-if="nullText !== null && slotActive === false").pa-4
     | {{ nullText }}
   slot(v-if="slotActive")

@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-
+//TODO rename this
 <template lang="pug">
   v-layout.clickable
     v-flex
@@ -19,9 +19,9 @@ export default {
       v-flex(column)
         h4 {{ args.title }}
         div.pl-3.body-1.grey--text
-          div {{ args.date }}
-          div {{ args.level }}
-          div {{ args.subject }}
+          div {{ args.item1 }}
+          div {{ args.item2 }}
+          div {{ args.item3 }}
 </template>
 
 

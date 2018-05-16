@@ -16,9 +16,6 @@ export default {
 
   data: () => ({
     // these v, tile, masonry only solves the error of undefined data due to plugin
-    v: '',
-    tile: '',
-    masonry: '',
     avatar: 'need absolute path/proper/context url, else wont load, cause webpack',
     name: '',
     favcolor: '#04a',
@@ -98,17 +95,20 @@ export default {
       { name: 'education', component: StuProfEditEdu },
       { name: 'workhistory', component: StuProfEditEdu },
       { name: 'gigsfreelances', component: StuProfEditEdu },
-      { name: 'skills', component: StuProfEditEdu },
+      { name: 'skills', component: StuProfEditSkills },
       { name: 'volunteers', component: StuProfEditEdu },
       { name: 'leadership', component: StuProfEditEdu },
       { name: 'videos', component: StuProfEditEdu },
       { name: 'newmodule', component: StuProfEditEdu }
     ]
+
     for (const i of cards) {
       this.infoCards[i.name].addClicked = () => {
         this.editDialog.name = i.name
         this.editDialog.component = i.component
         this.editDialog.model = true
+        // undefined will set default value in their component
+        this.editDialog.data = undefined
       }
     }
 
@@ -116,36 +116,14 @@ export default {
     this.infoCards['education'].contents = [
       {
         component: StuInfocardContentIcontext,
-        args: { title: 'Kathmandu University', date: '2014-8', level: 'Bachelors', subject: 'Business Arts' }
+        args: { title: 'Kathmandu University', item1: '2014-8', item2: 'Bachelors', item3: 'Business Arts' }
       },
       {
         component: StuInfocardContentIcontext,
-        args: { title: 'Tribhuwan University', date: '2017-8', level: 'Masters', subject: 'Physics' }
+        args: { title: 'Tribhuwan University', item1: '2017-8', item2: 'Masters', item3: 'Physics' }
       }
     ]
 
-    // this.infoCards.education
-    // this.infoCards = {
-    //  'education': {
-    //    name: 'education',
-    //    nullText: 'List out some of your education, courses you took and certifications',
-    //    addClicked: () => {
-    //      this.editDialog.name = 'education'
-    //      this.editDialog.component = StuProfEditEdu
-    //      this.editDialog.model = true
-    //    },
-    //    dialogComponent: StuProfEditEdu,
-    //    contents: [
-    //      {
-    //        component: StuInfocardContentIcontext,
-    //        args: { title: 'Kathmandu University', date: '2014-8', level: 'Bachelors', subject: 'Business Arts' }
-    //      },
-    //      {
-    //        component: StuInfocardContentIcontext,
-    //        args: { title: 'Tribhuwan University', date: '2017-8', level: 'Masters', subject: 'Physics' }
-    //      }
-    //    ]
-    //  },
     //  'workhistory': {
     //    'name': 'Work History',
     //    'nullText': 'List here the places you have worked before.',
@@ -220,9 +198,10 @@ export default {
       }
     },
     closeEditDialog () {
-      console.log('closing')
       this.editDialog.model = false
+      this.editDialog.component = null
     },
+
     onClickInfoCardItem (index, name, component, preData, data) {
       this.editDialog.index = index
       this.editDialog.name = name
@@ -230,46 +209,65 @@ export default {
       this.editDialog.preData = preData
       this.editDialog.data = data
       this.editDialog.model = true
+      console.dir(data)
     },
+
     /**
      * Preserves data for the dialog to use.
      */
     persist (data) {
       this.editDialog.data = data
     },
-    addToInfoCard (name) {
-      console.log(name)
-      console.log(this.editDialog.name)
-      // close dialog
-      this.editDialog.model = false
-      const obj =
-        {
-          component: StuInfocardContentIcontext,
-          args: { title: 'Kathmandu University', date: '2017-8-19', level: 'Bachelors', subject: 'Business Arts' },
-          onClick: () => {
-            this.editDialog.name = 'education'
-            this.editDialog.component = StuProfEditEdu
-            this.editDialog.preData = false
-            this.editDialog.model = true
-          }
-        }
-      this.infoCards.education.contents.push(obj)
-    },
-    editInfoCard (event) {
-      console.log('editing')
-      console.log(this.editDialog.name)
-      console.log(this.editDialog.index)
-      console.log(event)
 
-      Vue.set(this.infoCards[this.editDialog.name].contents[this.editDialog.index], 'args', event)
-      console.log('changed')
-      // this.infoCards[this.editDialog.name].contents.splice(this.editDialog.index, 0)
-      // this.infoCards[this.editDialog.name].contents[this.editDialog.index] = {
-      //   component: StuInfocardContentIcontext,
-      //   args: { title: event.school, date: event.date, level: event.subject, subject: event.subject }
-      // }
+    /**
+     * General clicking action for the card-content-items.
+     */
+    cardItemOnClick: (that, name, component, preData) => {
+      that.editDialog.name = name
+      that.editDialog.component = component
+      that.editDialog.preData = preData
+      that.editDialog.model = true
+    },
+
+    redrawMasonry () {
+      Vue.nextTick().then(() => {
+        this.$redrawVueMasonry()
+      })
+    },
+
+    addToInfoCard (name) {
+      console.log('adding')
+      const item = {
+        component: StuInfocardContentIcontext,
+        args: { title: name.title, item1: name.date, item2: name.level, item3: name.subject },
+        onClick: this.cardItemOnClick(this, 'education', StuProfEditEdu, false)
+      }
+      this.infoCards.education.contents.push(item)
+      this.closeEditDialog()
+      this.redrawMasonry()
+    },
+
+    editInfoCard (data) {
+      Vue.set(this.infoCards[this.editDialog.name].contents[this.editDialog.index], 'args', data)
+      this.infoCards[this.editDialog.name].contents.splice(this.editDialog.index, 0)
+      this.infoCards[this.editDialog.name].contents[this.editDialog.index] = {
+        component: StuInfocardContentIcontext,
+        args: { title: data.title, item1: data.date, item2: data.level, item3: data.subject }
+      }
+      this.closeEditDialog()
+      this.redrawMasonry()
+    },
+
+    removeInfoCard () {
+      console.log('remove')
+      // Vue.delete(this.infoCards[this.editDialog.name], 'contents[this.editDialog.index]')
+      this.infoCards[this.editDialog.name].contents.pop(this.editDialog.index)
+      this.closeEditDialog()
+      this.redrawMasonry()
     }
   },
+
+  watch: { },
 
   components: {
     'stu-infocard-base': StuInfocardBase,
@@ -288,6 +286,10 @@ export default {
 // -- main content
 v-container(fluid).pa-0
   v-jumbotron(src="/static/doc-images/mountain.jpg")
+    v-layout
+      v-btn(fab icon absolute right bottom).white.mb-5
+        v-icon edit
+
   v-layout(justify-center align-start).xs-flex-col
     
     // -- profile bill board
@@ -304,13 +306,14 @@ v-container(fluid).pa-0
     // -- info cards
     .info-card-container.xs-full.ml-3.mt-3
       div(
-          v-masonry 
+          v-masonry=""
+          :ref="'mason'"
           transition-duration="0.3s" 
           item-selector=".item"
         )
         div(v-for="(i, index) in infoCards" :key="i.name")
           stu-infocard-base(
-              v-masonry-tile 
+              v-masonry-tile=""
               class="item" 
               :title="i.id" 
               :nullText="i.nullText" 
@@ -324,17 +327,18 @@ v-container(fluid).pa-0
                     :args="part.args"
                     @click.native.stop="onClickInfoCardItem(index, i.name, i.dialogComponent, true, part.args)"
                   ).mt-3.mx-3
+
   //- dialog component for all editing options
-  v-dialog(v-model="editDialog.model")
+  // @input=closeEditDialog (expected=false) because, when dialog closes you also need to nullify component
+  v-dialog(lazy v-model="editDialog.model" @input="closeEditDialog")
     component(
       :is="editDialog.component"
-      :alive="editDialog.model"
       @input="dialogEvent"
       :prof-data="editDialog.data"
-      @close="editDialog.model = false"
+      @close="closeEditDialog"
       @add="addToInfoCard($event)"
       @edit="editInfoCard($event)"
-      @remove=""
+      @remove="removeInfoCard()"
     )
 
 </template>
