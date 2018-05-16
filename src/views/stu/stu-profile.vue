@@ -15,6 +15,10 @@ export default {
   props: { },
 
   data: () => ({
+    // these v, tile, masonry only solves the error of undefined data due to plugin
+    v: '',
+    tile: '',
+    masonry: '',
     avatar: 'need absolute path/proper/context url, else wont load, cause webpack',
     name: '',
     favcolor: '#04a',
@@ -299,14 +303,14 @@ v-container(fluid).pa-0
 
     // -- info cards
     .info-card-container.xs-full.ml-3.mt-3
-      // v-masonry 
       div(
+          v-masonry 
           transition-duration="0.3s" 
           item-selector=".item"
         )
         div(v-for="(i, index) in infoCards" :key="i.name")
-          // v-masonry-tile 
           stu-infocard-base(
+              v-masonry-tile 
               class="item" 
               :title="i.id" 
               :nullText="i.nullText" 
