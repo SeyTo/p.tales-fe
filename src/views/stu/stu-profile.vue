@@ -8,6 +8,7 @@ import Vue from 'vue'
 // dialogs
 import StuProfEditSkills from '@/shared/components/dialog/stu-prof-edit-skills'
 import StuProfEditEdu from '@/shared/components/dialog/stu-prof-edit-education'
+import StuProfEditWorkHistory from './stu-profile/dialog/stu-prof-edit-workhistory'
 
 export default {
   name: 'student-profile',
@@ -42,9 +43,10 @@ export default {
         dialogComponent: StuProfEditEdu
       },
       'workhistory': {
-        'name': 'workhistory',
-        'id': 'Work History',
-        'nullText': 'List here the places you have worked before.'
+        name: 'workhistory',
+        id: 'Work History',
+        nullText: 'List here the places you have worked before.',
+        dialogComponent: StuProfEditWorkHistory
       },
       'gigsfreelances': {
         'name': 'gigsfreelances',
@@ -93,7 +95,7 @@ export default {
 
     const cards = [
       { name: 'education', component: StuProfEditEdu },
-      { name: 'workhistory', component: StuProfEditEdu },
+      { name: 'workhistory', component: StuProfEditWorkHistory },
       { name: 'gigsfreelances', component: StuProfEditEdu },
       { name: 'skills', component: StuProfEditSkills },
       { name: 'volunteers', component: StuProfEditEdu },
@@ -275,7 +277,8 @@ export default {
     'stu-profile-billboard': StuProfileBoard,
     'stu-infocard-content-chips': StuInfocardContentChips,
     'stu-prof-edit-skills': StuProfEditSkills,
-    'stu-prof-edit-edu': StuProfEditEdu
+    'stu-prof-edit-edu': StuProfEditEdu,
+    'stu-prof-edit-workhistory': StuProfEditWorkHistory
   }
 
 }
