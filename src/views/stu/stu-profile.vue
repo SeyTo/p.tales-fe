@@ -36,47 +36,53 @@ export default {
     currentDialogComponent: null,
     dialogModel: false,
     infoCards: {
-      'education': {
+      education: {
         name: 'education',
         id: 'Education',
         nullText: 'List out some of your education, courses you took and certifications',
         dialogComponent: StuProfEditEdu
       },
-      'workhistory': {
+      workhistory: {
         name: 'workhistory',
         id: 'Work History',
         nullText: 'List here the places you have worked before.',
         dialogComponent: StuProfEditWorkHistory
       },
-      'gigsfreelances': {
-        'name': 'gigsfreelances',
-        'id': 'Gigs & Freelances',
-        'nullText': 'List out some of your Gigs'
+      gigsfreelances: {
+        name: 'gigsfreelances',
+        id: 'Gigs & Freelances',
+        nullText: 'List out some of your Gigs',
+        dialogComponent: StuProfEditWorkHistory
       },
-      'skills': {
-        'name': 'skills',
-        'id': 'Skills',
-        'nullText': 'List out some of your education, courses you took and certifications'
+      skills: {
+        name: 'skills',
+        id: 'Skills',
+        nullText: 'List out some of your education, courses you took and certifications',
+        dialogComponent: StuProfEditWorkHistory
       },
-      'volunteers': {
-        'name': 'volunteers',
-        'id': 'Volunteers',
-        'nullText': 'List out some of your education, courses you took and certifications'
+      volunteers: {
+        name: 'volunteers',
+        id: 'Volunteers',
+        nullText: 'List out some of your education, courses you took and certifications',
+        dialogComponent: StuProfEditWorkHistory
       },
-      'leadership': {
-        'name': 'leadership',
-        'id': 'Leadership',
-        'nullText': 'List out some of your education, courses you took and certifications'
+      leadership: {
+        name: 'leadership',
+        id: 'Leadership',
+        nullText: 'List out some of your education, courses you took and certifications',
+        dialogComponent: StuProfEditWorkHistory
       },
-      'videos': {
-        'name': 'videos',
-        'id': 'Videos',
-        'nullText': 'List out some of your education, courses you took and certifications'
+      videos: {
+        name: 'videos',
+        id: 'Videos',
+        nullText: 'List out some of your education, courses you took and certifications',
+        dialogComponent: StuProfEditWorkHistory
       },
-      'newmodule': {
-        'name': 'newmodule',
-        'id': 'Add New Module',
-        'nullText': 'List out some of your education, courses you took and certifications'
+      newmodule: {
+        name: 'newmodule',
+        id: 'Add New Module',
+        nullText: 'List out some of your education, courses you took and certifications',
+        dialogComponent: StuProfEditWorkHistory
       }
     }
   }),
@@ -93,21 +99,10 @@ export default {
     this.dob = '2017, 14th May'
     this.phonenumber = '+200 9158248424'
 
-    const cards = [
-      { name: 'education', component: StuProfEditEdu },
-      { name: 'workhistory', component: StuProfEditWorkHistory },
-      { name: 'gigsfreelances', component: StuProfEditEdu },
-      { name: 'skills', component: StuProfEditSkills },
-      { name: 'volunteers', component: StuProfEditEdu },
-      { name: 'leadership', component: StuProfEditEdu },
-      { name: 'videos', component: StuProfEditEdu },
-      { name: 'newmodule', component: StuProfEditEdu }
-    ]
-
-    for (const i of cards) {
-      this.infoCards[i.name].addClicked = () => {
-        this.editDialog.name = i.name
-        this.editDialog.component = i.component
+    for (const i in this.infoCards) {
+      this.infoCards[i].addClicked = () => {
+        this.editDialog.name = this.infoCards[i].name
+        this.editDialog.component = this.infoCards[i].dialogComponent
         this.editDialog.model = true
         // undefined will set default value in their component
         this.editDialog.data = undefined
@@ -126,22 +121,20 @@ export default {
       }
     ]
 
-    //  'workhistory': {
-    //    'name': 'Work History',
-    //    'nullText': 'List here the places you have worked before.',
-    //    addClicked: () => { },
-    //    contents: [
-    //      {
-    //        component: StuInfocardContentIcontext,
-    //        args: { title: 'Starbucks', date: '2017-9-9', level: 'Manager', subject: 'Did literally nothing.' }
-    //      }
-    //    ]
-    //  },
-    //  'gigsfreelances': {
-    //    'name': 'Gigs and Freelances',
-    //    'nullText': 'List out some of your education, courses you took and certifications',
-    //    addClicked: () => { }
-    //  },
+    this.infoCards['workhistory'].contents = [
+      {
+        component: StuInfocardContentIcontext,
+        args: { title: 'StarBucks', item1: 'Barista', item2: '2017-4', item3: 'Did literally nothing...' }
+      }
+    ]
+
+    this.infoCards['gigsfreelances'].contents = [
+      {
+        component: StuInfocardContentIcontext,
+        args: { title: 'Bass Jam', item1: 'Bassis', item2: '2017-4', item3: 'Played Bass' }
+      }
+    ]
+
     //  'skills': {
     //    'name': 'Skills',
     //    'nullText': 'List out some of your education, courses you took and certifications',
