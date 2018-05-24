@@ -40,49 +40,57 @@ export default {
         name: 'education',
         id: 'Education',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditEdu
+        dialogComponent: StuProfEditEdu,
+        listComponent: StuInfocardContentIcontext
       },
       workhistory: {
         name: 'workhistory',
         id: 'Work History',
         nullText: 'List here the places you have worked before.',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentIcontext
       },
       gigsfreelances: {
         name: 'gigsfreelances',
         id: 'Gigs & Freelances',
         nullText: 'List out some of your Gigs',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentIcontext
       },
       skills: {
         name: 'skills',
         id: 'Skills',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentChips
       },
       volunteers: {
         name: 'volunteers',
         id: 'Volunteers',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentIcontext
       },
       leadership: {
         name: 'leadership',
         id: 'Leadership',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentIcontext
       },
       videos: {
         name: 'videos',
         id: 'Videos',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentIcontext
       },
       newmodule: {
         name: 'newmodule',
         id: 'Add New Module',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory
+        dialogComponent: StuProfEditWorkHistory,
+        listComponent: StuInfocardContentIcontext
       }
     }
   }),
@@ -187,11 +195,23 @@ export default {
   beforeDestroy () { },
 
   methods: {
+    processArgs (args) {
+      switch (this.editDialog.name) {
+        case 'education':
+          return { title: args.title, item1: args.date, item2: args.level, item3: args.subject }
+        case 'workhistory':
+          return { title: args.name, item1: args.position, item2: args.start, item3: args.details }
+        default:
+          return { }
+      }
+    },
+
     dialogEvent (event) {
       if (!event) {
         this.editDialog.component = null
       }
     },
+
     closeEditDialog () {
       this.editDialog.model = false
       this.editDialog.component = null
@@ -217,9 +237,9 @@ export default {
     /**
      * General clicking action for the card-content-items.
      */
-    cardItemOnClick: (that, name, component, preData) => {
+    cardItemOnClick: (that, name, dialogComponent, preData) => {
       that.editDialog.name = name
-      that.editDialog.component = component
+      that.editDialog.component = dialogComponent
       that.editDialog.preData = preData
       that.editDialog.model = true
     },
@@ -232,12 +252,13 @@ export default {
 
     addToInfoCard (name) {
       console.log('adding')
+      const args = this.processArgs(name)
       const item = {
-        component: StuInfocardContentIcontext,
-        args: { title: name.title, item1: name.date, item2: name.level, item3: name.subject },
-        onClick: this.cardItemOnClick(this, 'education', StuProfEditEdu, false)
+        component: this.infoCards[this.editDialog.name].listComponent,
+        args: args,
+        onClick: this.cardItemOnClick(this, this.editDialog.name, this.editDialog.component, false)
       }
-      this.infoCards.education.contents.push(item)
+      this.infoCards[this.editDialog.name].contents.push(item)
       this.closeEditDialog()
       this.redrawMasonry()
     },
