@@ -61,8 +61,8 @@ export default {
         name: 'skills',
         id: 'Skills',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory,
-        listComponent: StuInfocardContentChips
+        dialogComponent: StuProfEditSkills,
+        listComponent: StuInfocardContentChips 
       },
       volunteers: {
         name: 'volunteers',
@@ -140,6 +140,15 @@ export default {
       {
         component: StuInfocardContentIcontext,
         args: { title: 'Bass Jam', item1: 'Bassis', item2: '2017-4', item3: 'Played Bass' }
+      }
+    ]
+
+    this.infoCards['skills'].contents = [
+      { 
+        component: StuInfocardContentChips,
+        args: {
+          title: 'Techinical Skills', data: [ 'Java', 'Bargaining' ], color: blue
+        }
       }
     ]
 

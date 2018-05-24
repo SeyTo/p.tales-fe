@@ -8,14 +8,37 @@ export default {
   props: {
     'value': Boolean,
     'preData': Boolean,
-    'data': Object
+    'data': Object,
+    'profData': {
+      default () {
+        return {
+          title: '',
+          item1: ''
+        }
+      }
+    }
   },
 
-  data: () => ({ }),
+  data () {
+    return {
+      technicalSkills: [],
+      skills: [],
+      languages: [],
+      isNew: !this.profData.title
+    }
+  },
 
   computed: { },
 
-  methods: { },
+  methods: {
+    remove (item) {
+      this.technicalSkills.splice(this.technicalSkills.indexOf(item), 1)
+      this.technicalSkills = [...this.technicalSkills]
+    },
+    add () {
+      this.$emit('edit', { technicalSkills: this.technicalSkills, skills: this.skills, languages: this.languages })
+    }
+  },
 
   components: { },
 
@@ -26,17 +49,77 @@ export default {
 
 
 <template lang="pug">
-v-dialog(lazy :value="value" @input="$emit('input', $event)")
-  v-card
-    v-card-title.headline.justify-center
+v-card
+  v-card-title.headline
+    v-layout(align-center).pa-0
       | Education
-      v-btn(depressed fab icon small).close.mr-2.mt-2
+      v-spacer
+      v-btn(depressed fab icon small @click="close").ma-0
         v-icon close
-    v-divider
-    v-layout(column).pa-4
-      v-text-field(label="Technical Skills" hide-details)
-      v-text-field(label="Skills" hide-details)
-      v-text-field(label="Languages" hide-details)
+
+  v-divider
+  v-layout(column).pa-4
+    v-select(
+      v-model="technicalSkills"
+      label="Technical Skills"
+      chips
+      tags
+      preprend-icon="filter_list"
+      append-icon=""
+    )
+      // TODO slot not working
+      template(slot="selection" slot-scope="data")
+        v-chip(
+          :key="JSON.stringify(data.item)"
+          close
+          :selected="data.selected"
+          @input="remove(data.item)"
+          color="blue"
+        )
+          strong {{ data.item }} &nbsp;
+
+    v-select(
+      v-model="skills"
+      label="Skills"
+      chips
+      tags
+      preprend-icon="filter_list"
+      append-icon=""
+    )
+      // TODO slot not working
+      template(slot="selection" slot-scope="data")
+        v-chip(
+          :key="JSON.stringify(data.item)"
+          close
+          :selected="data.selected"
+          @input="remove(data.item)"
+          color="green"
+        )
+          strong {{ data.item }} &nbsp;
+
+    v-select(
+      v-model="languages"
+      label="Languages"
+      chips
+      tags
+      preprend-icon="filter_list"
+      append-icon=""
+    )
+      // TODO slot not working
+      template(slot="selection" slot-scope="data")
+        v-chip(
+          :key="JSON.stringify(data.item)"
+          close
+          :selected="data.selected"
+          @input="remove(data.item)"
+          color="red"
+        )
+          strong {{ data.item }} &nbsp;
+
+  v-layout
+    v-spacer
+    v-btn(flat @click="add") Edit
+
 </template>
 
 
