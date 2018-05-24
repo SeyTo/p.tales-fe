@@ -15,6 +15,12 @@
   width 100% !important
   height auto !important
 
+// fix height when screen becomes small
+@media $display-breakpoints.xs-only
+  .jumbotron__image
+    width auto !important
+    height 100% !important
+
 .fill-vh
   // compensates navbar height
   height 96vh
