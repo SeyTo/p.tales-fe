@@ -36,7 +36,7 @@ export default {
       this.technicalSkills = [...this.technicalSkills]
     },
     add () {
-      this.$emit('edit', { technicalSkills: this.technicalSkills, skills: this.skills, languages: this.languages })
+      this.$emit('edit', [ { title: 'techinicalSkills', data: this.technicalSkills, color: 'blue' }, { title: 'skills', data: this.skills, color: 'green' }, { title: 'languages', data: this.languages, color: 'red' } ])
     }
   },
 

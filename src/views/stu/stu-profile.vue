@@ -62,7 +62,7 @@ export default {
         id: 'Skills',
         nullText: 'List out some of your education, courses you took and certifications',
         dialogComponent: StuProfEditSkills,
-        listComponent: StuInfocardContentChips 
+        listComponent: StuInfocardContentChips
       },
       volunteers: {
         name: 'volunteers',
@@ -97,6 +97,7 @@ export default {
 
   created () {
     // TODO load profile data from interceptor/http
+    // Example payload from server
     let context = require.context('../../assets/svg', false, /\.svg$/)
     this.avatar = context('./' + 'avatar.svg')
     this.favcolor = '#04a'
@@ -112,8 +113,7 @@ export default {
         this.editDialog.name = this.infoCards[i].name
         this.editDialog.component = this.infoCards[i].dialogComponent
         this.editDialog.model = true
-        // undefined will set default value in their component
-        this.editDialog.data = undefined
+        this.editDialog.data = this.processData(this.editDialog.name, null)
       }
     }
 
@@ -144,40 +144,14 @@ export default {
     ]
 
     this.infoCards['skills'].contents = [
-      { 
+      {
         component: StuInfocardContentChips,
         args: {
-          title: 'Techinical Skills', data: [ 'Java', 'Bargaining' ], color: blue
+          title: 'Techinical Skills', data: [ 'Java', 'Bargaining' ], color: 'blue'
         }
       }
     ]
 
-    //  'skills': {
-    //    'name': 'Skills',
-    //    'nullText': 'List out some of your education, courses you took and certifications',
-    //    addClicked: () => { },
-    //    contents: [
-    //      {
-    //        component: StuInfocardContentChips,
-    //        args: { title: 'Technical Skills', data: [ 'Java', 'Acting', 'Mushroom', 'Assembly x86', 'R-lang', 'Documentation' ], color: 'blue' },
-    //        onClick: (args) => {
-    //          this.editDialog.component = StuProfEditSkills
-    //          this.editDialog.preData = true
-    //          console.log('data: ' + args)
-    //          this.editDialog.data = args
-    //          this.editDialog.model = true
-    //        }
-    //      },
-    //      {
-    //        component: StuInfocardContentChips,
-    //        args: { title: 'Skills', data: [ 'Mushroom', 'Management' ], color: 'green' }
-    //      },
-    //      {
-    //        component: StuInfocardContentChips,
-    //        args: { title: 'Languages', data: [ 'Cow', 'Catcalling', 'German' ], color: 'pink' }
-    //      }
-    //    ]
-    //  },
     //  'volunteers': {
     //    'name': 'Volunteers',
     //    'nullText': 'List out some of your education, courses you took and certifications',
@@ -210,8 +184,35 @@ export default {
           return { title: args.title, item1: args.date, item2: args.level, item3: args.subject }
         case 'workhistory':
           return { title: args.name, item1: args.position, item2: args.start, item3: args.details }
+        case 'skills':
+          return { title: args.title, data: args.data, color: args.color }
         default:
           return { }
+      }
+    },
+
+    /**
+     * Packs args data into suitable form to be used by respective dialog handlers.
+     * null args means that new item is supposed to be added.
+     * @param {string} type 'edit' or 'add'
+     * @param {object} args data from infoCards.component[x].args
+     */
+    processData (name, content) {
+      if (name === 'skills') {
+        // this is special exception, when clicking on new/edit, all items are shown
+        // unlike the others that show the only one that is clicked.
+        const data = []
+        for (let i in this.infoCards[name].contents) {
+          data.push(this.infoCards[name].contents[i].args)
+        }
+        return data.length === 0 ? undefined : data
+      }
+      // no content means that new item is supposed to be added
+      if (!content || content.length === 0) {
+        // should be 'undefined' else the component's 'props' will not assign itself default values
+        return undefined
+      } else {
+        return content.args
       }
     },
 
@@ -231,7 +232,7 @@ export default {
       this.editDialog.name = name
       this.editDialog.component = component
       this.editDialog.preData = preData
-      this.editDialog.data = data
+      this.editDialog.data = this.processData(this.editDialog.name, this.infoCards[name].contents[index])
       this.editDialog.model = true
       console.dir(data)
     },
@@ -273,12 +274,25 @@ export default {
     },
 
     editInfoCard (data) {
-      Vue.set(this.infoCards[this.editDialog.name].contents[this.editDialog.index], 'args', data)
-      this.infoCards[this.editDialog.name].contents.splice(this.editDialog.index, 0)
-      this.infoCards[this.editDialog.name].contents[this.editDialog.index] = {
-        component: StuInfocardContentIcontext,
-        args: { title: data.title, item1: data.date, item2: data.level, item3: data.subject }
+      // passing an array would mean that you want to clear the list and then add a new list to it.
+      if (Array.isArray(data)) {
+        this.infoCards[this.editDialog.name].contents = []
+        for (var i of data) {
+          const item = {
+            component: StuInfocardContentChips,
+            args: this.processArgs(i)
+          }
+          this.infoCards[this.editDialog.name].contents.push(item)
+        }
+      } else {
+        this.infoCards[this.editDialog.name].contents.splice(this.editDialog.index, 0)
+        this.infoCards[this.editDialog.name].contents[this.editDialog.index] = {
+          component: StuInfocardContentIcontext,
+          args: this.processArgs(data)
+        }
       }
+
+      // Vue.set(this.infoCards[this.editDialog.name].contents[this.editDialog.index], 'args', data)
       this.closeEditDialog()
       this.redrawMasonry()
     },
