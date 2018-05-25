@@ -202,6 +202,7 @@ export default {
         // this is special exception, when clicking on new/edit, all items are shown
         // unlike the others that show the only one that is clicked.
         const data = []
+        // packs into array with original args
         for (let i in this.infoCards[name].contents) {
           data.push(this.infoCards[name].contents[i].args)
         }
