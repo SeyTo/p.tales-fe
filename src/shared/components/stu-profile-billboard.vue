@@ -18,6 +18,12 @@ export default {
     }
   },
 
+  methods: {
+    onEdit () {
+      this.$emit('edit')
+    }
+  },
+
   computed: { },
 
   components: { }
@@ -63,7 +69,7 @@ v-card.profile-board
       v-btn(icon fab flat small)
         img(src="@/assets/svg/linkedin.svg") 
   div.mb-3.mx-4.text-xs-right
-    a EDIT
+    a(@click="onEdit") EDIT
 
 </template>
 

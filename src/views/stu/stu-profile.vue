@@ -3,6 +3,8 @@ import StuInfocardBase from './stu-prof-infocards/stu-infocard-base.vue'
 import StuInfocardContentIcontext from './stu-prof-infocards/stu-infocard-content-icontext'
 import StuProfileBoard from '@/shared/components/stu-profile-billboard'
 import StuInfocardContentChips from './stu-prof-infocards/stu-infocard-content-chips'
+import StuProfNewModuleList from './stu-profile/dialog/stu-prof-newmodule-list'
+import StuProfBasicInfo from './stu-profile/dialog/stu-prof-basicinfo'
 import Vue from 'vue'
 
 // dialogs
@@ -31,6 +33,10 @@ export default {
       name: null,
       component: null,
       preData: false,
+      data: null
+    },
+    basicEdit: {
+      model: false,
       data: null
     },
     currentDialogComponent: null,
@@ -89,8 +95,8 @@ export default {
         name: 'newmodule',
         id: 'Add New Module',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory,
-        listComponent: StuInfocardContentIcontext
+        dialogComponent: StuProfNewModuleList,
+        listComponent: null
       }
     }
   }),
@@ -304,6 +310,15 @@ export default {
       this.infoCards[this.editDialog.name].contents.pop(this.editDialog.index)
       this.closeEditDialog()
       this.redrawMasonry()
+    },
+
+    basicEditDialog () {
+      console.log('opening')
+      this.basicEdit.model = true
+    },
+
+    closeBasicEdit () {
+      this.basicEdit.model = false
     }
   },
 
@@ -316,7 +331,9 @@ export default {
     'stu-infocard-content-chips': StuInfocardContentChips,
     'stu-prof-edit-skills': StuProfEditSkills,
     'stu-prof-edit-edu': StuProfEditEdu,
-    'stu-prof-edit-workhistory': StuProfEditWorkHistory
+    'stu-prof-edit-workhistory': StuProfEditWorkHistory,
+    'stu-prof-newmodule-list': StuProfNewModuleList,
+    'stu-prof-basicinfo': StuProfBasicInfo
   }
 
 }
@@ -342,6 +359,7 @@ v-container(fluid).pa-0
       :dob="dob"
       :phonenumber="phonenumber"
       :favcolor="favcolor"
+      @edit="basicEditDialog"
     ).xs-full
 
     // -- info cards
@@ -381,6 +399,9 @@ v-container(fluid).pa-0
       @edit="editInfoCard($event)"
       @remove="removeInfoCard()"
     )
+
+  v-dialog(lazy v-model="basicEdit.model" @input="closeBasicEdit")
+    stu-prof-basicinfo
 
 </template>
 
