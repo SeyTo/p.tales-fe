@@ -4,7 +4,11 @@ import titlebar from '@/shared/components/card-comp/titlebar'
 export default {
   name: 'stu-prof-newmodule-list',
 
-  data: () => ({ }),
+  data: () => ({
+    form: {
+      model: false
+    }
+  }),
 
   computed: { },
 
@@ -17,16 +21,59 @@ export default {
 
 <template lang="pug">
 v-card
-  titlebar(title="Something different for your profile")
+  titlebar(title="Something different for your profile" @close="$emit('close')")
 
   v-divider
 
-  v-layout.pa-4
-    | Github
-    | Show off your coding contributions.
-    | Website 
-    | Do your have your own website?
-    | Request More Modular features here.
+  v-layout(row wrap)
+    v-flex(xs12)
+      v-expansion-panel
+        v-expansion-panel-content
+          div(slot="header") 
+            v-list-tile()
+              v-list-avatar.mr-3
+                img(src="@/assets/svg/github-logo.svg" height="40")
+              v-list-tile-content
+                v-list-tile-title Add a Github link
+                v-list-tile-sub-title Show off your coding projects.
+          v-card.pa-3
+            v-text-field(
+              label="Paste your url here."
+            )
+            v-checkbox(
+              label="Opt into JobDart's grouper project here."
+            )
+      v-expansion-panel
+        v-expansion-panel-content
+          div(slot="header")
+            v-list-tile
+              v-list-avatar.mr-3
+                img(src="@/assets/svg/compose.svg" height="40")
+              v-list-tile-content
+                v-list-tile-title Add your own website
+                v-list-tile-sub-title Direct link to your website.
+          v-card.pa-3
+            v-text-field(
+              label="Paste your url here."
+            )
+
+    //-v-list
+      v-list-tile(@click="")
+        v-list-avatar.mr-3
+          img(src="@/assets/svg/compose.svg" height="40")
+        v-list-tile-content
+          v-list-tile-title Add your own website
+          v-list-tile-sub-title Direct link to your website.
+      v-list-tile(@click="")
+        v-list-avatar.mr-3
+          img(src="@/assets/svg/man.svg" height="40")
+        v-list-tile-content
+          v-list-tile-title More modular feature?
+          v-list-tile-sub-title Want more? Request Here.
+
+  v-dialog(lazy v-model="form.model")
+    v-card
+      | Test
   
 </template>
 
