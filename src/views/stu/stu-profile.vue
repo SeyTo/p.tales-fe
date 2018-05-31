@@ -304,6 +304,17 @@ export default {
       this.redrawMasonry()
     },
 
+    editBasicInfo (data) {
+      this.name = data.name
+      this.email = data.email
+      this.dob = data.dob
+      this.address = data.address
+      this.aboutme = data.aboutme
+      this.favcolor = data.favcolor
+      // TODO add social
+      this.basicEdit.model = false
+    },
+
     removeInfoCard () {
       console.log('remove')
       // Vue.delete(this.infoCards[this.editDialog.name], 'contents[this.editDialog.index]')
@@ -401,7 +412,17 @@ v-container(fluid).pa-0
     )
 
   v-dialog(lazy v-model="basicEdit.model" @input="closeBasicEdit")
-    stu-prof-basicinfo
+    stu-prof-basicinfo(
+      :pName="name"
+      :pAddress="address"
+      :pEmail="email"
+      :pPhone="phonenumber"
+      :pDob="dob"
+      :pAboutme="aboutme"
+      :pColor="favcolor"
+      :pSocial="[]"
+      @edit="editBasicInfo($event)"
+    )
 
 </template>
 
