@@ -16,7 +16,7 @@ export default {
 
 
 <template lang="pug">
-div
+v-card
   titlebar(title="Gigs & Freelances" @close="$emit('close')")
 </template>
 
