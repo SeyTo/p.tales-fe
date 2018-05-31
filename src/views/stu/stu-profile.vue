@@ -11,6 +11,10 @@ import Vue from 'vue'
 import StuProfEditSkills from '@/shared/components/dialog/stu-prof-edit-skills'
 import StuProfEditEdu from '@/shared/components/dialog/stu-prof-edit-education'
 import StuProfEditWorkHistory from './stu-profile/dialog/stu-prof-edit-workhistory'
+import StuProfEditVideo from './stu-profile/dialog/stu-prof-edit-video'
+import StuProfEditGigsNFreelance from './stu-profile/dialog/stu-prof-edit-gigsnfreelance'
+import StuProfEditVolunteers from './stu-profile/dialog/stu-prof-edit-volunteer'
+import StuProfEditLeadership from './stu-profile/dialog/stu-prof-edit-leadership'
 
 export default {
   name: 'student-profile',
@@ -60,7 +64,7 @@ export default {
         name: 'gigsfreelances',
         id: 'Gigs & Freelances',
         nullText: 'List out some of your Gigs',
-        dialogComponent: StuProfEditWorkHistory,
+        dialogComponent: StuProfEditGigsNFreelance,
         listComponent: StuInfocardContentIcontext
       },
       skills: {
@@ -74,21 +78,21 @@ export default {
         name: 'volunteers',
         id: 'Volunteers',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory,
+        dialogComponent: StuProfEditVolunteers,
         listComponent: StuInfocardContentIcontext
       },
       leadership: {
         name: 'leadership',
         id: 'Leadership',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory,
+        dialogComponent: StuProfEditLeadership,
         listComponent: StuInfocardContentIcontext
       },
       videos: {
         name: 'videos',
         id: 'Videos',
         nullText: 'List out some of your education, courses you took and certifications',
-        dialogComponent: StuProfEditWorkHistory,
+        dialogComponent: StuProfEditVideo,
         listComponent: StuInfocardContentIcontext
       },
       newmodule: {
@@ -344,7 +348,11 @@ export default {
     'stu-prof-edit-edu': StuProfEditEdu,
     'stu-prof-edit-workhistory': StuProfEditWorkHistory,
     'stu-prof-newmodule-list': StuProfNewModuleList,
-    'stu-prof-basicinfo': StuProfBasicInfo
+    'stu-prof-basicinfo': StuProfBasicInfo,
+    'stu-prof-edit-video': StuProfEditVideo,
+    'stu-prof-edit-gigsnfreelance': StuProfEditGigsNFreelance,
+    'stu-prof-edit-volunteer': StuProfEditVolunteers,
+    'stu-prof-edit-leadership': StuProfEditLeadership
   }
 
 }
