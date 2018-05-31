@@ -57,24 +57,6 @@ v-card
               label="Paste your url here."
             )
 
-    //-v-list
-      v-list-tile(@click="")
-        v-list-avatar.mr-3
-          img(src="@/assets/svg/compose.svg" height="40")
-        v-list-tile-content
-          v-list-tile-title Add your own website
-          v-list-tile-sub-title Direct link to your website.
-      v-list-tile(@click="")
-        v-list-avatar.mr-3
-          img(src="@/assets/svg/man.svg" height="40")
-        v-list-tile-content
-          v-list-tile-title More modular feature?
-          v-list-tile-sub-title Want more? Request Here.
-
-  v-dialog(lazy v-model="form.model")
-    v-card
-      | Test
-  
 </template>
 
 

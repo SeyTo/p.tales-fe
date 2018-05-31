@@ -147,7 +147,7 @@ export default {
 
 <template lang="pug">
 v-card
-  titlebar(title="Work History")
+  titlebar(title="Work History" @close="$emit('close')")
 
   v-divider
 
