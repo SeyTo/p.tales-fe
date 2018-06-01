@@ -7,17 +7,23 @@ export default {
     return {
       // TODO use global instance of these options
       'jobsOptions': [
-        { text: 'Search' },
-        { text: 'Your Applications' },
-        { text: 'Saved Jobs' },
-        { text: 'Invitations' }
+        { text: 'Search', route: 'StudentJobsSearch' },
+        { text: 'Your Applications', route: 'StudentJobsApplications' },
+        { text: 'Bookmarked Jobs', route: 'StudentJobsBookmarks' },
+        { text: 'Invitations', route: 'StudentJobsInvitations' }
       ],
       'profileOptions': [
-        { text: 'Profile' },
-        { text: 'User Preferences' },
-        { text: 'Terms & Conditions' },
-        { text: 'Log Out' }
+        { text: 'Profile', route: 'StudentProfile'},
+        { text: 'User Preferences', route: 'StudentUserPrefs' },
+        { text: 'Terms & Conditions', route: '' },
+        { text: 'Log Out', route: '' }
       ]
+    }
+  },
+
+  methods: {
+    navigate (route) {
+      this.$router.push({ name: route })
     }
   },
 
@@ -30,19 +36,25 @@ export default {
 
 <template lang="pug">
 base-navdrawer
-  v-expansion-panel(inset)
-    v-expansion-panel-content
-      div(slot="header") Jobs & Interns
-      div(v-for="(item, i) in jobsOptions" :key="i")
-        v-btn(flat) {{ item.text }}
-  v-btn(flat) Blogs
-  v-btn(flat) Notifs
-  v-expansion-panel(inset)
-    v-expansion-panel-content
-      div(slot="header") Profile
-      div(v-for="(item, i) in profileOptions" :key="i")
-        v-btn(flat) {{ item.text }}
-
+  v-list
+    v-list-group
+      v-list-tile(slot="activator")
+        v-list-tile-content
+          v-list-tile-title Jobs & Interns
+      v-list-tile(v-for="(item, i) in jobsOptions" :key="item.text" @click="navigate(item.route)")
+        v-list-tile-content.pl-3
+          | {{ item.text }}
+    v-list-tile(@click="navigate('')")
+      v-list-tile-title Blogs
+    v-list-tile(@click="navigate('')")
+      v-list-tile-title Explore Companies
+    v-list-group
+      v-list-tile(slot="activator")
+        v-list-tile-content
+          v-list-tile-title Profile
+      v-list-tile(v-for="(item, i) in profileOptions" :key="item.text" @click="navigate(item.route)")
+        v-list-tile-content.pl-3
+          | {{ item.text }}
 </template>
 
 
