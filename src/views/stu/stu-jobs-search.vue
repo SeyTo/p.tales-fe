@@ -40,10 +40,35 @@ export default {
       },
       infoDialog: {
         model: false
+      },
+      filterFab: {
+        fixed: true,
+        top: true,
+        left: true,
+        bottom: false,
+        right: false
       }
     }
   },
 
+  computed: {
+    adjustFab () {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        this.filterFab.fixed = true
+        this.filterFab.top = false
+        this.filterFab.bottom = true
+        this.filterFab.right = true
+        this.filterFab.left = false
+      } else {
+        this.filterFab.fixed = true
+        this.filterFab.top = true
+        this.filterFab.bottom = false
+        this.filterFab.right = false
+        this.filterFab.left = true
+      }
+      return this.filterFab.fixed
+    }
+  },
   components: {
     'job-desc-card': JobDescCard,
     'job-desc-card-max': JobDescCardMax
@@ -113,34 +138,36 @@ v-container
 
     // -- filter drawer
     v-navigation-drawer(app v-model="filterDrawer.model").nava
-      v-toolbar(flat)
+      v-toolbar(flat color="white")
+        v-icon filter_list
         .title.pa-3 Filter
         v-spacer
         v-btn(icon @click="filterDrawer.model = false") 
           v-icon close
-
       +generalFilters
-
 
     v-layout(justify-center)
       v-layout(wrap justify-start grid-list-lg)
         template(v-for="(i, index) in jobs")
           v-flex(md4 sm6 xs12).pa-2
             job-desc-card(:job="i" :hasApplied="false" @click.native.stop="openJobDialog(index)")
-
-
+            
   // -- fab
   v-fab-transition
     v-btn(
-        :key="'filterDialogFab'"
-        slot="activator" 
-        fab 
-        fixed bottom right 
-        hover 
-        @click="filterDrawer.model = true"
-        v-if="filterDrawer.model === false"
-      )
-      img(src="@/assets/svg/filter.svg").t-fab-svg.round
+      :key="'filterDialogFab'"
+      slot="activator"
+      hover fab
+      :fixed="adjustFab"
+      :top="filterFab.top"
+      :bottom="filterFab.bottom"
+      :right="filterFab.right"
+      :left="filterFab.left"
+      @click="filterDrawer.model = true"
+      v-if="filterDrawer.model === false"
+      color="white"
+    ).navbar-height-adjust
+      v-icon filter_list
 
   // -- info dialog
   // TODO remove universal dialog width
@@ -182,10 +209,14 @@ _card_container_width_single = (1 * _card_width) + (2 * _card_pad)
       width _card_width
       min-height 200px
       margin _card_pad 0 0 _card_pad 
+
+.navbar-height-adjust
+  margin-top 62px
 @media screen and (max-width: _card_container_width_triple)
   .result-container
     width _card_container_width_double !important
 @media screen and (max-width: _card_container_width_double)
   .result-container
     width _card_container_width_single !important
+
 </style>
