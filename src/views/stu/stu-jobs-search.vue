@@ -133,8 +133,11 @@ v-container
       .display-1.text-xs-center.mb-3 Search Jobs
     // -- main search bar
     v-layout(justify-center).search-container.mb-4
-      v-text-field(solo label="Search").search-bar
-      v-btn(large color="primary").search-btn.ma-0 Search 
+      v-text-field(
+        solo 
+        label="Search"
+        prepend-icon="search"
+      ).search-bar
 
     // -- filter drawer
     v-navigation-drawer(app v-model="filterDrawer.model").nava
