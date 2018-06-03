@@ -58,7 +58,8 @@ mixin buttonsBar
         v-icon more_vert
       
 v-card(hover v-if="job")
-  v-card-title.card-title.headline.bold {{ job.role }}
+  v-card-title.card-title.headline.bold
+    .ellipsis {{ job.role }}
   v-divider
   v-container(fluid)
     v-layout(column)
@@ -85,6 +86,10 @@ v-card(hover v-if="job")
 
 // TODO generalize
 _about_height = 80px
+.ellipsis
+  overflow hidden
+  white-space nowrap
+  text-overflow ellipsis
 .buttons-bar
   .btn
     margin 0
@@ -95,7 +100,7 @@ _about_height = 80px
 .about
   min-height 80px
   max-height 80px
-  text-overflow ellpises
+  text-overflow ellipsis
   overflow hidden
 .bold
   font-weight bold

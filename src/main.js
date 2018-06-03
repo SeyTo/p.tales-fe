@@ -34,6 +34,7 @@ import {
   VRadioGroup,
   VSubheader,
   VChip,
+  VTooltip,
   transitions
 } from 'vuetify'
 // this import should be only after all style imports
@@ -70,6 +71,7 @@ Vue.use(Vuetify, {
     VRadioGroup,
     VSubheader,
     VChip,
+    VTooltip,
     transitions
   },
   theme: {

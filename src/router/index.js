@@ -30,6 +30,9 @@ import StuRoot from '@/views/stu/stu-root'
 // blogs
 import BlogsLanding from '@/views/blogs/blog-landing'
 
+// common
+import JobDetails from '@/views/job-details'
+
 import CompanyDirectory from '@/views/company-directory'
 
 Vue.use(Router)
@@ -163,6 +166,11 @@ export default new Router({
       path: '/blogs',
       name: 'BlogsLanding',
       component: BlogsLanding
+    },
+    {
+      path: '/job-details',
+      name: 'JobDetails',
+      component: JobDetails
     }
   ]
 })

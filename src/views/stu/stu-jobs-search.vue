@@ -3,7 +3,7 @@ import JobDescCard from '@/shared/components/job-desc-card'
 import JobDescCardMax from '@/shared/components/job-desc-card-max'
 
 var jobA = {
-  role: 'Get me a tea gal',
+  role: 'Get me a tea gal where women are strong',
   emp: {
     name: 'Tales',
     address: 'Somewhere in Nepal'
@@ -30,7 +30,7 @@ export default {
   data () {
     return {
       jobs: [
-        jobA, jobB, jobA, jobB
+        jobA, jobB, jobA, jobB, jobA, jobB, jobA, jobB
       ],
       isPaid: false,
       dialog: false,
@@ -47,7 +47,8 @@ export default {
         left: true,
         bottom: false,
         right: false
-      }
+      },
+      searchItems: []
     }
   },
 
@@ -78,6 +79,10 @@ export default {
     openJobDialog (i) {
       this.selectedJobIndex = i
       this.infoDialog.model = true
+    },
+    remove (item) {
+      this.technicalSkills.splice(this.searchItems.indexOf(item), 1)
+      this.technicalSkills = [...this.searchItems]
     }
   }
 }
