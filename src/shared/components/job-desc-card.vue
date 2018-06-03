@@ -11,12 +11,25 @@ export default {
     'hasApplied': {
       default: false,
       type: Boolean
+    },
+    'pBookmark': {
+      default: false,
+      type: Boolean
     }
   },
 
-  data: () => ({ }),
+  data: () => ({
+    bookmark: this.pBookmark
+  }),
 
   computed: { },
+
+  methods: {
+    bookmarkThis () {
+      this.bookmark = !this.bookmark
+      this.$emit('onBookmark', { value: this.bookmark })
+    }
+  },
 
   components: { }
 }
@@ -27,13 +40,14 @@ export default {
 mixin buttonsBar
   v-layout(v-show="!hasApplied").buttons-bar.mt-2
     div
-      v-btn(depressed icon) 
-        v-icon favorite
-    v-flex.apply-btn-contain
+      v-btn(depressed icon @click.native.stop="bookmarkThis").mr-2
+        v-icon(v-if="bookmark") bookmark
+        v-icon(v-else) bookmark_outline
+    v-flex.apply-btn-contain.mr-2
       v-btn(depressed block color="primary") Apply
     div
       v-btn(depressed icon)
-        v-icon star
+        v-icon more_vert
 
   v-layout(v-show="hasApplied").buttons-bar.mt-2
     v-btn(depressed small) Got An Interview
